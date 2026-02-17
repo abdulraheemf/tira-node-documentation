@@ -67,5 +67,27 @@ export default defineConfig({
         link: "https://github.com/Labedan-IT-Solutions/tira-node",
       },
     ],
+
+    search: {
+      provider: "local",
+      options: {
+        locales: {
+          sw: {
+            translations: {
+              button: { buttonText: "Tafuta", buttonAriaLabel: "Tafuta" },
+              modal: {
+                noResultsText: "Hakuna matokeo ya",
+                resetButtonTitle: "Futa utafutaji",
+                footer: {
+                  selectText: "kuchagua",
+                  navigateText: "kusogea",
+                  closeText: "kufunga",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 });
