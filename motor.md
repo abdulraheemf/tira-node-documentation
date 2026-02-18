@@ -37,6 +37,44 @@ Verifies a motor vehicle against TIRA's registry. This is a **synchronous** requ
 - `motor_category` must be `"1"` or `"2"`
 - You must provide **exactly one** of `motor_registration_number` or `motor_chassis_number` — providing both or neither throws a `TiraValidationError`
 
+### Example — Verify by Registration Number
+
+```js
+const result = await tira.motor.verify({
+  request_id: "VERIFY-001",
+  motor_category: "1", // Motor Vehicle
+  motor_registration_number: "T337DSE",
+});
+
+if (result.tira_status_code === "TIRA001") {
+  console.log(result.data.Make);             // "TRAILER"
+  console.log(result.data.Model);            // "SKELETAL"
+  console.log(result.data.OwnerName);        // "KALKAALOW TRANSPORT LIMITED"
+  console.log(result.data.YearOfManufacture); // "2008"
+  console.log(result.data.MotorUsage);       // "Commercial"
+} else {
+  console.log("Vehicle not found:", result.tira_status_desc);
+}
+```
+
+### Example — Verify by Chassis Number
+
+```js
+const result = await tira.motor.verify({
+  request_id: "VERIFY-002",
+  motor_category: "1",
+  motor_chassis_number: "JTDBW933901234567",
+});
+
+if (result.tira_status_code === "TIRA001") {
+  console.log(result.data.RegistrationNumber); // e.g., "T123ABC"
+  console.log(result.data.ChassisNumber);      // "JTDBW933901234567"
+  console.log(result.data.OwnerName);          // Owner's name
+} else {
+  console.log("Vehicle not found:", result.tira_status_desc);
+}
+```
+
 ## .verify() Response
 
 When you call `tira.motor.verify()`, you get a `MotorVerificationResponse`:
@@ -79,44 +117,6 @@ When the vehicle is found, `data` contains:
 ::: info
 All values in `data` are returned as strings by TIRA, even numeric fields like `EngineCapacity` and `YearOfManufacture`. Some fields may be empty (e.g., `EngineNumber` for trailers) or `"0"` when not applicable.
 :::
-
-### Example — Verify by Registration Number
-
-```js
-const result = await tira.motor.verify({
-  request_id: "VERIFY-001",
-  motor_category: "1", // Motor Vehicle
-  motor_registration_number: "T337DSE",
-});
-
-if (result.tira_status_code === "TIRA001") {
-  console.log(result.data.Make);             // "TRAILER"
-  console.log(result.data.Model);            // "SKELETAL"
-  console.log(result.data.OwnerName);        // "KALKAALOW TRANSPORT LIMITED"
-  console.log(result.data.YearOfManufacture); // "2008"
-  console.log(result.data.MotorUsage);       // "Commercial"
-} else {
-  console.log("Vehicle not found:", result.tira_status_desc);
-}
-```
-
-### Example — Verify by Chassis Number
-
-```js
-const result = await tira.motor.verify({
-  request_id: "VERIFY-002",
-  motor_category: "1",
-  motor_chassis_number: "JTDBW933901234567",
-});
-
-if (result.tira_status_code === "TIRA001") {
-  console.log(result.data.RegistrationNumber); // e.g., "T123ABC"
-  console.log(result.data.ChassisNumber);      // "JTDBW933901234567"
-  console.log(result.data.OwnerName);          // Owner's name
-} else {
-  console.log("Vehicle not found:", result.tira_status_desc);
-}
-```
 
 ## .submit() Payload
 
@@ -357,25 +357,6 @@ The package validates your payload before sending it to TIRA. If validation fail
 | Motor Cycle + Registered | Required | Optional | Optional | Optional |
 | Motor Cycle + In Transit | — | Optional | Optional | Optional |
 
-## .submit() Response
-
-When you call `tira.motor.submit()`, you get an immediate `CoverNoteResponse` from TIRA:
-
-| Field | Type | Description |
-|---|---|---|
-| `acknowledgement_id` | `string` | TIRA's acknowledgement ID |
-| `request_id` | `string` | Your original request ID (echoed back) |
-| `tira_status_code` | `string` | Status code — `"TIRA001"` means received |
-| `tira_status_desc` | `string` | Human-readable description |
-| `requires_acknowledgement` | `boolean` | Always `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
-
-::: tip "TIRA001" means "received", not "approved"
-At this stage, `"TIRA001"` means TIRA received your request and it's being processed. It does **not** mean your cover note has been approved. The actual result (approved or rejected) comes later via your callback URL.
-
-If you get a code other than `"TIRA001"`, something went wrong with the submission itself. Check the [Error Codes](/error-codes) page for the specific code.
-:::
-
 ### Example — New Cover Note
 
 ```js
@@ -495,6 +476,25 @@ const result = await tira.motor.submit({
   // ...rest of payload
 });
 ```
+
+## .submit() Response
+
+When you call `tira.motor.submit()`, you get an immediate `CoverNoteResponse` from TIRA:
+
+| Field | Type | Description |
+|---|---|---|
+| `acknowledgement_id` | `string` | TIRA's acknowledgement ID |
+| `request_id` | `string` | Your original request ID (echoed back) |
+| `tira_status_code` | `string` | Status code — `"TIRA001"` means received |
+| `tira_status_desc` | `string` | Human-readable description |
+| `requires_acknowledgement` | `boolean` | Always `true` |
+| `acknowledgement_payload` | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
+
+::: tip "TIRA001" means "received", not "approved"
+At this stage, `"TIRA001"` means TIRA received your request and it's being processed. It does **not** mean your cover note has been approved. The actual result (approved or rejected) comes later via your callback URL.
+
+If you get a code other than `"TIRA001"`, something went wrong with the submission itself. Check the [Error Codes](/error-codes) page for the specific code.
+:::
 
 ## .submit() Callback Response
 
