@@ -28,6 +28,14 @@ We use `tira-node` internally at Labedan IT Solutions. When we started integrati
 
 So we built one. And then we thought: why keep it to ourselves? Every insurance company and broker in Tanzania goes through the same struggle. We packaged our internal tooling into an open-source SDK and published it on npm so the community can benefit.
 
+## Languages
+
+This documentation is available in **English** and **Kiswahili**. You can switch between them using the language selector in the navigation bar.
+
+We did our best to translate the documentation into Kiswahili, but some technical terms were intentionally left in English where we felt they would be better understood by the developer community (e.g., "callback", "endpoint", "payload").
+
+If you spot a translation that could be improved or is incorrect, we'd love your help — just open a pull request on the [documentation repository](https://github.com/Labedan-IT-Solutions/tira-node-documentation) and we'll review and merge it.
+
 ## Roadmap
 
 `tira-node` started as an internal tool and is now open-source on npm. We actively use it in production, so it will continue to receive updates and maintenance.

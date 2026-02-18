@@ -28,6 +28,14 @@ Tunatumia `tira-node` ndani ya Labedan IT Solutions. Tulipoanza kuunganisha na T
 
 Kwa hivyo tulijenga moja. Na kisha tukafikiria: kwa nini tuiweke kwa sisi wenyewe? Kila kampuni ya bima na dalali nchini Tanzania hupitia matatizo hayo hayo. Tulifunga zana zetu za ndani kuwa SDK ya chanzo wazi na kuichapisha kwenye npm ili jamii inufaike.
 
+## Lugha
+
+Nyaraka hizi zinapatikana kwa **Kiingereza** na **Kiswahili**. Unaweza kubadilisha kati yao kwa kutumia kichaguzi cha lugha kwenye upau wa urambazaji.
+
+Tulijitahidi kutafsiri nyaraka hizi kwa Kiswahili, lakini baadhi ya maneno ya kitaalamu tuliyaacha kwa Kiingereza ambapo tulihisi yangeweza kueleweka vizuri zaidi na jamii ya wasanidi programu (mf. "callback", "endpoint", "payload").
+
+Ukiona tafsiri inayoweza kuboreshwa au isiyo sahihi, tutafurahi kupata msaada wako — fungua tu pull request kwenye [hazina ya nyaraka](https://github.com/Labedan-IT-Solutions/tira-node-documentation) na tutaikagua na kuiunganisha.
+
 ## Mpango wa Baadaye
 
 `tira-node` ilianza kama zana ya ndani na sasa ni chanzo wazi kwenye npm. Tunaitumia kikamilifu katika uzalishaji, kwa hivyo itaendelea kupokea masasisho na matengenezo.
