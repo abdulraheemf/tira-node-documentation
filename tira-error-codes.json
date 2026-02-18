@@ -1,0 +1,442 @@
+[
+  { "code": "TIRA001", "description": "Successful" },
+  { "code": "TIRA002", "description": "Failure" },
+  { "code": "TIRA003", "description": "Invalid client key" },
+  { "code": "TIRA004", "description": "An error occurred while processing" },
+  { "code": "TIRA005", "description": "Invalid or incomplete request data" },
+  {
+    "code": "TIRA006",
+    "description": "Request could not be processed. Try again later"
+  },
+  { "code": "TIRA007", "description": "Requested data could not be found" },
+  {
+    "code": "TIRA008",
+    "description": "Required request header information not provided"
+  },
+  {
+    "code": "TIRA009",
+    "description": "Request header information mismatch client identification parameters"
+  },
+  { "code": "TIRA010", "description": "Server internal communication failure" },
+  { "code": "TIRA011", "description": "Client system configuration not found" },
+  {
+    "code": "TIRA012",
+    "description": "Inactive or disabled Client system configuration"
+  },
+  { "code": "TIRA013", "description": "Inactive or invalid Client" },
+  {
+    "code": "TIRA014",
+    "description": "Client PKI certificate file not found in specified path"
+  },
+  {
+    "code": "TIRA015",
+    "description": "Bad or missing Client PKI configurations"
+  },
+  { "code": "TIRA016", "description": "Invalid request signature" },
+  { "code": "TIRA017", "description": "Invalid client system call back url" },
+  { "code": "TIRA018", "description": "Invalid company code" },
+  { "code": "TIRA019", "description": "Invalid cover note type" },
+  { "code": "TIRA020", "description": "Invalid covernote start date" },
+  { "code": "TIRA021", "description": "Invalid covernote end date" },
+  { "code": "TIRA022", "description": "Invalid insurance company" },
+  { "code": "TIRA023", "description": "Invalid insurance transaction company" },
+  {
+    "code": "TIRA024",
+    "description": "Duplicate insurance covernote number or covernote identification number"
+  },
+  {
+    "code": "TIRA025",
+    "description": "Invalid or inactive insurance transaction sale point"
+  },
+  {
+    "code": "TIRA026",
+    "description": "Invalid or inactive insurance transaction product"
+  },
+  {
+    "code": "TIRA027",
+    "description": "Invalid or inactive insurance transaction currency"
+  },
+  { "code": "TIRA028", "description": "Invalid transaction exchange rate" },
+  {
+    "code": "TIRA029",
+    "description": "Invalid insurance sum insured equivalent amount"
+  },
+  {
+    "code": "TIRA030",
+    "description": "Invalid insurance covernote risk covered premium rate"
+  },
+  {
+    "code": "TIRA031",
+    "description": "Invalid insurance premium amount (premium before discount)"
+  },
+  {
+    "code": "TIRA032",
+    "description": "Invalid insurance tax code or tax type(s) charged"
+  },
+  { "code": "TIRA033", "description": "Invalid insurance tax type rates used" },
+  { "code": "TIRA034", "description": "Invalid insurance tax type amount" },
+  {
+    "code": "TIRA035",
+    "description": "Invalid insurance total taxes or premium including tax value"
+  },
+  { "code": "TIRA036", "description": "Invalid covernote reference number" },
+  { "code": "TIRA037", "description": "Duplicate reinsurance declaration" },
+  { "code": "TIRA038", "description": "Invalid reinsurance participant" },
+  {
+    "code": "TIRA039",
+    "description": "Invalid coinsurance premium amount value"
+  },
+  {
+    "code": "TIRA040",
+    "description": "Invalid reinsurance participation share value"
+  },
+  {
+    "code": "TIRA041",
+    "description": "Invalid reinsurance participation type"
+  },
+  { "code": "TIRA042", "description": "Invalid insurer policy number" },
+  { "code": "TIRA043", "description": "Invalid policy operative clause" },
+  {
+    "code": "TIRA044",
+    "description": "Policy applied covernote(s) does not exist"
+  },
+  { "code": "TIRA045", "description": "Duplicate policy" },
+  { "code": "TIRA046", "description": "Applied covernote(s) have policy" },
+  { "code": "TIRA047", "description": "Duplicate policy applied covernote(s)" },
+  {
+    "code": "TIRA048",
+    "description": "Notification content preparation failed"
+  },
+  { "code": "TIRA049", "description": "No content returned by client system" },
+  {
+    "code": "TIRA050",
+    "description": "Error occurred while connecting to external system"
+  },
+  {
+    "code": "TIRA051",
+    "description": "Client system not allowed for inbound communication"
+  },
+  {
+    "code": "TIRA052",
+    "description": "Client system not allowed for outbound communication"
+  },
+  {
+    "code": "TIRA053",
+    "description": "Invalid claim notification report date"
+  },
+  { "code": "TIRA054", "description": "Invalid risk covered" },
+  {
+    "code": "TIRA055",
+    "description": "Invalid premium charged after discount equivalent amount"
+  },
+  { "code": "TIRA056", "description": "Duplicate claim notification number" },
+  { "code": "TIRA057", "description": "Invalid claim notification number" },
+  {
+    "code": "TIRA058",
+    "description": "Claimant exists for the specified covernote"
+  },
+  { "code": "TIRA059", "description": "Invalid claim reference number" },
+  { "code": "TIRA060", "description": "Duplicate claim intimation" },
+  { "code": "TIRA061", "description": "Invalid claim intimation date" },
+  { "code": "TIRA062", "description": "Invalid claim intimation number" },
+  { "code": "TIRA063", "description": "Duplicate claim assessment number" },
+  {
+    "code": "TIRA064",
+    "description": "Invalid claim assessment received date"
+  },
+  { "code": "TIRA065", "description": "Invalid claim approval date" },
+  { "code": "TIRA066", "description": "Invalid claim adjustment date" },
+  {
+    "code": "TIRA067",
+    "description": "Invalid claim offer communication date"
+  },
+  {
+    "code": "TIRA068",
+    "description": "Invalid claimant claim offer response date"
+  },
+  { "code": "TIRA069", "description": "Invalid offer reconciliation" },
+  {
+    "code": "TIRA070",
+    "description": "Claim assessment for the payment not found"
+  },
+  { "code": "TIRA071", "description": "Duplicate claim payment number" },
+  { "code": "TIRA072", "description": "Claim has already been paid" },
+  { "code": "TIRA073", "description": "Invalid claim payment date" },
+  { "code": "TIRA074", "description": "Invalid claim payment currency" },
+  { "code": "TIRA075", "description": "Invalid claim payment amount" },
+  { "code": "TIRA076", "description": "Duplicate claim rejection number" },
+  { "code": "TIRA077", "description": "Invalid claim rejection date" },
+  {
+    "code": "TIRA078",
+    "description": "Invalid claim rejection. Claim already paid"
+  },
+  { "code": "TIRA079", "description": "Invalid claim loss date" },
+  { "code": "TIRA080", "description": "Invalid reinsurance broker" },
+  { "code": "TIRA081", "description": "Invalid covernote type" },
+  {
+    "code": "TIRA082",
+    "description": "Invalid previous covernote reference number"
+  },
+  {
+    "code": "TIRA083",
+    "description": "Invalid total premium including tax value"
+  },
+  {
+    "code": "TIRA084",
+    "description": "Invalid total premium excluding tax value"
+  },
+  { "code": "TIRA085", "description": "Invalid premium discount type" },
+  { "code": "TIRA086", "description": "Invalid premium discount amount" },
+  {
+    "code": "TIRA087",
+    "description": "Premium discount is not allowed for this type of cover"
+  },
+  { "code": "TIRA088", "description": "Invalid acknowledgement" },
+  {
+    "code": "TIRA089",
+    "description": "Pending transaction waiting for processing"
+  },
+  {
+    "code": "TIRA090",
+    "description": "Active covernote with specified insurance product exists for this motor"
+  },
+  {
+    "code": "TIRA091",
+    "description": "Invalid risk covered premium after discount value"
+  },
+  { "code": "TIRA092", "description": "Invalid claimant details" },
+  { "code": "TIRA093", "description": "Invalid claim assessment number" },
+  { "code": "TIRA094", "description": "Invalid claim litigation reason" },
+  { "code": "TIRA095", "description": "Invalid request identification number" },
+  { "code": "TIRA096", "description": "Invalid client system code" },
+  { "code": "TIRA097", "description": "Invalid covernote type" },
+  { "code": "TIRA098", "description": "Invalid covernote number" },
+  { "code": "TIRA099", "description": "Invalid covernote description" },
+  { "code": "TIRA100", "description": "Invalid covernote operative clause" },
+  { "code": "TIRA101", "description": "Invalid payment mode" },
+  { "code": "TIRA102", "description": "Invalid commission paid" },
+  { "code": "TIRA103", "description": "Invalid commission rate" },
+  {
+    "code": "TIRA104",
+    "description": "Invalid value identifying if transaction is part of fleet or not"
+  },
+  {
+    "code": "TIRA105",
+    "description": "Invalid or duplicate fleet identification number"
+  },
+  { "code": "TIRA106", "description": "Invalid fleet size" },
+  {
+    "code": "TIRA107",
+    "description": "Invalid total comprehensive insured motors value"
+  },
+  { "code": "TIRA108", "description": "Invalid fleet entry" },
+  { "code": "TIRA109", "description": "Invalid insurance officer name" },
+  { "code": "TIRA110", "description": "Invalid insurance officer title" },
+  { "code": "TIRA111", "description": "Invalid insurance risk code" },
+  { "code": "TIRA112", "description": "Invalid insurance sum insured amount" },
+  {
+    "code": "TIRA113",
+    "description": "Invalid subject matter covered reference"
+  },
+  {
+    "code": "TIRA114",
+    "description": "Invalid subject matter covered description"
+  },
+  { "code": "TIRA115", "description": "Invalid insurance addon reference" },
+  { "code": "TIRA116", "description": "Invalid insurance addon description" },
+  {
+    "code": "TIRA117",
+    "description": "Invalid insurance addon premium amount"
+  },
+  { "code": "TIRA118", "description": "Invalid insurance addon premium rate" },
+  {
+    "code": "TIRA119",
+    "description": "Invalid insurance addon premium excluding tax amount"
+  },
+  {
+    "code": "TIRA120",
+    "description": "Invalid insurance addon premium excluding tax equivalent amount"
+  },
+  {
+    "code": "TIRA121",
+    "description": "Invalid insurance addon premium including tax amount"
+  },
+  { "code": "TIRA122", "description": "Invalid insurance policyholder name" },
+  {
+    "code": "TIRA123",
+    "description": "Invalid insurance policyholder birth date or company registration date"
+  },
+  { "code": "TIRA124", "description": "Invalid insurance policyholder type" },
+  {
+    "code": "TIRA125",
+    "description": "Invalid identity number or company incorporation certificate number"
+  },
+  { "code": "TIRA126", "description": "Invalid identity type" },
+  { "code": "TIRA127", "description": "Invalid gender" },
+  { "code": "TIRA128", "description": "Invalid country or country code" },
+  { "code": "TIRA129", "description": "Invalid region or state" },
+  { "code": "TIRA130", "description": "Invalid district or county" },
+  { "code": "TIRA131", "description": "Invalid street" },
+  { "code": "TIRA132", "description": "Invalid phone number" },
+  { "code": "TIRA133", "description": "Invalid fax number" },
+  { "code": "TIRA134", "description": "Invalid address" },
+  { "code": "TIRA135", "description": "Invalid email address" },
+  { "code": "TIRA136", "description": "Invalid motor category" },
+  { "code": "TIRA137", "description": "Invalid motor registration number" },
+  { "code": "TIRA138", "description": "Invalid motor chassis number" },
+  { "code": "TIRA139", "description": "Invalid motor make" },
+  { "code": "TIRA140", "description": "Invalid motor model" },
+  { "code": "TIRA141", "description": "Invalid motor model number" },
+  { "code": "TIRA142", "description": "Invalid motor body type" },
+  { "code": "TIRA143", "description": "Invalid motor color" },
+  { "code": "TIRA144", "description": "Invalid motor engine number" },
+  { "code": "TIRA145", "description": "Invalid motor engine capacity" },
+  { "code": "TIRA146", "description": "Invalid motor fuel used" },
+  { "code": "TIRA147", "description": "Invalid motor number of axles" },
+  { "code": "TIRA148", "description": "Invalid motor axle distance" },
+  { "code": "TIRA149", "description": "Invalid motor sitting capacity" },
+  { "code": "TIRA150", "description": "Invalid motor year of manufacture" },
+  { "code": "TIRA151", "description": "Invalid motor tare weight" },
+  { "code": "TIRA152", "description": "Invalid motor gross weight" },
+  { "code": "TIRA153", "description": "Invalid motor usage" },
+  { "code": "TIRA154", "description": "Invalid motor owner name" },
+  { "code": "TIRA155", "description": "Invalid motor owner category" },
+  { "code": "TIRA156", "description": "Invalid motor owner address" },
+  { "code": "TIRA157", "description": "Invalid policy special conditions" },
+  { "code": "TIRA158", "description": "Invalid policy exclusions" },
+  { "code": "TIRA159", "description": "Invalid insurance sticker number" },
+  { "code": "TIRA160", "description": "Invalid reinsurance category" },
+  {
+    "code": "TIRA161",
+    "description": "Invalid reinsurance participant or participant code"
+  },
+  { "code": "TIRA162", "description": "Invalid reinsurance participant type" },
+  { "code": "TIRA163", "description": "Invalid reinsurance form" },
+  { "code": "TIRA164", "description": "Invalid reinsurance type" },
+  {
+    "code": "TIRA165",
+    "description": "Invalid reinsurance rebroker or rebroker code"
+  },
+  {
+    "code": "TIRA166",
+    "description": "Invalid reinsurance rebrokerage commission value"
+  },
+  { "code": "TIRA167", "description": "Invalid reinsurance commission value" },
+  {
+    "code": "TIRA168",
+    "description": "Invalid reinsurance premium share value"
+  },
+  {
+    "code": "TIRA169",
+    "description": "Invalid reinsurance participation date"
+  },
+  {
+    "code": "TIRA170",
+    "description": "Invalid value identifying if claim form is dully filled or not"
+  },
+  { "code": "TIRA171", "description": "Invalid claim loss nature" },
+  { "code": "TIRA172", "description": "Invalid claim loss type" },
+  { "code": "TIRA173", "description": "Invalid claim loss location" },
+  { "code": "TIRA174", "description": "Invalid claim estimated amount" },
+  { "code": "TIRA175", "description": "Invalid claim reserved amount" },
+  { "code": "TIRA176", "description": "Invalid claim reserve method" },
+  { "code": "TIRA177", "description": "Invalid claim loss assessment option" },
+  { "code": "TIRA178", "description": "Invalid claim assessor name" },
+  {
+    "code": "TIRA179",
+    "description": "Invalid claim assessor identity number"
+  },
+  { "code": "TIRA180", "description": "Invalid claim assessor identity type" },
+  { "code": "TIRA181", "description": "Invalid claimant name" },
+  { "code": "TIRA182", "description": "Invalid claimant birth date" },
+  { "code": "TIRA183", "description": "Invalid claimant category" },
+  { "code": "TIRA184", "description": "Invalid claimant type" },
+  { "code": "TIRA185", "description": "Invalid claimant identity number" },
+  { "code": "TIRA186", "description": "Invalid claimant identity type" },
+  {
+    "code": "TIRA187",
+    "description": "Invalid claim assessment report summary"
+  },
+  { "code": "TIRA188", "description": "Invalid claim assessment amount" },
+  { "code": "TIRA189", "description": "Invalid claim approved amount" },
+  { "code": "TIRA190", "description": "Invalid claim approval date" },
+  { "code": "TIRA191", "description": "Invalid claim approval authority" },
+  {
+    "code": "TIRA192",
+    "description": "Invalid value identifying if its claim reassessment or not"
+  },
+  { "code": "TIRA193", "description": "Invalid discharge voucher number" },
+  { "code": "TIRA194", "description": "Duplicate discharge voucher" },
+  { "code": "TIRA195", "description": "Invalid discharge voucher date" },
+  {
+    "code": "TIRA196",
+    "description": "Invalid claim discharge voucher offer communication date"
+  },
+  {
+    "code": "TIRA197",
+    "description": "Invalid claim discharge voucher offer communicated amount"
+  },
+  {
+    "code": "TIRA198",
+    "description": "Invalid claim discharge voucher offer response date"
+  },
+  {
+    "code": "TIRA199",
+    "description": "Invalid claim discharge voucher offer adjustment date"
+  },
+  {
+    "code": "TIRA200",
+    "description": "Invalid claim discharge voucher offer adjustment reason"
+  },
+  {
+    "code": "TIRA201",
+    "description": "Invalid claim discharge voucher offer adjustment amount"
+  },
+  {
+    "code": "TIRA202",
+    "description": "Invalid claim discharge voucher offer reconciliation date"
+  },
+  {
+    "code": "TIRA203",
+    "description": "Invalid claim discharge voucher offer reconciliation reason"
+  },
+  {
+    "code": "TIRA204",
+    "description": "Invalid claim discharge voucher offer reconciliation amount"
+  },
+  {
+    "code": "TIRA205",
+    "description": "Invalid value identifying if offer was accepted or not"
+  },
+  { "code": "TIRA206", "description": "Invalid claim payment number" },
+  {
+    "code": "TIRA207",
+    "description": "Invalid value identifying if claim parties were notified about claim payment or not"
+  },
+  { "code": "TIRA208", "description": "Invalid claim net premium earned" },
+  {
+    "code": "TIRA209",
+    "description": "Invalid value identifying if claim resulted into litigation or not"
+  },
+  { "code": "TIRA210", "description": "Invalid claim rejection number" },
+  { "code": "TIRA211", "description": "Invalid claim rejection reason" },
+  { "code": "TIRA212", "description": "Invalid endorsement type" },
+  { "code": "TIRA213", "description": "Invalid endorsement reason" },
+  { "code": "TIRA214", "description": "Invalid premium discount rate" },
+  {
+    "code": "TIRA215",
+    "description": "Invalid endorsement premium earned amount"
+  },
+  {
+    "code": "TIRA216",
+    "description": "Invalid value identifying premium is tax exempted or not"
+  },
+  { "code": "TIRA217", "description": "Invalid tax exemption type" },
+  { "code": "TIRA218", "description": "Invalid tax exemption reference" },
+  { "code": "TIRA219", "description": "Invalid motor type" },
+  {
+    "code": "TIRA220",
+    "description": "Active covernote with specified motor details exists"
+  },
+  { "code": "TIRA221", "description": "Invalid fleet type" }
+]

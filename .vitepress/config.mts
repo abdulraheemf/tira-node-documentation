@@ -13,9 +13,20 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/" },
+          { text: "Getting Started", link: "/getting-started" },
           { text: "Examples", link: "/markdown-examples" },
         ],
         sidebar: [
+          {
+            text: "Getting Started",
+            items: [
+              { text: "Getting Started", link: "/getting-started" },
+              { text: "Initialization", link: "/initialization" },
+              { text: "Signing & Verification", link: "/signing-verification" },
+              { text: "Callbacks & Acknowledgements", link: "/callbacks-acknowledgements" },
+              { text: "Error Codes", link: "/error-codes" },
+            ],
+          },
           {
             text: "Examples",
             items: [
@@ -35,9 +46,20 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Nyumbani", link: "/sw/" },
+          { text: "Kuanza", link: "/sw/getting-started" },
           { text: "Mifano", link: "/sw/markdown-examples" },
         ],
         sidebar: [
+          {
+            text: "Kuanza",
+            items: [
+              { text: "Kuanza", link: "/sw/getting-started" },
+              { text: "Uanzishaji", link: "/sw/initialization" },
+              { text: "Usainiaji na Uthibitishaji", link: "/sw/signing-verification" },
+              { text: "Callback na Uthibitisho", link: "/sw/callbacks-acknowledgements" },
+              { text: "Misimbo ya Makosa", link: "/sw/error-codes" },
+            ],
+          },
           {
             text: "Mifano",
             items: [

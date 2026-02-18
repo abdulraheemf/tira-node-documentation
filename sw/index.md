@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Anza Hapa
-      link: /sw/markdown-examples
+      link: /sw/getting-started
     - theme: alt
       text: Tazama kwenye GitHub
       link: https://github.com/Labedan-IT-Solutions/tira-node
