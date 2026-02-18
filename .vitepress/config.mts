@@ -13,12 +13,12 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Home", link: "/" },
-          { text: "Getting Started", link: "/getting-started" },
+          { text: "Guide", link: "/getting-started" },
           { text: "Examples", link: "/markdown-examples" },
         ],
         sidebar: [
           {
-            text: "Getting Started",
+            text: "Guide",
             items: [
               { text: "Getting Started", link: "/getting-started" },
               { text: "Initialization", link: "/initialization" },
@@ -46,12 +46,12 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: "Nyumbani", link: "/sw/" },
-          { text: "Kuanza", link: "/sw/getting-started" },
+          { text: "Mwongozo", link: "/sw/getting-started" },
           { text: "Mifano", link: "/sw/markdown-examples" },
         ],
         sidebar: [
           {
-            text: "Kuanza",
+            text: "Mwongozo",
             items: [
               { text: "Kuanza", link: "/sw/getting-started" },
               { text: "Uanzishaji", link: "/sw/initialization" },
