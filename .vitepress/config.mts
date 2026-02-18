@@ -31,6 +31,9 @@ export default defineConfig({
             text: "Resources",
             items: [
               { text: "Motor", link: "/motor" },
+              { text: "Motor Fleet", link: "/motor-fleet" },
+              { text: "Non-Life Other", link: "/non-life-other" },
+              { text: "Reinsurance", link: "/reinsurance" },
             ],
           },
         ],
@@ -63,6 +66,9 @@ export default defineConfig({
             text: "Rasilimali",
             items: [
               { text: "Magari", link: "/sw/motor" },
+              { text: "Magari ya Msafara", link: "/sw/motor-fleet" },
+              { text: "Bima Nyinginezo", link: "/sw/non-life-other" },
+              { text: "Bima ya Kurudisha", link: "/sw/reinsurance" },
             ],
           },
         ],
