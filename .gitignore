@@ -3,3 +3,4 @@ build
 .env
 .vitepress
 .DS_Store
+.llms

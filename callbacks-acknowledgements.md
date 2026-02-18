@@ -321,25 +321,25 @@ Without this, `req.body` will be empty and the callback handler will fail.
 :::
 
 ::: warning Error handling
-Wrap your callback handler in a try/catch. If something goes wrong while processing the data, try to acknowledge anyway to prevent TIRA from retrying:
+Only wrap your business logic (e.g., saving to database) in try-catch — the callback parsing and acknowledgement should always run:
 
 ```js
 app.post("/tira/motor-callback", async (req, res) => {
-  let result;
+  const result = await tira.motor.handleCallback(req.body);
+
   try {
-    result = await tira.motor.handleCallback(req.body);
     await saveToDatabase(result.extracted);
   } catch (err) {
-    console.error("Error processing callback:", err);
+    console.error("Error saving to database:", err);
   }
 
-  // Acknowledge even if processing failed
-  if (result) {
-    const ackXml = tira.acknowledge(result.body, uuid());
-    res.set("Content-Type", "application/xml").send(ackXml);
-  } else {
-    res.status(500).send("Failed to process callback");
-  }
+  // Always runs, regardless of whether your processing succeeded
+  const ackXml = tira.acknowledge(result.body, uuid());
+  res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+:::
+
+::: danger Repetitive non-acknowledgement
+TIRA monitors acknowledgement responses. Repeatedly failing to acknowledge callbacks may result in TIRA taking action against your integration. Always ensure your callback endpoint acknowledges every callback it receives.
 :::

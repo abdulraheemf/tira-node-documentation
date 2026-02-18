@@ -321,25 +321,25 @@ Bila hii, `req.body` itakuwa tupu na kushughulikia callback kutashindwa.
 :::
 
 ::: warning Kushughulikia makosa
-Funga kushughulikia callback yako katika try/catch. Ikiwa kitu kimekwenda vibaya wakati wa kushughulikia data, jaribu kuthibitisha hata hivyo ili kuzuia TIRA kurudia:
+Funga tu mantiki yako ya biashara (mf. kuhifadhi kwenye hifadhidata) katika try-catch — uchambuzi wa callback na uthibitisho lazima uendelee daima:
 
 ```js
 app.post("/tira/motor-callback", async (req, res) => {
-  let result;
+  const result = await tira.motor.handleCallback(req.body);
+
   try {
-    result = await tira.motor.handleCallback(req.body);
     await saveToDatabase(result.extracted);
   } catch (err) {
-    console.error("Kosa la kushughulikia callback:", err);
+    console.error("Kosa la kuhifadhi kwenye hifadhidata:", err);
   }
 
-  // Thibitisha hata ikiwa kushughulikia kumeshindwa
-  if (result) {
-    const ackXml = tira.acknowledge(result.body, uuid());
-    res.set("Content-Type", "application/xml").send(ackXml);
-  } else {
-    res.status(500).send("Imeshindwa kushughulikia callback");
-  }
+  // Inafanya kazi daima, bila kujali kama usindikaji wako umefanikiwa
+  const ackXml = tira.acknowledge(result.body, uuid());
+  res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+:::
+
+::: danger Kutothibitisha mara kwa mara
+TIRA inafuatilia majibu ya uthibitisho. Kushindwa kuthibitisha callback mara kwa mara kunaweza kusababisha TIRA kuchukua hatua dhidi ya muunganisho wako. Hakikisha daima endpoint yako ya callback inathibitisha kila callback inayoipokea.
 :::

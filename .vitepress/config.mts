@@ -14,7 +14,7 @@ export default defineConfig({
         nav: [
           { text: "Home", link: "/" },
           { text: "Guide", link: "/getting-started" },
-          { text: "Examples", link: "/markdown-examples" },
+          { text: "Resources", link: "/motor" },
         ],
         sidebar: [
           {
@@ -28,10 +28,9 @@ export default defineConfig({
             ],
           },
           {
-            text: "Examples",
+            text: "Resources",
             items: [
-              { text: "Markdown Examples", link: "/markdown-examples" },
-              { text: "Runtime API Examples", link: "/api-examples" },
+              { text: "Motor", link: "/motor" },
             ],
           },
         ],
@@ -47,7 +46,7 @@ export default defineConfig({
         nav: [
           { text: "Nyumbani", link: "/sw/" },
           { text: "Mwongozo", link: "/sw/getting-started" },
-          { text: "Mifano", link: "/sw/markdown-examples" },
+          { text: "Rasilimali", link: "/sw/motor" },
         ],
         sidebar: [
           {
@@ -61,10 +60,9 @@ export default defineConfig({
             ],
           },
           {
-            text: "Mifano",
+            text: "Rasilimali",
             items: [
-              { text: "Mifano ya Markdown", link: "/sw/markdown-examples" },
-              { text: "Mifano ya Runtime API", link: "/sw/api-examples" },
+              { text: "Magari", link: "/sw/motor" },
             ],
           },
         ],
