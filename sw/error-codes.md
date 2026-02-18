@@ -112,7 +112,7 @@ TIRA inarudisha msimbo wa hali katika kila jibu. Utaona misimbo hii katika sehem
 | `TIRA151` | Uzito wa tare wa gari si sahihi | Angalia `tare_weight`. Lazima iwe nambari halali (katika kg). |
 | `TIRA152` | Uzito wa jumla wa gari si sahihi | Angalia `gross_weight`. Lazima iwe nambari halali (katika kg). |
 | `TIRA153` | Matumizi ya gari si sahihi | Angalia `motor_usage`. Lazima iwe msimbo halali wa matumizi. |
-| `TIRA154` | Jina la mmiliki wa gari si sahihi | Angalia `owner_name`. Lazima lisiwe tupu. |
+| `TIRA154` | Jina la mmiliki wa gari si sahihi | Angalia `owner_name`.  |
 | `TIRA155` | Aina ya mmiliki wa gari si sahihi | Angalia `owner_category`. |
 | `TIRA156` | Anwani ya mmiliki wa gari si sahihi | Angalia `owner_address`. Lazima isiwe tupu. |
 | `TIRA159` | Nambari ya stika ya bima si sahihi | Nambari ya stika si sahihi. Kawaida hupewa na TIRA. |

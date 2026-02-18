@@ -154,7 +154,7 @@ These are the top-level fields in the submission payload.
 | Field | Type | Required | Default | XML Tag | Description |
 |---|---|---|---|---|---|
 | `request_id` | `string` | Yes | — | `RequestId` | Unique request identifier |
-| `callback_url` | `string` | Yes | — | `CallBackUrl` | Where TIRA sends results. Must be HTTPS. |
+| `callback_url` | `string` | Yes | — | `CallBackUrl` | Where TIRA sends results |
 | `insurer_company_code` | `string` | Yes | — | `InsurerCompanyCode` | Insurer's company code |
 | `covernote_type` | `"1"\|"2"\|"3"` | Yes | — | `CoverNoteType` | 1=New, 2=Renewal, 3=Endorsement |
 | `covernote_number` | `string` | Conditional | `""` | `CoverNoteNumber` | Your cover note number. Required for New and Renewal. |
@@ -208,7 +208,7 @@ The `motor_details` object describes the vehicle being insured.
 | `tare_weight` | `number` | Yes | — | `TareWeight` | Empty weight in kg. Must be positive. |
 | `gross_weight` | `number` | Yes | — | `GrossWeight` | Loaded weight in kg. Must be positive. |
 | `motor_usage` | `"1"\|"2"` | Yes | — | `MotorUsage` | 1=Private, 2=Commercial |
-| `owner_name` | `string` | Yes | — | `OwnerName` | Vehicle owner's name |
+| `owner_name` | `string` | No | `""` | `OwnerName` | Vehicle owner's name |
 | `owner_category` | `"1"\|"2"` | Yes | — | `OwnerCategory` | 1=Sole Proprietor, 2=Corporate |
 | `owner_address` | `string` | Yes | — | `OwnerAddress` | Vehicle owner's address |
 
@@ -323,7 +323,7 @@ This means if you want a cover note to start on June 1st Tanzania time, pass `"2
 
 The package validates your payload before sending it to TIRA. If validation fails, it throws a `TiraValidationError` with the field name and a descriptive message.
 
-- `callback_url` must start with `https://`
+- `callback_url` must be a valid URL
 - `covernote_number` is required when `covernote_type` is `"1"` (New) or `"2"` (Renewal)
 - `previous_covernote_reference_number` is required when `covernote_type` is `"2"` (Renewal) or `"3"` (Endorsement)
 - `endorsement_type` and `endorsement_reason` are required when `covernote_type` is `"3"` (Endorsement)
@@ -888,9 +888,6 @@ The XML tags `CommisionPaid` and `CommisionRate` use a single "s" ("Commision" i
 TIRA retries callbacks indefinitely until you acknowledge them. Always call `tira.acknowledge(result.body, uuid())` and return the XML, even if processing the callback data failed.
 :::
 
-::: danger Using HTTP for callback_url
-The `callback_url` must start with `https://`. Using `http://` will throw a `TiraValidationError` before the request is sent.
-:::
 
 ::: danger Providing both registration and chassis number in verify()
 `tira.motor.verify()` requires **exactly one** of `motor_registration_number` or `motor_chassis_number`. Providing both throws a `TiraValidationError`.

@@ -112,7 +112,7 @@ TIRA returns a status code in every response. You'll see these codes in two plac
 | `TIRA151` | Invalid motor tare weight | Check `tare_weight`. Must be a valid number (in kg). |
 | `TIRA152` | Invalid motor gross weight | Check `gross_weight`. Must be a valid number (in kg). |
 | `TIRA153` | Invalid motor usage | Check `motor_usage`. Must be a valid usage code. |
-| `TIRA154` | Invalid motor owner name | Check `owner_name`. Must not be empty. |
+| `TIRA154` | Invalid motor owner name | Check `owner_name`.|
 | `TIRA155` | Invalid motor owner category | Check `owner_category`. Must be a valid category. |
 | `TIRA156` | Invalid motor owner address | Check `owner_address`. Must not be empty. |
 | `TIRA159` | Invalid insurance sticker number | The sticker number is invalid. This is usually assigned by TIRA. |

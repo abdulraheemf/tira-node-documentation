@@ -154,7 +154,7 @@ Hizi ni sehemu za kiwango cha juu katika mzigo wa utumaji.
 | Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
 |---|---|---|---|---|---|
 | `request_id` | `string` | Ndiyo | — | `RequestId` | Kitambulisho cha kipekee cha ombi |
-| `callback_url` | `string` | Ndiyo | — | `CallBackUrl` | Mahali TIRA inatuma matokeo. Lazima iwe HTTPS. |
+| `callback_url` | `string` | Ndiyo | — | `CallBackUrl` | Mahali TIRA inatuma matokeo |
 | `insurer_company_code` | `string` | Ndiyo | — | `InsurerCompanyCode` | Msimbo wa kampuni ya bima |
 | `covernote_type` | `"1"\|"2"\|"3"` | Ndiyo | — | `CoverNoteType` | 1=Mpya, 2=Upyaji, 3=Marekebisho |
 | `covernote_number` | `string` | Masharti | `""` | `CoverNoteNumber` | Nambari yako ya covernote. Inahitajika kwa Mpya na Upyaji. |
@@ -208,7 +208,7 @@ Kitu cha `motor_details` kinaeleza gari linalobimishwa.
 | `tare_weight` | `number` | Ndiyo | — | `TareWeight` | Uzito tupu kwa kg. Lazima iwe chanya. |
 | `gross_weight` | `number` | Ndiyo | — | `GrossWeight` | Uzito kamili kwa kg. Lazima iwe chanya. |
 | `motor_usage` | `"1"\|"2"` | Ndiyo | — | `MotorUsage` | 1=Binafsi, 2=Biashara |
-| `owner_name` | `string` | Ndiyo | — | `OwnerName` | Jina la mmiliki wa gari |
+| `owner_name` | `string` | Hapana | `""` | `OwnerName` | Jina la mmiliki wa gari |
 | `owner_category` | `"1"\|"2"` | Ndiyo | — | `OwnerCategory` | 1=Mmiliki Binafsi, 2=Kampuni |
 | `owner_address` | `string` | Ndiyo | — | `OwnerAddress` | Anwani ya mmiliki wa gari |
 
@@ -323,7 +323,7 @@ Hii inamaanisha ukitaka covernote ianze Juni 1 saa za Tanzania, toa `"2025-05-31
 
 Kifurushi kinathibitisha mzigo wako kabla ya kuutuma kwa TIRA. Uthibitishaji ukishindwa, kinatupa `TiraValidationError` na jina la sehemu na ujumbe wa maelezo.
 
-- `callback_url` lazima ianze na `https://`
+- `callback_url` lazima iwe URL halali
 - `covernote_number` inahitajika wakati `covernote_type` ni `"1"` (Mpya) au `"2"` (Upyaji)
 - `previous_covernote_reference_number` inahitajika wakati `covernote_type` ni `"2"` (Upyaji) au `"3"` (Marekebisho)
 - `endorsement_type` na `endorsement_reason` zinahitajika wakati `covernote_type` ni `"3"` (Marekebisho)
@@ -888,9 +888,6 @@ XML tags `CommisionPaid` na `CommisionRate` zinatumia "s" moja ("Commision" bada
 TIRA inarudia callback bila kikomo hadi uthibitishe. Daima ita `tira.acknowledge(result.body, uuid())` na rudisha XML, hata ikiwa kushughulikia data ya callback kumeshindwa.
 :::
 
-::: danger Kutumia HTTP kwa callback_url
-`callback_url` lazima ianze na `https://`. Kutumia `http://` kutatupa `TiraValidationError` kabla ya ombi kutumwa.
-:::
 
 ::: danger Kutoa nambari ya usajili na chasi zote mbili katika verify()
 `tira.motor.verify()` inahitaji **moja tu** kati ya `motor_registration_number` au `motor_chassis_number`. Kutoa zote mbili kutatupa `TiraValidationError`.
