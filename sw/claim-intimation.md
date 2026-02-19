@@ -6,10 +6,10 @@ Kwa mtiririko wa jumla wa kutuma-callback-kuthibitisha, tazama [Callback na Uthi
 
 ## Mbinu Zinazopatikana
 
-| Mbinu                                         | Maelezo                                       | Wakati wa Kutumia                                                                            | Inarudisha                                         |
-| --------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `tira.claimIntimation.submit(payload)`        | Tuma madai ya awali kwa TIRA                  | Baada ya taarifa ya madai kukubaliwa na una nambari ya kumbukumbu ya madai                   | `ClaimIntimationResponse`                          |
-| `tira.claimIntimation.handleCallback(input)`  | Chambua na kutoa data kutoka callback ya TIRA | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako                                | `CallbackResult<ClaimIntimationCallbackResponse>`  |
+| Mbinu                                        | Maelezo                                       | Wakati wa Kutumia                                                          | Inarudisha                                        |
+| -------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------- |
+| `tira.claimIntimation.submit(payload)`       | Tuma madai ya awali kwa TIRA                  | Baada ya taarifa ya madai kukubaliwa na una nambari ya kumbukumbu ya madai | `ClaimIntimationResponse`                         |
+| `tira.claimIntimation.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako               | `CallbackResult<ClaimIntimationCallbackResponse>` |
 
 ## Mzigo wa .submit()
 
@@ -23,25 +23,25 @@ Inatuma madai ya awali kwa TIRA. Hii ni operesheni ya **asynchronous** — unapa
 
 ### Sehemu za Madai ya Awali
 
-| Sehemu                       | Aina           | Inahitajika | Chaguomsingi | XML Tag                    | Maelezo                                                                                              |
-| ---------------------------- | -------------- | ----------- | ------------ | -------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `request_id`                 | `string`       | Ndiyo       | —            | `RequestId`                | Kitambulisho cha kipekee cha ombi                                                                    |
-| `callback_url`               | `string`       | Ndiyo       | —            | `CallBackUrl`              | TIRA inapotuma matokeo                                                                               |
-| `insurer_company_code`       | `string`       | Ndiyo       | —            | `InsurerCompanyCode`       | Nambari ya kampuni ya bima                                                                           |
-| `claim_intimation_number`    | `string`       | Ndiyo       | —            | `ClaimIntimationNumber`    | Nambari ya madai ya awali kwa mujibu wa bima. String(50).                                            |
-| `claim_reference_number`     | `string`       | Ndiyo       | —            | `ClaimReferenceNumber`     | Nambari ya kumbukumbu ya madai ya TIRA kutoka taarifa ya madai. String(50).                          |
-| `covernote_reference_number` | `string`       | Ndiyo       | —            | `CoverNoteReferenceNumber` | Nambari ya kumbukumbu ya covernote ya TIRA ambayo dai linapinga. String(50).                         |
-| `claim_intimation_date`      | `string\|Date` | Ndiyo       | —            | `ClaimIntimationDate`      | Tarehe na muda wa madai ya awali. Tazama [Utumaji wa Tarehe](#utumaji-wa-tarehe).                    |
-| `currency_code`              | `string`       | Hapana      | `"TZS"`      | `CurrencyCode`             | Msimbo wa fedha wa ISO 4217.                                                                         |
-| `exchange_rate`              | `number`       | Hapana      | `1.0`        | `ExchangeRate`             | Kiwango cha ubadilishaji hadi TZS. Kinafomatiwa kwa desimali 2.                                     |
-| `claim_estimated_amount`     | `number`       | Ndiyo       | —            | `ClaimEstimatedAmount`     | Kiasi kinachokadiriwa cha dai. Numeric(36,2).                                                        |
-| `claim_reserve_amount`       | `number`       | Ndiyo       | —            | `ClaimReserveAmount`       | Kiasi cha akiba kilichotengwa kwa dai. Numeric(36,2).                                                |
-| `claim_reserve_method`       | `string`       | Ndiyo       | —            | `ClaimReserveMethod`       | Njia iliyotumika kukokotoa akiba (mf. "Chain Ladder"). String(100).                                  |
-| `loss_assessment_option`     | `"1"\|"2"`     | Ndiyo       | —            | `LossAssessmentOption`     | 1=Ndani ya kampuni (mfanyakazi wa bima), 2=Nje (mkadiriaji wa bima aliyesajiliwa).                   |
-| `assessor_name`              | `string`       | Ndiyo       | —            | `AssessorName`             | Jina la mkadiriaji. String(100).                                                                     |
-| `assessor_id_number`         | `string`       | Ndiyo       | —            | `AssessorIdNumber`         | Nambari ya kitambulisho cha mkadiriaji. String(50).                                                  |
-| `assessor_id_type`           | `"1"\|…\|"7"`  | Ndiyo       | —            | `AssessorIdType`           | Aina ya kitambulisho cha mkadiriaji. Tazama [Aina za Kitambulisho](#aina-za-kitambulisho).           |
-| `claimants`                  | `Claimant[]`   | Ndiyo       | —            | `Claimants > Claimant`     | Angalau mdai mmoja anahitajika. Tazama [Wadai](#wadai).                                              |
+| Sehemu                       | Aina           | Inahitajika | Chaguomsingi | XML Tag                    | Maelezo                                                                                    |
+| ---------------------------- | -------------- | ----------- | ------------ | -------------------------- | ------------------------------------------------------------------------------------------ |
+| `request_id`                 | `string`       | Ndiyo       | —            | `RequestId`                | Kitambulisho cha kipekee cha ombi                                                          |
+| `callback_url`               | `string`       | Ndiyo       | —            | `CallBackUrl`              | TIRA inapotuma matokeo                                                                     |
+| `insurer_company_code`       | `string`       | Ndiyo       | —            | `InsurerCompanyCode`       | Nambari ya kampuni ya bima                                                                 |
+| `claim_intimation_number`    | `string`       | Ndiyo       | —            | `ClaimIntimationNumber`    | Nambari ya madai ya awali kwa mujibu wa bima. String(50).                                  |
+| `claim_reference_number`     | `string`       | Ndiyo       | —            | `ClaimReferenceNumber`     | Nambari ya kumbukumbu ya madai ya TIRA kutoka taarifa ya madai. String(50).                |
+| `covernote_reference_number` | `string`       | Ndiyo       | —            | `CoverNoteReferenceNumber` | Nambari ya kumbukumbu ya covernote ya TIRA ambayo dai linapinga. String(50).               |
+| `claim_intimation_date`      | `string\|Date` | Ndiyo       | —            | `ClaimIntimationDate`      | Tarehe na muda wa madai ya awali. Tazama [Utumaji wa Tarehe](#utumaji-wa-tarehe).          |
+| `currency_code`              | `string`       | Hapana      | `"TZS"`      | `CurrencyCode`             | Msimbo wa fedha wa ISO 4217.                                                               |
+| `exchange_rate`              | `number`       | Hapana      | `1.0`        | `ExchangeRate`             | Kiwango cha ubadilishaji hadi TZS. Kinafomatiwa kwa desimali 2.                            |
+| `claim_estimated_amount`     | `number`       | Ndiyo       | —            | `ClaimEstimatedAmount`     | Kiasi kinachokadiriwa cha dai. Numeric(36,2).                                              |
+| `claim_reserve_amount`       | `number`       | Ndiyo       | —            | `ClaimReserveAmount`       | Kiasi cha akiba kilichotengwa kwa dai. Numeric(36,2).                                      |
+| `claim_reserve_method`       | `string`       | Ndiyo       | —            | `ClaimReserveMethod`       | Njia iliyotumika kukokotoa akiba (mf. "Chain Ladder"). String(100).                        |
+| `loss_assessment_option`     | `"1"\|"2"`     | Ndiyo       | —            | `LossAssessmentOption`     | 1=Ndani ya kampuni (mfanyakazi wa bima), 2=Nje (mkadiriaji wa bima aliyesajiliwa).         |
+| `assessor_name`              | `string`       | Ndiyo       | —            | `AssessorName`             | Jina la mkadiriaji. String(100).                                                           |
+| `assessor_id_number`         | `string`       | Ndiyo       | —            | `AssessorIdNumber`         | Nambari ya kitambulisho cha mkadiriaji. String(50).                                        |
+| `assessor_id_type`           | `"1"\|…\|"7"`  | Ndiyo       | —            | `AssessorIdType`           | Aina ya kitambulisho cha mkadiriaji. Tazama [Aina za Kitambulisho](#aina-za-kitambulisho). |
+| `claimants`                  | `Claimant[]`   | Ndiyo       | —            | `Claimants > Claimant`     | Angalau mdai mmoja anahitajika. Tazama [Wadai](#wadai).                                    |
 
 ::: info Sehemu za kichwa zinazojazwa kiotomatiki
 Sehemu za kichwa cha XML `CompanyCode` na `SystemCode` zinajazwa kiotomatiki kutoka kwenye usanidi wako wa Tira — huhitaji kuzijumuisha kwenye mzigo.
@@ -51,37 +51,37 @@ Sehemu za kichwa cha XML `CompanyCode` na `SystemCode` zinajazwa kiotomatiki kut
 
 Kila mdai kwenye safu ya `claimants` ana sehemu zifuatazo:
 
-| Sehemu                   | Aina           | Inahitajika | Chaguomsingi | XML Tag              | Maelezo                                                                               |
-| ------------------------ | -------------- | ----------- | ------------ | -------------------- | ------------------------------------------------------------------------------------- |
-| `claimant_name`          | `string`       | Ndiyo       | —            | `ClaimantName`       | Jina kamili la mdai. String(100).                                                     |
-| `claimant_birth_date`    | `string`       | Ndiyo       | —            | `ClaimantBirthDate`  | Tarehe ya kuzaliwa katika fomati YYYY-MM-DD.                                          |
-| `claimant_category`      | `"1"\|"2"`     | Ndiyo       | —            | `ClaimantCategory`   | 1=Mwenye bima, 2=Upande wa Tatu.                                                     |
-| `claimant_type`          | `"1"\|"2"`     | Ndiyo       | —            | `ClaimantType`       | 1=Mtu binafsi, 2=Kampuni.                                                            |
-| `claimant_id_number`     | `string`       | Ndiyo       | —            | `ClaimantIdNumber`   | Nambari ya kitambulisho. String(50).                                                  |
-| `claimant_id_type`       | `"1"\|…\|"7"`  | Ndiyo       | —            | `ClaimantIdType`     | Aina ya kitambulisho. Tazama [Aina za Kitambulisho](#aina-za-kitambulisho).           |
-| `gender`                 | `"M"\|"F"`     | Hapana      | `""`         | `Gender`             | M=Mwanaume, F=Mwanamke.                                                              |
-| `country_code`           | `string`       | Hapana      | `"TZA"`      | `CountryCode`        | Msimbo wa nchi wa ISO 3166 alpha-3.                                                   |
-| `region`                 | `string`       | Ndiyo       | —            | `Region`             | Mkoa wa mdai.                                                                         |
-| `district`               | `string`       | Ndiyo       | —            | `District`           | Wilaya ya mdai. String(100).                                                          |
-| `street`                 | `string`       | Hapana      | `""`         | `Street`             | Mtaa wa mdai. String(100).                                                            |
-| `claimant_phone_number`  | `string`       | Ndiyo       | —            | `ClaimantPhoneNumber`| Nambari ya simu ya mdai. String(50).                                                  |
-| `claimant_fax`           | `string`       | Hapana      | `""`         | `ClaimantFax`        | Nambari ya faksi ya mdai. String(50).                                                 |
-| `postal_address`         | `string`       | Hapana      | `""`         | `PostalAddress`      | Anwani ya posta ya mdai. String(50).                                                  |
-| `email_address`          | `string`       | Hapana      | `""`         | `EmailAddress`       | Anwani ya barua pepe ya mdai. String(50).                                             |
+| Sehemu                  | Aina          | Inahitajika | Chaguomsingi | XML Tag               | Maelezo                                                                     |
+| ----------------------- | ------------- | ----------- | ------------ | --------------------- | --------------------------------------------------------------------------- |
+| `claimant_name`         | `string`      | Ndiyo       | —            | `ClaimantName`        | Jina kamili la mdai. String(100).                                           |
+| `claimant_birth_date`   | `string`      | Ndiyo       | —            | `ClaimantBirthDate`   | Tarehe ya kuzaliwa katika fomati YYYY-MM-DD.                                |
+| `claimant_category`     | `"1"\|"2"`    | Ndiyo       | —            | `ClaimantCategory`    | 1=Mwenye bima, 2=Upande wa Tatu.                                            |
+| `claimant_type`         | `"1"\|"2"`    | Ndiyo       | —            | `ClaimantType`        | 1=Mtu binafsi, 2=Kampuni.                                                   |
+| `claimant_id_number`    | `string`      | Ndiyo       | —            | `ClaimantIdNumber`    | Nambari ya kitambulisho. String(50).                                        |
+| `claimant_id_type`      | `"1"\|…\|"7"` | Ndiyo       | —            | `ClaimantIdType`      | Aina ya kitambulisho. Tazama [Aina za Kitambulisho](#aina-za-kitambulisho). |
+| `gender`                | `"M"\|"F"`    | Hapana      | `""`         | `Gender`              | M=Mwanaume, F=Mwanamke.                                                     |
+| `country_code`          | `string`      | Hapana      | `"TZA"`      | `CountryCode`         | Msimbo wa nchi wa ISO 3166 alpha-3.                                         |
+| `region`                | `string`      | Ndiyo       | —            | `Region`              | Mkoa wa mdai.                                                               |
+| `district`              | `string`      | Ndiyo       | —            | `District`            | Wilaya ya mdai. String(100).                                                |
+| `street`                | `string`      | Hapana      | `""`         | `Street`              | Mtaa wa mdai. String(100).                                                  |
+| `claimant_phone_number` | `string`      | Ndiyo       | —            | `ClaimantPhoneNumber` | Nambari ya simu ya mdai. String(50).                                        |
+| `claimant_fax`          | `string`      | Hapana      | `""`         | `ClaimantFax`         | Nambari ya faksi ya mdai. String(50).                                       |
+| `postal_address`        | `string`      | Hapana      | `""`         | `PostalAddress`       | Anwani ya posta ya mdai. String(50).                                        |
+| `email_address`         | `string`      | Hapana      | `""`         | `EmailAddress`        | Anwani ya barua pepe ya mdai. String(50).                                   |
 
 ### Aina za Kitambulisho
 
 `assessor_id_type` na `claimant_id_type` zote zinatumia thamani sawa:
 
-| Thamani | Maelezo                                               |
-| ------- | ----------------------------------------------------- |
-| `"1"`   | NIN (Nambari ya Kitambulisho cha Kitaifa)             |
-| `"2"`   | Nambari ya Usajili wa Wapigakura                      |
-| `"3"`   | Nambari ya Pasipoti                                   |
-| `"4"`   | Leseni ya Udereva                                     |
-| `"5"`   | Kitambulisho cha Mkazi wa Zanzibar (ZANID)            |
-| `"6"`   | TIN (Nambari ya Kitambulisho cha Kodi)                |
-| `"7"`   | Nambari ya Cheti cha Usajili wa Kampuni               |
+| Thamani | Maelezo                                    |
+| ------- | ------------------------------------------ |
+| `"1"`   | NIN (Nambari ya Kitambulisho cha Kitaifa)  |
+| `"2"`   | Nambari ya Usajili wa Wapigakura           |
+| `"3"`   | Nambari ya Pasipoti                        |
+| `"4"`   | Leseni ya Udereva                          |
+| `"5"`   | Kitambulisho cha Mkazi wa Zanzibar (ZANID) |
+| `"6"`   | TIN (Nambari ya Kitambulisho cha Kodi)     |
+| `"7"`   | Nambari ya Cheti cha Usajili wa Kampuni    |
 
 ### Utumaji wa Tarehe
 
@@ -347,20 +347,20 @@ Unaweza kutuma ama:
 
 ### Inarudisha Nini
 
-| Sehemu               | Aina                                   | Maelezo                                                                              |
-| -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------ |
-| `type`               | `"claim_intimation"`                   | Daima `"claim_intimation"` kwa handler hii                                           |
-| `extracted`          | `ClaimIntimationCallbackResponse`      | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit))            |
-| `body`               | `Record<string, any>`                  | XML iliyochanganuliwa kamili kama kitu cha JS — ipitishe kwa `tira.acknowledge()`    |
-| `signature_verified` | `boolean`                              | Kama sahihi ya kidijitali ya TIRA ilithibitishwa                                     |
-| `raw_xml`            | `string`                               | String ya XML ya asili                                                               |
+| Sehemu               | Aina                              | Maelezo                                                                           |
+| -------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| `type`               | `"claim_intimation"`              | Daima `"claim_intimation"` kwa handler hii                                        |
+| `extracted`          | `ClaimIntimationCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit))         |
+| `body`               | `Record<string, any>`             | XML iliyochanganuliwa kamili kama kitu cha JS — ipitishe kwa `tira.acknowledge()` |
+| `signature_verified` | `boolean`                         | Kama sahihi ya kidijitali ya TIRA ilithibitishwa                                  |
+| `raw_xml`            | `string`                          | String ya XML ya asili                                                            |
 
 ### Handler ya Rasilimali Maalum vs ya Jumla
 
-| Njia                 | Mbinu                                         | Wakati wa Kutumia                                                                              |
-| -------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| Ya rasilimali maalum | `tira.claimIntimation.handleCallback(input)`  | Ukiwa na endpoint tofauti kwa kila aina ya rasilimali                                          |
-| Ya jumla             | `tira.handleCallback(input)`                  | Ukiwa na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` kwenye config) |
+| Njia                 | Mbinu                                        | Wakati wa Kutumia                                                                              |
+| -------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Ya rasilimali maalum | `tira.claimIntimation.handleCallback(input)` | Ukiwa na endpoint tofauti kwa kila aina ya rasilimali                                          |
+| Ya jumla             | `tira.handleCallback(input)`                 | Ukiwa na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` kwenye config) |
 
 Zote mbili zinarudisha data sawa. Handler ya jumla inagundua aina ya callback kiotomatiki. Tazama [Callback na Uthibitisho](/sw/callbacks-acknowledgements) kwa maelezo ya handler ya jumla.
 
@@ -383,8 +383,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -481,7 +481,7 @@ claimants: [
     claimant_type: "2", // Kampuni
     // ...sehemu nyingine
   },
-]
+];
 ```
 
 ## Makosa ya Kuzingatia

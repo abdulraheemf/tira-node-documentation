@@ -31,6 +31,7 @@ Step 6: You acknowledge TIRA's callback
 ```
 
 ::: warning Retry Rules
+
 - **Step 2**: If you don't receive an acknowledgement from TIRA, retry your submission.
 - **Step 6**: If TIRA doesn't receive your acknowledgement, they will keep retrying the callback until you acknowledge it.
 
@@ -49,20 +50,20 @@ const result = await tira.motor.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
-console.log(result.tira_status_desc);   // "Successful"
+console.log(result.tira_status_code); // "TIRA001"
+console.log(result.tira_status_desc); // "Successful"
 ```
 
 The response tells you TIRA received your request:
 
-| Field | Description |
-|---|---|
-| `acknowledgement_id` | TIRA's ID for this acknowledgement |
-| `request_id` | Your original request ID (echoed back) |
-| `tira_status_code` | `"TIRA001"` means TIRA received your request |
-| `tira_status_desc` | Human-readable description |
-| `requires_acknowledgement` | Always `true` |
-| `acknowledgement_payload` | Raw parsed acknowledgement data (you won't usually need this) |
+| Field                      | Description                                                   |
+| -------------------------- | ------------------------------------------------------------- |
+| `acknowledgement_id`       | TIRA's ID for this acknowledgement                            |
+| `request_id`               | Your original request ID (echoed back)                        |
+| `tira_status_code`         | `"TIRA001"` means TIRA received your request                  |
+| `tira_status_desc`         | Human-readable description                                    |
+| `requires_acknowledgement` | Always `true`                                                 |
+| `acknowledgement_payload`  | Raw parsed acknowledgement data (you won't usually need this) |
 
 ::: tip "TIRA001" means "received", not "approved"
 At this stage, `"TIRA001"` only means TIRA got your request. It does **not** mean your cover note was approved or your claim was accepted. The actual result comes later via the callback.
@@ -115,13 +116,13 @@ app.post("/tira-callback", async (req, res) => {
 
 Both approaches return a `CallbackResult` with these fields:
 
-| Field | Description |
-|---|---|
-| `type` | The detected callback type (`"motor"`, `"policy"`, `"motor_fleet"`, etc.) |
-| `extracted` | Clean JSON with the response data. See each resource's own documentation page for the exact fields you receive. |
-| `body` | Full parsed XML as a JS object (you'll need this for acknowledgement) |
-| `signature_verified` | `true` if the digital signature was verified |
-| `raw_xml` | The original XML string |
+| Field                | Description                                                                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `type`               | The detected callback type (`"motor"`, `"policy"`, `"motor_fleet"`, etc.)                                       |
+| `extracted`          | Clean JSON with the response data. See each resource's own documentation page for the exact fields you receive. |
+| `body`               | Full parsed XML as a JS object (you'll need this for acknowledgement)                                           |
+| `signature_verified` | `true` if the digital signature was verified                                                                    |
+| `raw_xml`            | The original XML string                                                                                         |
 
 ## Acknowledging the Callback
 
@@ -146,10 +147,10 @@ app.post("/tira/motor-callback", async (req, res) => {
 
 It takes two arguments:
 
-| Argument | Description |
-|---|---|
-| `result.body` | The `body` from the callback result (the full parsed XML object) |
-| `acknowledgementId` | A unique string you generate (e.g. a UUID) |
+| Argument            | Description                                                      |
+| ------------------- | ---------------------------------------------------------------- |
+| `result.body`       | The `body` from the callback result (the full parsed XML object) |
+| `acknowledgementId` | A unique string you generate (e.g. a UUID)                       |
 
 It returns a signed XML string ready to send as the HTTP response. The package automatically:
 
@@ -193,8 +194,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -338,6 +339,7 @@ app.post("/tira/motor-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Repetitive non-acknowledgement

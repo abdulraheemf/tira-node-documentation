@@ -6,10 +6,10 @@ For the general submit-callback-acknowledge flow, see [Callbacks & Acknowledgeme
 
 ## Available Methods
 
-| Method | Description | When to Use | Returns |
-|---|---|---|---|
-| `tira.motorFleet.submit(payload)` | Submit a motor fleet cover note (new, renewal, or endorsement) | When you want to create, renew, or modify cover notes for multiple vehicles at once | `CoverNoteResponse` |
-| `tira.motorFleet.handleCallback(input)` | Parse and extract data from TIRA's fleet callback | When TIRA sends the result of your fleet submission to your callback URL | `CallbackResult<MotorFleetCallbackResponse>` |
+| Method                                  | Description                                                    | When to Use                                                                         | Returns                                      |
+| --------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------- | -------------------------------------------- |
+| `tira.motorFleet.submit(payload)`       | Submit a motor fleet cover note (new, renewal, or endorsement) | When you want to create, renew, or modify cover notes for multiple vehicles at once | `CoverNoteResponse`                          |
+| `tira.motorFleet.handleCallback(input)` | Parse and extract data from TIRA's fleet callback              | When TIRA sends the result of your fleet submission to your callback URL            | `CallbackResult<MotorFleetCallbackResponse>` |
 
 ## .submit() Payload
 
@@ -23,196 +23,196 @@ Submits a motor fleet cover note to TIRA. This is an asynchronous operation — 
 
 ### Cover Note Types
 
-| Value | Type | When to Use | Extra Required Fields |
-|---|---|---|---|
-| `"1"` | New | First-time fleet cover note | `covernote_number` on each fleet detail entry |
-| `"2"` | Renewal | Renewing existing fleet coverage | `covernote_number` + `previous_covernote_reference_number` on each fleet detail entry |
+| Value | Type        | When to Use                       | Extra Required Fields                                                                                        |
+| ----- | ----------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `"1"` | New         | First-time fleet cover note       | `covernote_number` on each fleet detail entry                                                                |
+| `"2"` | Renewal     | Renewing existing fleet coverage  | `covernote_number` + `previous_covernote_reference_number` on each fleet detail entry                        |
 | `"3"` | Endorsement | Modifying existing fleet coverage | `previous_covernote_reference_number` + `endorsement_type` + `endorsement_reason` on each fleet detail entry |
 
 ### Endorsement Types
 
 When `covernote_type` is `"3"` (Endorsement), each fleet detail entry must specify its endorsement type:
 
-| Value | Type | Description |
-|---|---|---|
-| `"1"` | Increasing Premium | Policy changes that increase the premium |
-| `"2"` | Decreasing Premium | Policy changes that decrease the premium |
+| Value | Type                  | Description                                        |
+| ----- | --------------------- | -------------------------------------------------- |
+| `"1"` | Increasing Premium    | Policy changes that increase the premium           |
+| `"2"` | Decreasing Premium    | Policy changes that decrease the premium           |
 | `"3"` | Cover Details Changed | Changes to coverage details without premium impact |
-| `"4"` | Cancellation | Cancelling the cover note entirely |
+| `"4"` | Cancellation          | Cancelling the cover note entirely                 |
 
 ### Fleet Header Fields
 
 These are the top-level fields in the fleet submission payload. The fleet header wraps all vehicles in the fleet.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Yes | — | `RequestId` | Unique request identifier |
-| `callback_url` | `string` | Yes | — | `CallBackUrl` | Where TIRA sends results |
-| `insurer_company_code` | `string` | Yes | — | `InsurerCompanyCode` | Insurer's company code |
-| `covernote_type` | `"1"\|"2"\|"3"` | Yes | — | `CoverNoteType` | 1=New, 2=Renewal, 3=Endorsement |
-| `fleet_id` | `string` | Yes | — | `FleetId` | Unique fleet identifier |
-| `fleet_type` | `"1"\|"2"` | Yes | — | `FleetType` | 1=New fleet, 2=Additional vehicles to existing fleet |
-| `fleet_size` | `number` | Yes | — | `FleetSize` | Total number of vehicles in the fleet. Must be positive. |
-| `comprehensive_insured` | `number` | No | `""` | `ComprehensiveInsured` | Number of vehicles with comprehensive insurance |
-| `sales_point_code` | `string` | Yes | — | `SalePointCode` | Sales point code given by TIRA |
-| `covernote_start_date` | `string\|Date` | Yes | — | `CoverNoteStartDate` | Start date. See [Date Handling](#date-handling). |
-| `covernote_end_date` | `string\|Date` | Yes | — | `CoverNoteEndDate` | End date. Must be after start date. |
-| `payment_mode` | `"1"\|"2"\|"3"` | Yes | — | `PaymentMode` | 1=Cash, 2=Cheque, 3=EFT |
-| `currency_code` | `string` | No | `"TZS"` | `CurrencyCode` | ISO currency code |
-| `exchange_rate` | `number` | No | `1.0` | `ExchangeRate` | Exchange rate to TZS. Formatted to 2 decimal places. |
-| `total_premium_excluding_tax` | `number` | Yes | — | `TotalPremiumExcludingTax` | Total premium before tax (sum of all vehicles). Max 2 decimal places. |
-| `total_premium_including_tax` | `number` | Yes | — | `TotalPremiumIncludingTax` | Total premium after tax (sum of all vehicles). Must be >= excluding tax. |
-| `commission_paid` | `number` | No | `"0.00"` | `CommisionPaid` | Commission amount. Mandatory for intermediaries. |
-| `commission_rate` | `number` | No | `"0.00"` | `CommisionRate` | Commission rate. Max 5 decimal places. |
-| `officer_name` | `string` | Yes | — | `OfficerName` | Name of the processing officer |
-| `officer_title` | `string` | Yes | — | `OfficerTitle` | Title of the processing officer |
-| `product_code` | `string` | Yes | — | `ProductCode` | Product code (e.g., `SP014001000000` for Motor Private Vehicle) |
-| `policy_holders` | `PolicyHolder[]` | Yes | — | `PolicyHolders` | At least one policy holder. Fleet-level. See [Policy Holders](#policy-holders). |
-| `fleet_details` | `FleetDetailEntry[]` | Yes | — | `FleetDtl` | At least one vehicle entry. See [Fleet Detail Fields](#fleet-detail-fields). |
+| Field                         | Type                 | Required | Default  | XML Tag                    | Description                                                                     |
+| ----------------------------- | -------------------- | -------- | -------- | -------------------------- | ------------------------------------------------------------------------------- |
+| `request_id`                  | `string`             | Yes      | —        | `RequestId`                | Unique request identifier                                                       |
+| `callback_url`                | `string`             | Yes      | —        | `CallBackUrl`              | Where TIRA sends results                                                        |
+| `insurer_company_code`        | `string`             | Yes      | —        | `InsurerCompanyCode`       | Insurer's company code                                                          |
+| `covernote_type`              | `"1"\|"2"\|"3"`      | Yes      | —        | `CoverNoteType`            | 1=New, 2=Renewal, 3=Endorsement                                                 |
+| `fleet_id`                    | `string`             | Yes      | —        | `FleetId`                  | Unique fleet identifier                                                         |
+| `fleet_type`                  | `"1"\|"2"`           | Yes      | —        | `FleetType`                | 1=New fleet, 2=Additional vehicles to existing fleet                            |
+| `fleet_size`                  | `number`             | Yes      | —        | `FleetSize`                | Total number of vehicles in the fleet. Must be positive.                        |
+| `comprehensive_insured`       | `number`             | No       | `""`     | `ComprehensiveInsured`     | Number of vehicles with comprehensive insurance                                 |
+| `sales_point_code`            | `string`             | Yes      | —        | `SalePointCode`            | Sales point code given by TIRA                                                  |
+| `covernote_start_date`        | `string\|Date`       | Yes      | —        | `CoverNoteStartDate`       | Start date. See [Date Handling](#date-handling).                                |
+| `covernote_end_date`          | `string\|Date`       | Yes      | —        | `CoverNoteEndDate`         | End date. Must be after start date.                                             |
+| `payment_mode`                | `"1"\|"2"\|"3"`      | Yes      | —        | `PaymentMode`              | 1=Cash, 2=Cheque, 3=EFT                                                         |
+| `currency_code`               | `string`             | No       | `"TZS"`  | `CurrencyCode`             | ISO currency code                                                               |
+| `exchange_rate`               | `number`             | No       | `1.0`    | `ExchangeRate`             | Exchange rate to TZS. Formatted to 2 decimal places.                            |
+| `total_premium_excluding_tax` | `number`             | Yes      | —        | `TotalPremiumExcludingTax` | Total premium before tax (sum of all vehicles). Max 2 decimal places.           |
+| `total_premium_including_tax` | `number`             | Yes      | —        | `TotalPremiumIncludingTax` | Total premium after tax (sum of all vehicles). Must be >= excluding tax.        |
+| `commission_paid`             | `number`             | No       | `"0.00"` | `CommisionPaid`            | Commission amount. Mandatory for intermediaries.                                |
+| `commission_rate`             | `number`             | No       | `"0.00"` | `CommisionRate`            | Commission rate. Max 5 decimal places.                                          |
+| `officer_name`                | `string`             | Yes      | —        | `OfficerName`              | Name of the processing officer                                                  |
+| `officer_title`               | `string`             | Yes      | —        | `OfficerTitle`             | Title of the processing officer                                                 |
+| `product_code`                | `string`             | Yes      | —        | `ProductCode`              | Product code (e.g., `SP014001000000` for Motor Private Vehicle)                 |
+| `policy_holders`              | `PolicyHolder[]`     | Yes      | —        | `PolicyHolders`            | At least one policy holder. Fleet-level. See [Policy Holders](#policy-holders). |
+| `fleet_details`               | `FleetDetailEntry[]` | Yes      | —        | `FleetDtl`                 | At least one vehicle entry. See [Fleet Detail Fields](#fleet-detail-fields).    |
 
 ### Fleet Detail Fields
 
 Each entry in the `fleet_details` array represents one vehicle in the fleet. Each vehicle gets its own cover note number, risks, subject matters, addons, and motor details.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `fleet_entry` | `number` | Yes | — | `FleetEntry` | Sequence number (1, 2, 3, etc.) |
-| `covernote_number` | `string` | Yes | — | `CoverNoteNumber` | Cover note number for this vehicle |
-| `previous_covernote_reference_number` | `string` | Conditional | `""` | `PrevCoverNoteReferenceNumber` | Required for Renewal and Endorsement |
-| `covernote_desc` | `string` | Yes | — | `CoverNoteDesc` | Description (e.g., "Private Vehicles") |
-| `operative_clause` | `string` | Yes | — | `OperativeClause` | Operative clause (e.g., "Comprehensive") |
-| `endorsement_type` | `"1"\|"2"\|"3"\|"4"` | Conditional | `""` | `EndorsementType` | Required when `covernote_type` is `"3"`. See [Endorsement Types](#endorsement-types). |
-| `endorsement_reason` | `string` | Conditional | `""` | `EndorsementReason` | Required when `covernote_type` is `"3"`. |
-| `endorsement_premium_earned` | `number` | No | `""` | `EndorsementPremiumEarned` | Premium earned from endorsement |
-| `risks_covered` | `RisksCovered[]` | Yes | — | `RisksCovered` | At least one risk per vehicle. See [Risks Covered](#risks-covered). |
-| `subject_matters_covered` | `SubjectMatter[]` | Yes | — | `SubjectMattersCovered` | At least one subject matter per vehicle. See [Subject Matters](#subject-matters). |
-| `covernote_addons` | `CoverNoteAddon[]` | No | `[]` | `CoverNoteAddons` | Optional addons per vehicle. See [Cover Note Addons](#cover-note-addons). |
-| `motor_details` | `MotorDetails` | Yes | — | `MotorDtl` | Motor vehicle details for this vehicle. See [Motor Details](#motor-details). |
+| Field                                 | Type                 | Required    | Default | XML Tag                        | Description                                                                           |
+| ------------------------------------- | -------------------- | ----------- | ------- | ------------------------------ | ------------------------------------------------------------------------------------- |
+| `fleet_entry`                         | `number`             | Yes         | —       | `FleetEntry`                   | Sequence number (1, 2, 3, etc.)                                                       |
+| `covernote_number`                    | `string`             | Yes         | —       | `CoverNoteNumber`              | Cover note number for this vehicle                                                    |
+| `previous_covernote_reference_number` | `string`             | Conditional | `""`    | `PrevCoverNoteReferenceNumber` | Required for Renewal and Endorsement                                                  |
+| `covernote_desc`                      | `string`             | Yes         | —       | `CoverNoteDesc`                | Description (e.g., "Private Vehicles")                                                |
+| `operative_clause`                    | `string`             | Yes         | —       | `OperativeClause`              | Operative clause (e.g., "Comprehensive")                                              |
+| `endorsement_type`                    | `"1"\|"2"\|"3"\|"4"` | Conditional | `""`    | `EndorsementType`              | Required when `covernote_type` is `"3"`. See [Endorsement Types](#endorsement-types). |
+| `endorsement_reason`                  | `string`             | Conditional | `""`    | `EndorsementReason`            | Required when `covernote_type` is `"3"`.                                              |
+| `endorsement_premium_earned`          | `number`             | No          | `""`    | `EndorsementPremiumEarned`     | Premium earned from endorsement                                                       |
+| `risks_covered`                       | `RisksCovered[]`     | Yes         | —       | `RisksCovered`                 | At least one risk per vehicle. See [Risks Covered](#risks-covered).                   |
+| `subject_matters_covered`             | `SubjectMatter[]`    | Yes         | —       | `SubjectMattersCovered`        | At least one subject matter per vehicle. See [Subject Matters](#subject-matters).     |
+| `covernote_addons`                    | `CoverNoteAddon[]`   | No          | `[]`    | `CoverNoteAddons`              | Optional addons per vehicle. See [Cover Note Addons](#cover-note-addons).             |
+| `motor_details`                       | `MotorDetails`       | Yes         | —       | `MotorDtl`                     | Motor vehicle details for this vehicle. See [Motor Details](#motor-details).          |
 
 ### Motor Details
 
 The `motor_details` object on each fleet detail entry describes the vehicle being insured. This is the same structure used by the [Motor](/motor) resource.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `motor_category` | `"1"\|"2"` | Yes | — | `MotorCategory` | 1=Motor Vehicle, 2=Motor Cycle |
-| `motor_type` | `"1"\|"2"` | Yes | — | `MotorType` | 1=Registered, 2=In Transit |
-| `registration_number` | `string` | Conditional | `""` | `RegistrationNumber` | Required if `motor_type` is `"1"` (Registered) |
-| `chassis_number` | `string` | Yes | — | `ChassisNumber` | Vehicle chassis number |
-| `make` | `string` | Yes | — | `Make` | e.g., "Toyota" |
-| `model` | `string` | Yes | — | `Model` | e.g., "RAV4" |
-| `model_number` | `string` | Yes | — | `ModelNumber` | e.g., "2010" |
-| `body_type` | `string` | Yes | — | `BodyType` | e.g., "STATION WAGON" |
-| `color` | `string` | Yes | — | `Color` | e.g., "WHITE" |
-| `engine_number` | `string` | Yes | — | `EngineNumber` | Engine serial number |
-| `engine_capacity` | `string` | Yes | — | `EngineCapacity` | Engine capacity in cc (e.g., "2360") |
-| `fuel_used` | `string` | Yes | — | `FuelUsed` | e.g., "PETROL", "DIESEL" |
-| `number_of_axles` | `number` | Conditional | `""` | `NumberOfAxles` | Required for Motor Vehicle, optional for Motor Cycle |
-| `axle_distance` | `number` | Conditional | `0` | `AxleDistance` | Required for Motor Vehicle, optional for Motor Cycle |
-| `sitting_capacity` | `number` | Conditional | `""` | `SittingCapacity` | Required for Motor Vehicle, optional for Motor Cycle |
-| `year_of_manufacture` | `number` | Yes | — | `YearOfManufacture` | Must be between 1900 and next year |
-| `tare_weight` | `number` | Yes | — | `TareWeight` | Empty weight in kg. Must be positive. |
-| `gross_weight` | `number` | Yes | — | `GrossWeight` | Loaded weight in kg. Must be positive. |
-| `motor_usage` | `"1"\|"2"` | Yes | — | `MotorUsage` | 1=Private, 2=Commercial |
-| `owner_name` | `string` | No | `""` | `OwnerName` | Vehicle owner's name |
-| `owner_category` | `"1"\|"2"` | Yes | — | `OwnerCategory` | 1=Sole Proprietor, 2=Corporate |
-| `owner_address` | `string` | Yes | — | `OwnerAddress` | Vehicle owner's address |
+| Field                 | Type       | Required    | Default | XML Tag              | Description                                          |
+| --------------------- | ---------- | ----------- | ------- | -------------------- | ---------------------------------------------------- |
+| `motor_category`      | `"1"\|"2"` | Yes         | —       | `MotorCategory`      | 1=Motor Vehicle, 2=Motor Cycle                       |
+| `motor_type`          | `"1"\|"2"` | Yes         | —       | `MotorType`          | 1=Registered, 2=In Transit                           |
+| `registration_number` | `string`   | Conditional | `""`    | `RegistrationNumber` | Required if `motor_type` is `"1"` (Registered)       |
+| `chassis_number`      | `string`   | Yes         | —       | `ChassisNumber`      | Vehicle chassis number                               |
+| `make`                | `string`   | Yes         | —       | `Make`               | e.g., "Toyota"                                       |
+| `model`               | `string`   | Yes         | —       | `Model`              | e.g., "RAV4"                                         |
+| `model_number`        | `string`   | Yes         | —       | `ModelNumber`        | e.g., "2010"                                         |
+| `body_type`           | `string`   | Yes         | —       | `BodyType`           | e.g., "STATION WAGON"                                |
+| `color`               | `string`   | Yes         | —       | `Color`              | e.g., "WHITE"                                        |
+| `engine_number`       | `string`   | Yes         | —       | `EngineNumber`       | Engine serial number                                 |
+| `engine_capacity`     | `string`   | Yes         | —       | `EngineCapacity`     | Engine capacity in cc (e.g., "2360")                 |
+| `fuel_used`           | `string`   | Yes         | —       | `FuelUsed`           | e.g., "PETROL", "DIESEL"                             |
+| `number_of_axles`     | `number`   | Conditional | `""`    | `NumberOfAxles`      | Required for Motor Vehicle, optional for Motor Cycle |
+| `axle_distance`       | `number`   | Conditional | `0`     | `AxleDistance`       | Required for Motor Vehicle, optional for Motor Cycle |
+| `sitting_capacity`    | `number`   | Conditional | `""`    | `SittingCapacity`    | Required for Motor Vehicle, optional for Motor Cycle |
+| `year_of_manufacture` | `number`   | Yes         | —       | `YearOfManufacture`  | Must be between 1900 and next year                   |
+| `tare_weight`         | `number`   | Yes         | —       | `TareWeight`         | Empty weight in kg. Must be positive.                |
+| `gross_weight`        | `number`   | Yes         | —       | `GrossWeight`        | Loaded weight in kg. Must be positive.               |
+| `motor_usage`         | `"1"\|"2"` | Yes         | —       | `MotorUsage`         | 1=Private, 2=Commercial                              |
+| `owner_name`          | `string`   | No          | `""`    | `OwnerName`          | Vehicle owner's name                                 |
+| `owner_category`      | `"1"\|"2"` | Yes         | —       | `OwnerCategory`      | 1=Sole Proprietor, 2=Corporate                       |
+| `owner_address`       | `string`   | Yes         | —       | `OwnerAddress`       | Vehicle owner's address                              |
 
 ### Risks Covered
 
 At least one risk is required per vehicle. Each item in the `risks_covered` array maps to a `<RiskCovered>` XML element.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `risk_code` | `string` | Yes | `RiskCode` | Risk code from TIRA (e.g., `SP014001000001`) |
-| `sum_insured` | `number` | Yes | `SumInsured` | Sum insured amount. Max 2 decimal places. |
-| `sum_insured_equivalent` | `number` | Yes | `SumInsuredEquivalent` | Sum insured equivalent in TZS. Max 2 decimal places. |
-| `premium_rate` | `number` | Yes | `PremiumRate` | Premium rate. Max 5 decimal places. |
-| `premium_before_discount` | `number` | Yes | `PremiumBeforeDiscount` | Premium before discount. Max 2 decimal places. |
-| `premium_after_discount` | `number` | Yes | `PremiumAfterDiscount` | Premium after discount. Max 2 decimal places. |
-| `premium_excluding_tax_equivalent` | `number` | Yes | `PremiumExcludingTaxEquivalent` | Premium excluding tax in TZS. Max 2 decimal places. |
-| `premium_including_tax` | `number` | Yes | `PremiumIncludingTax` | Premium including tax. Max 2 decimal places. |
-| `discounts_offered` | `DiscountOffered[]` | No | `DiscountsOffered` | See [Discounts Offered](#discounts-offered) |
-| `taxes_charged` | `TaxCharged[]` | Yes | `TaxesCharged` | See [Taxes Charged](#taxes-charged) |
+| Field                              | Type                | Required | XML Tag                         | Description                                          |
+| ---------------------------------- | ------------------- | -------- | ------------------------------- | ---------------------------------------------------- |
+| `risk_code`                        | `string`            | Yes      | `RiskCode`                      | Risk code from TIRA (e.g., `SP014001000001`)         |
+| `sum_insured`                      | `number`            | Yes      | `SumInsured`                    | Sum insured amount. Max 2 decimal places.            |
+| `sum_insured_equivalent`           | `number`            | Yes      | `SumInsuredEquivalent`          | Sum insured equivalent in TZS. Max 2 decimal places. |
+| `premium_rate`                     | `number`            | Yes      | `PremiumRate`                   | Premium rate. Max 5 decimal places.                  |
+| `premium_before_discount`          | `number`            | Yes      | `PremiumBeforeDiscount`         | Premium before discount. Max 2 decimal places.       |
+| `premium_after_discount`           | `number`            | Yes      | `PremiumAfterDiscount`          | Premium after discount. Max 2 decimal places.        |
+| `premium_excluding_tax_equivalent` | `number`            | Yes      | `PremiumExcludingTaxEquivalent` | Premium excluding tax in TZS. Max 2 decimal places.  |
+| `premium_including_tax`            | `number`            | Yes      | `PremiumIncludingTax`           | Premium including tax. Max 2 decimal places.         |
+| `discounts_offered`                | `DiscountOffered[]` | No       | `DiscountsOffered`              | See [Discounts Offered](#discounts-offered)          |
+| `taxes_charged`                    | `TaxCharged[]`      | Yes      | `TaxesCharged`                  | See [Taxes Charged](#taxes-charged)                  |
 
 ### Taxes Charged
 
 Each risk and addon must include tax information. If no tax applies, set `is_tax_exempted` to `"Y"` and provide exemption details.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `tax_code` | `string` | Yes | `TaxCode` | Tax code from TIRA (e.g., `VAT-MAINLAND`) |
-| `is_tax_exempted` | `"Y"\|"N"` | Yes | `IsTaxExempted` | Whether tax is exempted |
-| `tax_exemption_type` | `"1"\|"2"` | Conditional | `TaxExemptionType` | Required if exempted. 1=Policy Holder Exempted, 2=Risk Exempted |
-| `tax_exemption_reference` | `string` | Conditional | `TaxExemptionReference` | Required if exempted. Exemption reference number. |
-| `tax_rate` | `number` | Yes | `TaxRate` | Tax rate as decimal (e.g., `0.18` for 18%). Max 5 decimal places. |
-| `tax_amount` | `number` | Yes | `TaxAmount` | Tax amount. Max 2 decimal places. |
+| Field                     | Type       | Required    | XML Tag                 | Description                                                       |
+| ------------------------- | ---------- | ----------- | ----------------------- | ----------------------------------------------------------------- |
+| `tax_code`                | `string`   | Yes         | `TaxCode`               | Tax code from TIRA (e.g., `VAT-MAINLAND`)                         |
+| `is_tax_exempted`         | `"Y"\|"N"` | Yes         | `IsTaxExempted`         | Whether tax is exempted                                           |
+| `tax_exemption_type`      | `"1"\|"2"` | Conditional | `TaxExemptionType`      | Required if exempted. 1=Policy Holder Exempted, 2=Risk Exempted   |
+| `tax_exemption_reference` | `string`   | Conditional | `TaxExemptionReference` | Required if exempted. Exemption reference number.                 |
+| `tax_rate`                | `number`   | Yes         | `TaxRate`               | Tax rate as decimal (e.g., `0.18` for 18%). Max 5 decimal places. |
+| `tax_amount`              | `number`   | Yes         | `TaxAmount`             | Tax amount. Max 2 decimal places.                                 |
 
 ### Discounts Offered
 
 Optional. Nested inside each risk.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `discount_type` | `"1"` | Yes | `DiscountType` | Currently only `"1"` (Fleet Discount) |
-| `discount_rate` | `number` | Yes | `DiscountRate` | Discount rate. Max 5 decimal places. |
-| `discount_amount` | `number` | Yes | `DiscountAmount` | Discount amount. Max 2 decimal places. |
+| Field             | Type     | Required | XML Tag          | Description                            |
+| ----------------- | -------- | -------- | ---------------- | -------------------------------------- |
+| `discount_type`   | `"1"`    | Yes      | `DiscountType`   | Currently only `"1"` (Fleet Discount)  |
+| `discount_rate`   | `number` | Yes      | `DiscountRate`   | Discount rate. Max 5 decimal places.   |
+| `discount_amount` | `number` | Yes      | `DiscountAmount` | Discount amount. Max 2 decimal places. |
 
 ### Subject Matters
 
 At least one subject matter is required per vehicle. Each item maps to a `<SubjectMatter>` XML element.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `subject_matter_reference` | `string` | Yes | `SubjectMatterReference` | Your reference (e.g., "HSB001") |
-| `subject_matter_desc` | `string` | Yes | `SubjectMatterDesc` | Description (e.g., "Vehicle") |
+| Field                      | Type     | Required | XML Tag                  | Description                     |
+| -------------------------- | -------- | -------- | ------------------------ | ------------------------------- |
+| `subject_matter_reference` | `string` | Yes      | `SubjectMatterReference` | Your reference (e.g., "HSB001") |
+| `subject_matter_desc`      | `string` | Yes      | `SubjectMatterDesc`      | Description (e.g., "Vehicle")   |
 
 ### Cover Note Addons
 
 Optional per vehicle. Each item maps to a `<CoverNoteAddon>` XML element.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `addon_reference` | `string` | Yes | `AddonReference` | Your addon reference |
-| `addon_description` | `string` | Yes | `AddonDesc` | Description of the addon |
-| `addon_amount` | `number` | Yes | `AddonAmount` | Addon amount. Max 2 decimal places. |
-| `addon_premium_rate` | `number` | Yes | `AddonPremiumRate` | Premium rate. Max 5 decimal places. |
-| `premium_excluding_tax` | `number` | Yes | `PremiumExcludingTax` | Premium before tax. Max 2 decimal places. |
-| `premium_excluding_tax_equivalent` | `number` | Yes | `PremiumExcludingTaxEquivalent` | Premium before tax in TZS. Max 2 decimal places. |
-| `premium_including_tax` | `number` | Yes | `PremiumIncludingTax` | Premium after tax. Max 2 decimal places. |
-| `taxes_charged` | `TaxCharged[]` | Yes | `TaxesCharged` | Same structure as [Taxes Charged](#taxes-charged) |
+| Field                              | Type           | Required | XML Tag                         | Description                                       |
+| ---------------------------------- | -------------- | -------- | ------------------------------- | ------------------------------------------------- |
+| `addon_reference`                  | `string`       | Yes      | `AddonReference`                | Your addon reference                              |
+| `addon_description`                | `string`       | Yes      | `AddonDesc`                     | Description of the addon                          |
+| `addon_amount`                     | `number`       | Yes      | `AddonAmount`                   | Addon amount. Max 2 decimal places.               |
+| `addon_premium_rate`               | `number`       | Yes      | `AddonPremiumRate`              | Premium rate. Max 5 decimal places.               |
+| `premium_excluding_tax`            | `number`       | Yes      | `PremiumExcludingTax`           | Premium before tax. Max 2 decimal places.         |
+| `premium_excluding_tax_equivalent` | `number`       | Yes      | `PremiumExcludingTaxEquivalent` | Premium before tax in TZS. Max 2 decimal places.  |
+| `premium_including_tax`            | `number`       | Yes      | `PremiumIncludingTax`           | Premium after tax. Max 2 decimal places.          |
+| `taxes_charged`                    | `TaxCharged[]` | Yes      | `TaxesCharged`                  | Same structure as [Taxes Charged](#taxes-charged) |
 
 ### Policy Holders
 
 At least one policy holder is required. Policy holders are at the **fleet level** (not per-vehicle). Each item maps to a `<PolicyHolder>` XML element.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `policyholder_name` | `string` | Yes | — | `PolicyHolderName` | Full name |
-| `policyholder_birthdate` | `string` | Yes | — | `PolicyHolderBirthDate` | Date of birth (`YYYY-MM-DD`) |
-| `policyholder_type` | `"1"\|"2"` | Yes | — | `PolicyHolderType` | 1=Individual, 2=Corporate |
-| `policyholder_id_type` | `"1"`–`"7"` | Yes | — | `PolicyHolderIdType` | See ID types table below |
-| `policyholder_id_number` | `string` | Yes | — | `PolicyHolderIdNumber` | ID number |
-| `gender` | `"M"\|"F"` | Yes | — | `Gender` | M=Male, F=Female |
-| `country_code` | `string` | No | `"TZA"` | `CountryCode` | ISO country code (e.g., `TZA`, `KEN`, `UGA`) |
-| `region` | `string` | Yes | — | `Region` | Region code from TIRA |
-| `district` | `string` | Yes | — | `District` | District from TIRA |
-| `street` | `string` | Yes | — | `Street` | Street name |
-| `phone_number` | `string` | Yes | — | `PolicyHolderPhoneNumber` | Format: `2557XXXXXXXX` (12 digits) |
-| `fax_number` | `string` | No | `""` | `PolicyHolderFax` | Fax number |
-| `postal_address` | `string` | Yes | — | `PostalAddress` | Postal address |
-| `email_address` | `string` | No | `""` | `EmailAddress` | Email address (validated if provided) |
+| Field                    | Type        | Required | Default | XML Tag                   | Description                                  |
+| ------------------------ | ----------- | -------- | ------- | ------------------------- | -------------------------------------------- |
+| `policyholder_name`      | `string`    | Yes      | —       | `PolicyHolderName`        | Full name                                    |
+| `policyholder_birthdate` | `string`    | Yes      | —       | `PolicyHolderBirthDate`   | Date of birth (`YYYY-MM-DD`)                 |
+| `policyholder_type`      | `"1"\|"2"`  | Yes      | —       | `PolicyHolderType`        | 1=Individual, 2=Corporate                    |
+| `policyholder_id_type`   | `"1"`–`"7"` | Yes      | —       | `PolicyHolderIdType`      | See ID types table below                     |
+| `policyholder_id_number` | `string`    | Yes      | —       | `PolicyHolderIdNumber`    | ID number                                    |
+| `gender`                 | `"M"\|"F"`  | Yes      | —       | `Gender`                  | M=Male, F=Female                             |
+| `country_code`           | `string`    | No       | `"TZA"` | `CountryCode`             | ISO country code (e.g., `TZA`, `KEN`, `UGA`) |
+| `region`                 | `string`    | Yes      | —       | `Region`                  | Region code from TIRA                        |
+| `district`               | `string`    | Yes      | —       | `District`                | District from TIRA                           |
+| `street`                 | `string`    | Yes      | —       | `Street`                  | Street name                                  |
+| `phone_number`           | `string`    | Yes      | —       | `PolicyHolderPhoneNumber` | Format: `2557XXXXXXXX` (12 digits)           |
+| `fax_number`             | `string`    | No       | `""`    | `PolicyHolderFax`         | Fax number                                   |
+| `postal_address`         | `string`    | Yes      | —       | `PostalAddress`           | Postal address                               |
+| `email_address`          | `string`    | No       | `""`    | `EmailAddress`            | Email address (validated if provided)        |
 
 #### Policy Holder ID Types
 
-| Value | Description |
-|---|---|
-| `"1"` | NIDA |
-| `"2"` | Voters ID Card |
-| `"3"` | Passport |
-| `"4"` | Driving License |
-| `"5"` | Zanzibar ID |
-| `"6"` | TIN |
+| Value | Description                              |
+| ----- | ---------------------------------------- |
+| `"1"` | NIDA                                     |
+| `"2"` | Voters ID Card                           |
+| `"3"` | Passport                                 |
+| `"4"` | Driving License                          |
+| `"5"` | Zanzibar ID                              |
+| `"6"` | TIN                                      |
 | `"7"` | Company Incorporation Certificate Number |
 
 ### Date Handling
@@ -254,20 +254,20 @@ The package validates your payload before sending it to TIRA. If validation fail
 
 **By cover note type (applies to each fleet detail entry):**
 
-| Scenario | `covernote_number` | `previous_covernote_reference_number` | `endorsement_type` | `endorsement_reason` |
-|---|---|---|---|---|
-| New (`"1"`) | Required | — | — | — |
-| Renewal (`"2"`) | Required | Required | — | — |
-| Endorsement (`"3"`) | Required | Required | Required | Required |
+| Scenario            | `covernote_number` | `previous_covernote_reference_number` | `endorsement_type` | `endorsement_reason` |
+| ------------------- | ------------------ | ------------------------------------- | ------------------ | -------------------- |
+| New (`"1"`)         | Required           | —                                     | —                  | —                    |
+| Renewal (`"2"`)     | Required           | Required                              | —                  | —                    |
+| Endorsement (`"3"`) | Required           | Required                              | Required           | Required             |
 
 **By motor category and type (per-vehicle `motor_details`):**
 
-| Scenario | `registration_number` | `number_of_axles` | `axle_distance` | `sitting_capacity` |
-|---|---|---|---|---|
-| Motor Vehicle + Registered | Required | Required | Required | Required |
-| Motor Vehicle + In Transit | — | Required | Required | Required |
-| Motor Cycle + Registered | Required | Optional | Optional | Optional |
-| Motor Cycle + In Transit | — | Optional | Optional | Optional |
+| Scenario                   | `registration_number` | `number_of_axles` | `axle_distance` | `sitting_capacity` |
+| -------------------------- | --------------------- | ----------------- | --------------- | ------------------ |
+| Motor Vehicle + Registered | Required              | Required          | Required        | Required           |
+| Motor Vehicle + In Transit | —                     | Required          | Required        | Required           |
+| Motor Cycle + Registered   | Required              | Optional          | Optional        | Optional           |
+| Motor Cycle + In Transit   | —                     | Optional          | Optional        | Optional           |
 
 ### Example — New Fleet
 
@@ -282,7 +282,7 @@ const result = await tira.motorFleet.submit({
   fleet_size: 2,
   sales_point_code: "SP719",
   covernote_start_date: "2025-05-31T21:00:00Z", // June 1st EAT
-  covernote_end_date: "2026-05-31T21:00:00Z",   // June 1st next year EAT
+  covernote_end_date: "2026-05-31T21:00:00Z", // June 1st next year EAT
   payment_mode: "3", // EFT
   total_premium_excluding_tax: 1050000,
   total_premium_including_tax: 1239000,
@@ -417,7 +417,7 @@ const result = await tira.motorFleet.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Example — Renewal
@@ -470,14 +470,14 @@ const result = await tira.motorFleet.submit({
 
 When you call `tira.motorFleet.submit()`, you get an immediate `CoverNoteResponse` from TIRA:
 
-| Field | Type | Description |
-|---|---|---|
-| `acknowledgement_id` | `string` | TIRA's acknowledgement ID |
-| `request_id` | `string` | Your original request ID (echoed back) |
-| `tira_status_code` | `string` | Status code — `"TIRA001"` means received |
-| `tira_status_desc` | `string` | Human-readable description |
-| `requires_acknowledgement` | `boolean` | Always `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
+| Field                      | Type                      | Description                                |
+| -------------------------- | ------------------------- | ------------------------------------------ |
+| `acknowledgement_id`       | `string`                  | TIRA's acknowledgement ID                  |
+| `request_id`               | `string`                  | Your original request ID (echoed back)     |
+| `tira_status_code`         | `string`                  | Status code — `"TIRA001"` means received   |
+| `tira_status_desc`         | `string`                  | Human-readable description                 |
+| `requires_acknowledgement` | `boolean`                 | Always `true`                              |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
 
 ::: tip "TIRA001" means "received", not "approved"
 At this stage, `"TIRA001"` means TIRA received your fleet request and it's being processed. It does **not** mean your cover notes have been approved. The actual results (approved or rejected, per vehicle) come later via your callback URL.
@@ -491,27 +491,27 @@ After TIRA processes your fleet submission, it sends the result to your `callbac
 
 ### Fleet-Level Extracted Data
 
-| Field | Type | Description |
-|---|---|---|
-| `response_id` | `string` | TIRA's response ID |
-| `request_id` | `string` | Your original request ID |
-| `fleet_id` | `string` | Your fleet identifier (echoed back) |
-| `fleet_status_code` | `string` | Fleet-level status. `"TIRA001"` = all vehicles processed successfully. |
-| `fleet_status_desc` | `string` | Fleet-level status description |
-| `fleet_details` | `MotorFleetCallbackDetail[]` | Per-vehicle results. See below. |
+| Field               | Type                         | Description                                                            |
+| ------------------- | ---------------------------- | ---------------------------------------------------------------------- |
+| `response_id`       | `string`                     | TIRA's response ID                                                     |
+| `request_id`        | `string`                     | Your original request ID                                               |
+| `fleet_id`          | `string`                     | Your fleet identifier (echoed back)                                    |
+| `fleet_status_code` | `string`                     | Fleet-level status. `"TIRA001"` = all vehicles processed successfully. |
+| `fleet_status_desc` | `string`                     | Fleet-level status description                                         |
+| `fleet_details`     | `MotorFleetCallbackDetail[]` | Per-vehicle results. See below.                                        |
 
 ### Per-Vehicle Callback Data
 
 Each entry in `fleet_details` contains:
 
-| Field | Type | Description |
-|---|---|---|
-| `fleet_entry` | `number` | Matches your `fleet_entry` sequence number |
-| `covernote_number` | `string` | Your cover note number for this vehicle |
-| `covernote_reference_number` | `string` | TIRA's cover note reference number (on success) |
-| `sticker_number` | `string` | Sticker number assigned by TIRA (on success) |
-| `response_status_code` | `string` | Per-vehicle status. `"TIRA001"` = approved. See [Error Codes](/error-codes). |
-| `response_status_desc` | `string` | Per-vehicle status description |
+| Field                        | Type     | Description                                                                  |
+| ---------------------------- | -------- | ---------------------------------------------------------------------------- |
+| `fleet_entry`                | `number` | Matches your `fleet_entry` sequence number                                   |
+| `covernote_number`           | `string` | Your cover note number for this vehicle                                      |
+| `covernote_reference_number` | `string` | TIRA's cover note reference number (on success)                              |
+| `sticker_number`             | `string` | Sticker number assigned by TIRA (on success)                                 |
+| `response_status_code`       | `string` | Per-vehicle status. `"TIRA001"` = approved. See [Error Codes](/error-codes). |
+| `response_status_desc`       | `string` | Per-vehicle status description                                               |
 
 ### On Success
 
@@ -537,7 +537,7 @@ for (const vehicle of result.extracted.fleet_details) {
     console.error(
       `Vehicle ${vehicle.fleet_entry} rejected:`,
       vehicle.response_status_code,
-      vehicle.response_status_desc
+      vehicle.response_status_desc,
     );
   }
 }
@@ -565,7 +565,7 @@ app.post("/tira/fleet-callback", async (req, res) => {
     } else {
       console.error(
         `Vehicle ${vehicle.fleet_entry} rejected: ${vehicle.response_status_code}`,
-        vehicle.response_status_desc
+        vehicle.response_status_desc,
       );
 
       await db.fleetVehicles.update({
@@ -596,12 +596,13 @@ TIRA expects you to acknowledge every callback. If you don't, they'll keep retry
 
 Call `tira.acknowledge(result.body, uniqueId)` with:
 
-| Argument | Description |
-|---|---|
+| Argument      | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
 | `result.body` | The `body` from the callback result — the full parsed XML as a JS object |
-| `uniqueId` | A unique string you generate (e.g., a UUID) |
+| `uniqueId`    | A unique string you generate (e.g., a UUID)                              |
 
 The package automatically:
+
 1. Derives the correct acknowledgement tag name (`MotorCoverNoteRefRes` → `MotorCoverNoteRefResAck`)
 2. Fills in `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, and `AcknowledgementStatusDesc`
 3. Signs the XML with your private key
@@ -660,6 +661,7 @@ app.post("/tira/fleet-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Repetitive non-acknowledgement
@@ -683,25 +685,26 @@ This function parses the callback XML that TIRA sends to your callback URL and e
 ### Input
 
 You can pass either:
+
 - A **raw XML string** — the `req.body` from your Express handler (requires `express.text({ type: "application/xml" })` middleware)
 - A **pre-parsed object** — if you've already parsed the XML yourself
 
 ### What It Returns
 
-| Field | Type | Description |
-|---|---|---|
-| `type` | `"motor_fleet"` | Always `"motor_fleet"` for this handler |
-| `extracted` | `MotorFleetCallbackResponse` | The extracted fleet data (see [Callback Response](#submit-callback-response)) |
-| `body` | `Record<string, any>` | Full parsed XML as JS object — pass this to `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Whether TIRA's digital signature was verified |
-| `raw_xml` | `string` | The original XML string |
+| Field                | Type                         | Description                                                                   |
+| -------------------- | ---------------------------- | ----------------------------------------------------------------------------- |
+| `type`               | `"motor_fleet"`              | Always `"motor_fleet"` for this handler                                       |
+| `extracted`          | `MotorFleetCallbackResponse` | The extracted fleet data (see [Callback Response](#submit-callback-response)) |
+| `body`               | `Record<string, any>`        | Full parsed XML as JS object — pass this to `tira.acknowledge()`              |
+| `signature_verified` | `boolean`                    | Whether TIRA's digital signature was verified                                 |
+| `raw_xml`            | `string`                     | The original XML string                                                       |
 
 ### Resource-Specific vs Universal Handler
 
-| Approach | Method | When to Use |
-|---|---|---|
-| Resource-specific | `tira.motorFleet.handleCallback(input)` | When you have separate endpoints per resource type |
-| Universal | `tira.handleCallback(input)` | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
+| Approach          | Method                                  | When to Use                                                                                |
+| ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Resource-specific | `tira.motorFleet.handleCallback(input)` | When you have separate endpoints per resource type                                         |
+| Universal         | `tira.handleCallback(input)`            | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
 
 Both return the same data. The universal handler auto-detects the callback type — for fleet callbacks, it identifies the `FleetResHdr` element to distinguish fleet from single-vehicle motor callbacks. See [Callbacks & Acknowledgements](/callbacks-acknowledgements) for details on the universal handler.
 
@@ -724,8 +727,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -780,10 +783,16 @@ app.post("/tira/fleet-callback", async (req, res) => {
           fleet_entry: vehicle.fleet_entry,
         },
         data: {
-          status: vehicle.response_status_code === "TIRA001" ? "approved" : "rejected",
+          status:
+            vehicle.response_status_code === "TIRA001"
+              ? "approved"
+              : "rejected",
           reference_number: vehicle.covernote_reference_number,
           sticker_number: vehicle.sticker_number,
-          rejection_code: vehicle.response_status_code !== "TIRA001" ? vehicle.response_status_code : null,
+          rejection_code:
+            vehicle.response_status_code !== "TIRA001"
+              ? vehicle.response_status_code
+              : null,
         },
       });
     }
@@ -834,6 +843,7 @@ If you set `covernote_end_date` to today's date instead, TIRA may reject the sub
 Motor Fleet splits fields between the fleet level and per-vehicle level differently from regular Motor:
 
 **Fleet level** (shared across all vehicles):
+
 - `request_id`, `callback_url`, `insurer_company_code`, `covernote_type`
 - `fleet_id`, `fleet_type`, `fleet_size`, `comprehensive_insured`
 - `sales_point_code`, `covernote_start_date`, `covernote_end_date`
@@ -844,6 +854,7 @@ Motor Fleet splits fields between the fleet level and per-vehicle level differen
 - `policy_holders`
 
 **Per-vehicle** (in each `fleet_details` entry):
+
 - `fleet_entry`, `covernote_number`, `previous_covernote_reference_number`
 - `covernote_desc`, `operative_clause`
 - `endorsement_type`, `endorsement_reason`, `endorsement_premium_earned`
@@ -878,7 +889,7 @@ fleet_details: [
     },
     // ...
   },
-]
+];
 ```
 
 ### In Transit Vehicles
@@ -898,7 +909,7 @@ fleet_details: [
     },
     // ...
   },
-]
+];
 ```
 
 ### Currency

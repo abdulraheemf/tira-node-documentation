@@ -6,10 +6,10 @@ Kwa mtiririko wa jumla wa kutuma-callback-kuthibitisha, tazama [Callback na Uthi
 
 ## Mbinu Zinazopatikana
 
-| Mbinu | Maelezo | Wakati wa Kutumia | Inarudisha |
-|---|---|---|---|
-| `tira.policy.submit(payload)` | Tuma ombi la sera linalorejelea covernote zilizoidhinishwa | Baada ya covernote zako kuidhinishwa na TIRA | `PolicyResponse` |
-| `tira.policy.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<PolicyCallbackResponse>` |
+| Mbinu                               | Maelezo                                                    | Wakati wa Kutumia                                            | Inarudisha                               |
+| ----------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| `tira.policy.submit(payload)`       | Tuma ombi la sera linalorejelea covernote zilizoidhinishwa | Baada ya covernote zako kuidhinishwa na TIRA                 | `PolicyResponse`                         |
+| `tira.policy.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA              | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<PolicyCallbackResponse>` |
 
 ## Mzigo wa .submit()
 
@@ -23,24 +23,24 @@ Inatuma ombi la sera kwa TIRA. Hii ni operesheni ya asynchronous — unapata uth
 
 ### Sehemu za Mzigo
 
-| Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Ndiyo | — | `RequestId` | Kitambulisho cha kipekee cha ombi |
-| `callback_url` | `string` | Ndiyo | — | `CallBackUrl` | Mahali TIRA inatuma matokeo |
-| `insurer_company_code` | `string` | Ndiyo | — | `InsurerCompanyCode` | Msimbo wa kampuni ya bima |
-| `policy_detail` | `PolicyDetail` | Ndiyo | — | `PolicyDtl` | Maelezo ya sera. Tazama [Maelezo ya Sera](#maelezo-ya-sera). |
+| Sehemu                 | Aina           | Inahitajika | Chaguomsingi | XML Tag              | Maelezo                                                      |
+| ---------------------- | -------------- | ----------- | ------------ | -------------------- | ------------------------------------------------------------ |
+| `request_id`           | `string`       | Ndiyo       | —            | `RequestId`          | Kitambulisho cha kipekee cha ombi                            |
+| `callback_url`         | `string`       | Ndiyo       | —            | `CallBackUrl`        | Mahali TIRA inatuma matokeo                                  |
+| `insurer_company_code` | `string`       | Ndiyo       | —            | `InsurerCompanyCode` | Msimbo wa kampuni ya bima                                    |
+| `policy_detail`        | `PolicyDetail` | Ndiyo       | —            | `PolicyDtl`          | Maelezo ya sera. Tazama [Maelezo ya Sera](#maelezo-ya-sera). |
 
 ### Maelezo ya Sera
 
 Kitu cha `policy_detail` kinaelezea sera inayotumwa.
 
-| Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
-|---|---|---|---|---|---|
-| `policy_number` | `string` | Ndiyo | — | `PolicyNumber` | Nambari ya sera kama ilivyo kwa mbima. Herufi 50. |
-| `policy_operative_clause` | `string` | Ndiyo | — | `PolicyOperativeClause` | Vifungu vya utekelezaji wa sera. Herufi 1000. |
-| `special_conditions` | `string` | Ndiyo | — | `SpecialConditions` | Masharti maalum ya sera. Herufi 1000. |
-| `exclusions` | `string` | Hapana | `""` | `Exclusions` | Vipengee vilivyotengwa kwa sera ikiwa vipo. Herufi 1000. |
-| `applied_cover_notes` | `string[]` | Ndiyo | — | `AppliedCoverNotes > CoverNoteReferenceNumber` | Nambari za rejea za covernote kutoka covernote zilizoidhinishwa hapo awali. Angalau moja inahitajika. |
+| Sehemu                    | Aina       | Inahitajika | Chaguomsingi | XML Tag                                        | Maelezo                                                                                               |
+| ------------------------- | ---------- | ----------- | ------------ | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `policy_number`           | `string`   | Ndiyo       | —            | `PolicyNumber`                                 | Nambari ya sera kama ilivyo kwa mbima. Herufi 50.                                                     |
+| `policy_operative_clause` | `string`   | Ndiyo       | —            | `PolicyOperativeClause`                        | Vifungu vya utekelezaji wa sera. Herufi 1000.                                                         |
+| `special_conditions`      | `string`   | Ndiyo       | —            | `SpecialConditions`                            | Masharti maalum ya sera. Herufi 1000.                                                                 |
+| `exclusions`              | `string`   | Hapana      | `""`         | `Exclusions`                                   | Vipengee vilivyotengwa kwa sera ikiwa vipo. Herufi 1000.                                              |
+| `applied_cover_notes`     | `string[]` | Ndiyo       | —            | `AppliedCoverNotes > CoverNoteReferenceNumber` | Nambari za rejea za covernote kutoka covernote zilizoidhinishwa hapo awali. Angalau moja inahitajika. |
 
 ### Sheria za Uthibitishaji
 
@@ -73,7 +73,7 @@ const result = await tira.policy.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Mfano — Covernote Nyingi
@@ -99,14 +99,14 @@ const result = await tira.policy.submit({
 
 Unapoita `tira.policy.submit()`, unapata `PolicyResponse` mara moja kutoka TIRA:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `acknowledgement_id` | `string` | Kitambulisho cha uthibitisho cha TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi (kinarudishwa) |
-| `tira_status_code` | `string` | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa |
-| `tira_status_desc` | `string` | Maelezo yanayosomeka |
-| `requires_acknowledgement` | `boolean` | Daima `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
+| Sehemu                     | Aina                      | Maelezo                                                    |
+| -------------------------- | ------------------------- | ---------------------------------------------------------- |
+| `acknowledgement_id`       | `string`                  | Kitambulisho cha uthibitisho cha TIRA                      |
+| `request_id`               | `string`                  | Kitambulisho chako cha ombi (kinarudishwa)                 |
+| `tira_status_code`         | `string`                  | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa         |
+| `tira_status_desc`         | `string`                  | Maelezo yanayosomeka                                       |
+| `requires_acknowledgement` | `boolean`                 | Daima `true`                                               |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
 
 ::: tip "TIRA001" inamaanisha "imepokewa", si "imeidhinishwa"
 Katika hatua hii, `"TIRA001"` inamaanisha TIRA imepokea ombi lako na linashughulikiwa. **Haimaanishi** sera yako imeidhinishwa. Matokeo halisi (imeidhinishwa au imekataliwa) yanakuja baadaye kupitia callback URL yako.
@@ -122,12 +122,12 @@ Baada ya TIRA kushughulikia utumaji wako, inatuma matokeo kwa `callback_url` yak
 
 Sehemu ya `extracted` ina data ya callback iliyochambuliwa:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `response_id` | `string` | Kitambulisho cha jibu la TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi |
+| Sehemu                 | Aina     | Maelezo                                                                                       |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `response_id`          | `string` | Kitambulisho cha jibu la TIRA                                                                 |
+| `request_id`           | `string` | Kitambulisho chako cha ombi                                                                   |
 | `response_status_code` | `string` | `"TIRA001"` = imeidhinishwa. Tazama [Misimbo ya Makosa](/sw/error-codes) kwa misimbo mingine. |
-| `response_status_desc` | `string` | Maelezo ya hali yanayosomeka |
+| `response_status_desc` | `string` | Maelezo ya hali yanayosomeka                                                                  |
 
 ### Ikiwa Imefanikiwa
 
@@ -163,7 +163,7 @@ app.post("/tira/policy-callback", async (req, res) => {
   } else {
     console.error(
       `Sera imekataliwa: ${result.extracted.response_status_code}`,
-      result.extracted.response_status_desc
+      result.extracted.response_status_desc,
     );
 
     await db.policies.update({
@@ -190,12 +190,13 @@ TIRA inatarajia uthibitishe kila callback. Usipothibitisha, wataendelea kurudia 
 
 Ita `tira.acknowledge(result.body, uniqueId)` na:
 
-| Hoja | Maelezo |
-|---|---|
+| Hoja          | Maelezo                                                                         |
+| ------------- | ------------------------------------------------------------------------------- |
 | `result.body` | `body` kutoka matokeo ya callback — XML kamili iliyochambuliwa kama kitu cha JS |
-| `uniqueId` | Mfuatano wa kipekee unaouzalisha (mf. UUID) |
+| `uniqueId`    | Mfuatano wa kipekee unaouzalisha (mf. UUID)                                     |
 
 Kifurushi kiotomatiki:
+
 1. Kinapata jina sahihi la tag ya uthibitisho (`PolicyRes` → `PolicyResAck`)
 2. Kinajaza `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, na `AcknowledgementStatusDesc`
 3. Kinasaini XML kwa ufunguo wako wa siri
@@ -254,6 +255,7 @@ app.post("/tira/policy-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Kutothibitisha mara kwa mara
@@ -277,25 +279,26 @@ Kazi hii inachambua XML ya callback ambayo TIRA inatuma kwa callback URL yako na
 ### Ingizo
 
 Unaweza kutoa:
+
 - **Mfuatano wa XML ghafi** — `req.body` kutoka Express handler yako (inahitaji middleware ya `express.text({ type: "application/xml" })`)
 - **Kitu kilichochambuliwa tayari** — ikiwa umeshachambua XML mwenyewe
 
 ### Inarudisha Nini
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `type` | `"policy"` | Daima `"policy"` kwa mshughulikaji huu |
-| `extracted` | `PolicyCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit)) |
-| `body` | `Record<string, any>` | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa |
-| `raw_xml` | `string` | Mfuatano wa XML wa asili |
+| Sehemu               | Aina                     | Maelezo                                                                        |
+| -------------------- | ------------------------ | ------------------------------------------------------------------------------ |
+| `type`               | `"policy"`               | Daima `"policy"` kwa mshughulikaji huu                                         |
+| `extracted`          | `PolicyCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit))      |
+| `body`               | `Record<string, any>`    | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
+| `signature_verified` | `boolean`                | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa                              |
+| `raw_xml`            | `string`                 | Mfuatano wa XML wa asili                                                       |
 
 ### Mshughulikaji wa Rasilimali Maalum dhidi ya wa Jumla
 
-| Mbinu | Mbinu | Wakati wa Kutumia |
-|---|---|---|
-| Rasilimali maalum | `tira.policy.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali |
-| Jumla | `tira.handleCallback(input)` | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
+| Mbinu             | Mbinu                               | Wakati wa Kutumia                                                                               |
+| ----------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Rasilimali maalum | `tira.policy.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali                                           |
+| Jumla             | `tira.handleCallback(input)`        | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
 
 Zote mbili zinarudisha data sawa. Mshughulikaji wa jumla unagundua aina ya callback kiotomatiki. Tazama [Callback na Uthibitisho](/sw/callbacks-acknowledgements) kwa maelezo zaidi kuhusu mshughulikaji wa jumla.
 
@@ -318,8 +321,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -354,9 +357,10 @@ app.post("/tira/policy-callback", async (req, res) => {
     await db.policies.update({
       where: { request_id: result.extracted.request_id },
       data: {
-        status: result.extracted.response_status_code === "TIRA001"
-          ? "approved"
-          : "rejected",
+        status:
+          result.extracted.response_status_code === "TIRA001"
+            ? "approved"
+            : "rejected",
         tira_response_code: result.extracted.response_status_code,
         tira_response_desc: result.extracted.response_status_desc,
       },
@@ -395,16 +399,16 @@ Safu ya `applied_cover_notes` lazima iwe na angalau nambari moja ya rejea ya cov
 
 ```js
 // Sahihi — angalau rejea moja
-applied_cover_notes: ["4242424"]
+applied_cover_notes: ["4242424"];
 
 // Sahihi — rejea nyingi
-applied_cover_notes: ["4242424", "2323235", "5656789"]
+applied_cover_notes: ["4242424", "2323235", "5656789"];
 
 // Si sahihi — safu tupu (inatupa TiraValidationError)
-applied_cover_notes: []
+applied_cover_notes: [];
 
 // Si sahihi — ina mfuatano tupu (inatupa TiraValidationError)
-applied_cover_notes: ["4242424", ""]
+applied_cover_notes: ["4242424", ""];
 ```
 
 ## Makosa ya Kawaida

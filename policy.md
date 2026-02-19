@@ -6,10 +6,10 @@ For the general submit-callback-acknowledge flow, see [Callbacks & Acknowledgeme
 
 ## Available Methods
 
-| Method | Description | When to Use | Returns |
-|---|---|---|---|
-| `tira.policy.submit(payload)` | Submit a policy request referencing approved cover notes | After your cover notes have been approved by TIRA | `PolicyResponse` |
-| `tira.policy.handleCallback(input)` | Parse and extract data from TIRA's callback | When TIRA sends the result of your submission to your callback URL | `CallbackResult<PolicyCallbackResponse>` |
+| Method                              | Description                                              | When to Use                                                        | Returns                                  |
+| ----------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------ | ---------------------------------------- |
+| `tira.policy.submit(payload)`       | Submit a policy request referencing approved cover notes | After your cover notes have been approved by TIRA                  | `PolicyResponse`                         |
+| `tira.policy.handleCallback(input)` | Parse and extract data from TIRA's callback              | When TIRA sends the result of your submission to your callback URL | `CallbackResult<PolicyCallbackResponse>` |
 
 ## .submit() Payload
 
@@ -23,24 +23,24 @@ Submits a policy request to TIRA. This is an asynchronous operation — you rece
 
 ### Payload Fields
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Yes | — | `RequestId` | Unique request identifier |
-| `callback_url` | `string` | Yes | — | `CallBackUrl` | Where TIRA sends results |
-| `insurer_company_code` | `string` | Yes | — | `InsurerCompanyCode` | Insurer's company code |
-| `policy_detail` | `PolicyDetail` | Yes | — | `PolicyDtl` | Policy details. See [Policy Detail](#policy-detail). |
+| Field                  | Type           | Required | Default | XML Tag              | Description                                          |
+| ---------------------- | -------------- | -------- | ------- | -------------------- | ---------------------------------------------------- |
+| `request_id`           | `string`       | Yes      | —       | `RequestId`          | Unique request identifier                            |
+| `callback_url`         | `string`       | Yes      | —       | `CallBackUrl`        | Where TIRA sends results                             |
+| `insurer_company_code` | `string`       | Yes      | —       | `InsurerCompanyCode` | Insurer's company code                               |
+| `policy_detail`        | `PolicyDetail` | Yes      | —       | `PolicyDtl`          | Policy details. See [Policy Detail](#policy-detail). |
 
 ### Policy Detail
 
 The `policy_detail` object describes the policy being submitted.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `policy_number` | `string` | Yes | — | `PolicyNumber` | Policy number as per insurer. Max 50 characters. |
-| `policy_operative_clause` | `string` | Yes | — | `PolicyOperativeClause` | Policy operative clauses. Max 1000 characters. |
-| `special_conditions` | `string` | Yes | — | `SpecialConditions` | Policy special conditions. Max 1000 characters. |
-| `exclusions` | `string` | No | `""` | `Exclusions` | Policy exclusions if any. Max 1000 characters. |
-| `applied_cover_notes` | `string[]` | Yes | — | `AppliedCoverNotes > CoverNoteReferenceNumber` | Cover note reference numbers from previously approved cover notes. At least one required. |
+| Field                     | Type       | Required | Default | XML Tag                                        | Description                                                                               |
+| ------------------------- | ---------- | -------- | ------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `policy_number`           | `string`   | Yes      | —       | `PolicyNumber`                                 | Policy number as per insurer. Max 50 characters.                                          |
+| `policy_operative_clause` | `string`   | Yes      | —       | `PolicyOperativeClause`                        | Policy operative clauses. Max 1000 characters.                                            |
+| `special_conditions`      | `string`   | Yes      | —       | `SpecialConditions`                            | Policy special conditions. Max 1000 characters.                                           |
+| `exclusions`              | `string`   | No       | `""`    | `Exclusions`                                   | Policy exclusions if any. Max 1000 characters.                                            |
+| `applied_cover_notes`     | `string[]` | Yes      | —       | `AppliedCoverNotes > CoverNoteReferenceNumber` | Cover note reference numbers from previously approved cover notes. At least one required. |
 
 ### Validation Rules
 
@@ -73,7 +73,7 @@ const result = await tira.policy.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Example — Multiple Cover Notes
@@ -99,14 +99,14 @@ const result = await tira.policy.submit({
 
 When you call `tira.policy.submit()`, you get an immediate `PolicyResponse` from TIRA:
 
-| Field | Type | Description |
-|---|---|---|
-| `acknowledgement_id` | `string` | TIRA's acknowledgement ID |
-| `request_id` | `string` | Your original request ID (echoed back) |
-| `tira_status_code` | `string` | Status code — `"TIRA001"` means received |
-| `tira_status_desc` | `string` | Human-readable description |
-| `requires_acknowledgement` | `boolean` | Always `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
+| Field                      | Type                      | Description                                |
+| -------------------------- | ------------------------- | ------------------------------------------ |
+| `acknowledgement_id`       | `string`                  | TIRA's acknowledgement ID                  |
+| `request_id`               | `string`                  | Your original request ID (echoed back)     |
+| `tira_status_code`         | `string`                  | Status code — `"TIRA001"` means received   |
+| `tira_status_desc`         | `string`                  | Human-readable description                 |
+| `requires_acknowledgement` | `boolean`                 | Always `true`                              |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
 
 ::: tip "TIRA001" means "received", not "approved"
 At this stage, `"TIRA001"` means TIRA received your request and it's being processed. It does **not** mean your policy has been approved. The actual result (approved or rejected) comes later via your callback URL.
@@ -122,12 +122,12 @@ After TIRA processes your submission, it sends the result to your `callback_url`
 
 The `extracted` field contains the parsed callback data:
 
-| Field | Type | Description |
-|---|---|---|
-| `response_id` | `string` | TIRA's response ID |
-| `request_id` | `string` | Your original request ID |
+| Field                  | Type     | Description                                                              |
+| ---------------------- | -------- | ------------------------------------------------------------------------ |
+| `response_id`          | `string` | TIRA's response ID                                                       |
+| `request_id`           | `string` | Your original request ID                                                 |
 | `response_status_code` | `string` | `"TIRA001"` = approved. See [Error Codes](/error-codes) for other codes. |
-| `response_status_desc` | `string` | Human-readable status description |
+| `response_status_desc` | `string` | Human-readable status description                                        |
 
 ### On Success
 
@@ -163,7 +163,7 @@ app.post("/tira/policy-callback", async (req, res) => {
   } else {
     console.error(
       `Policy rejected: ${result.extracted.response_status_code}`,
-      result.extracted.response_status_desc
+      result.extracted.response_status_desc,
     );
 
     await db.policies.update({
@@ -190,12 +190,13 @@ TIRA expects you to acknowledge every callback. If you don't, they'll keep retry
 
 Call `tira.acknowledge(result.body, uniqueId)` with:
 
-| Argument | Description |
-|---|---|
+| Argument      | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
 | `result.body` | The `body` from the callback result — the full parsed XML as a JS object |
-| `uniqueId` | A unique string you generate (e.g., a UUID) |
+| `uniqueId`    | A unique string you generate (e.g., a UUID)                              |
 
 The package automatically:
+
 1. Derives the correct acknowledgement tag name (`PolicyRes` → `PolicyResAck`)
 2. Fills in `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, and `AcknowledgementStatusDesc`
 3. Signs the XML with your private key
@@ -254,6 +255,7 @@ app.post("/tira/policy-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Repetitive non-acknowledgement
@@ -277,25 +279,26 @@ This function parses the callback XML that TIRA sends to your callback URL and e
 ### Input
 
 You can pass either:
+
 - A **raw XML string** — the `req.body` from your Express handler (requires `express.text({ type: "application/xml" })` middleware)
 - A **pre-parsed object** — if you've already parsed the XML yourself
 
 ### What It Returns
 
-| Field | Type | Description |
-|---|---|---|
-| `type` | `"policy"` | Always `"policy"` for this handler |
-| `extracted` | `PolicyCallbackResponse` | The extracted data (see [Callback Response](#submit-callback-response)) |
-| `body` | `Record<string, any>` | Full parsed XML as JS object — pass this to `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Whether TIRA's digital signature was verified |
-| `raw_xml` | `string` | The original XML string |
+| Field                | Type                     | Description                                                             |
+| -------------------- | ------------------------ | ----------------------------------------------------------------------- |
+| `type`               | `"policy"`               | Always `"policy"` for this handler                                      |
+| `extracted`          | `PolicyCallbackResponse` | The extracted data (see [Callback Response](#submit-callback-response)) |
+| `body`               | `Record<string, any>`    | Full parsed XML as JS object — pass this to `tira.acknowledge()`        |
+| `signature_verified` | `boolean`                | Whether TIRA's digital signature was verified                           |
+| `raw_xml`            | `string`                 | The original XML string                                                 |
 
 ### Resource-Specific vs Universal Handler
 
-| Approach | Method | When to Use |
-|---|---|---|
-| Resource-specific | `tira.policy.handleCallback(input)` | When you have separate endpoints per resource type |
-| Universal | `tira.handleCallback(input)` | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
+| Approach          | Method                              | When to Use                                                                                |
+| ----------------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| Resource-specific | `tira.policy.handleCallback(input)` | When you have separate endpoints per resource type                                         |
+| Universal         | `tira.handleCallback(input)`        | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
 
 Both return the same data. The universal handler auto-detects the callback type. See [Callbacks & Acknowledgements](/callbacks-acknowledgements) for details on the universal handler.
 
@@ -318,8 +321,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -354,9 +357,10 @@ app.post("/tira/policy-callback", async (req, res) => {
     await db.policies.update({
       where: { request_id: result.extracted.request_id },
       data: {
-        status: result.extracted.response_status_code === "TIRA001"
-          ? "approved"
-          : "rejected",
+        status:
+          result.extracted.response_status_code === "TIRA001"
+            ? "approved"
+            : "rejected",
         tira_response_code: result.extracted.response_status_code,
         tira_response_desc: result.extracted.response_status_desc,
       },
@@ -395,16 +399,16 @@ The `applied_cover_notes` array must contain at least one cover note reference n
 
 ```js
 // Valid — at least one reference
-applied_cover_notes: ["4242424"]
+applied_cover_notes: ["4242424"];
 
 // Valid — multiple references
-applied_cover_notes: ["4242424", "2323235", "5656789"]
+applied_cover_notes: ["4242424", "2323235", "5656789"];
 
 // Invalid — empty array (throws TiraValidationError)
-applied_cover_notes: []
+applied_cover_notes: [];
 
 // Invalid — contains empty string (throws TiraValidationError)
-applied_cover_notes: ["4242424", ""]
+applied_cover_notes: ["4242424", ""];
 ```
 
 ## Common Mistakes

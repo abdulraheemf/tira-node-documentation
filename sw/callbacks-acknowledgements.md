@@ -31,6 +31,7 @@ Hatua 6: Unathibitisha callback ya TIRA
 ```
 
 ::: warning Sheria za Kurudia
+
 - **Hatua 2**: Ikiwa hupokei uthibitisho kutoka TIRA, rudia utumaji wako.
 - **Hatua 6**: Ikiwa TIRA haipokei uthibitisho wako, wataendelea kurudia callback hadi uthibitishe.
 
@@ -49,20 +50,20 @@ const result = await tira.motor.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
-console.log(result.tira_status_desc);   // "Successful"
+console.log(result.tira_status_code); // "TIRA001"
+console.log(result.tira_status_desc); // "Successful"
 ```
 
 Jibu linakuambia TIRA imepokea ombi lako:
 
-| Sehemu | Maelezo |
-|---|---|
-| `acknowledgement_id` | Kitambulisho cha TIRA kwa uthibitisho huu |
-| `request_id` | Kitambulisho chako cha ombi (kinarudishwa) |
-| `tira_status_code` | `"TIRA001"` inamaanisha TIRA imepokea ombi lako |
-| `tira_status_desc` | Maelezo yanayosomeka |
-| `requires_acknowledgement` | Daima `true` |
-| `acknowledgement_payload` | Data ghafi ya uthibitisho (kawaida huitahitaji) |
+| Sehemu                     | Maelezo                                         |
+| -------------------------- | ----------------------------------------------- |
+| `acknowledgement_id`       | Kitambulisho cha TIRA kwa uthibitisho huu       |
+| `request_id`               | Kitambulisho chako cha ombi (kinarudishwa)      |
+| `tira_status_code`         | `"TIRA001"` inamaanisha TIRA imepokea ombi lako |
+| `tira_status_desc`         | Maelezo yanayosomeka                            |
+| `requires_acknowledgement` | Daima `true`                                    |
+| `acknowledgement_payload`  | Data ghafi ya uthibitisho (kawaida huitahitaji) |
 
 ::: tip "TIRA001" inamaanisha "imepokewa", si "imeidhinishwa"
 Katika hatua hii, `"TIRA001"` inamaanisha tu TIRA imepata ombi lako. **Haimaanishi** bima yako imeidhinishwa au madai yako yamekubaliwa. Matokeo halisi yanakuja baadaye kupitia callback.
@@ -115,13 +116,13 @@ app.post("/tira-callback", async (req, res) => {
 
 Njia zote mbili zinarudisha `CallbackResult` na sehemu hizi:
 
-| Sehemu | Maelezo |
-|---|---|
-| `type` | Aina ya callback iliyogunduliwa (`"motor"`, `"policy"`, `"motor_fleet"`, n.k.) |
-| `extracted` | JSON safi na data ya majibu. Tazama ukurasa wa nyaraka wa kila rasilimali kwa sehemu halisi unazopokea. |
-| `body` | XML kamili iliyochambuliwa kama kitu cha JS (utahitaji hii kwa uthibitisho) |
-| `signature_verified` | `true` ikiwa sahihi ya kidijitali ilithibitishwa |
-| `raw_xml` | Mfuatano wa XML wa asili |
+| Sehemu               | Maelezo                                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------------------- |
+| `type`               | Aina ya callback iliyogunduliwa (`"motor"`, `"policy"`, `"motor_fleet"`, n.k.)                          |
+| `extracted`          | JSON safi na data ya majibu. Tazama ukurasa wa nyaraka wa kila rasilimali kwa sehemu halisi unazopokea. |
+| `body`               | XML kamili iliyochambuliwa kama kitu cha JS (utahitaji hii kwa uthibitisho)                             |
+| `signature_verified` | `true` ikiwa sahihi ya kidijitali ilithibitishwa                                                        |
+| `raw_xml`            | Mfuatano wa XML wa asili                                                                                |
 
 ## Kuthibitisha Callback
 
@@ -135,7 +136,10 @@ app.post("/tira/motor-callback", async (req, res) => {
   await saveToDatabase(result.extracted);
 
   // Jenga XML ya uthibitisho
-  const ackXml = tira.acknowledge(result.body, "kitambulisho-chako-cha-kipekee");
+  const ackXml = tira.acknowledge(
+    result.body,
+    "kitambulisho-chako-cha-kipekee",
+  );
 
   // Itume kama jibu la HTTP
   res.set("Content-Type", "application/xml").send(ackXml);
@@ -146,10 +150,10 @@ app.post("/tira/motor-callback", async (req, res) => {
 
 Inachukua hoja mbili:
 
-| Hoja | Maelezo |
-|---|---|
-| `result.body` | `body` kutoka matokeo ya callback (kitu kamili cha XML kilichochambuliwa) |
-| `acknowledgementId` | Mfuatano wa kipekee unaozalisha (mf. UUID) |
+| Hoja                | Maelezo                                                                   |
+| ------------------- | ------------------------------------------------------------------------- |
+| `result.body`       | `body` kutoka matokeo ya callback (kitu kamili cha XML kilichochambuliwa) |
+| `acknowledgementId` | Mfuatano wa kipekee unaozalisha (mf. UUID)                                |
 
 Inarudisha mfuatano wa XML uliosainiwa tayari kutumwa kama jibu la HTTP. Kifurushi kinafanya kiotomatiki:
 
@@ -193,8 +197,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -338,6 +342,7 @@ app.post("/tira/motor-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Kutothibitisha mara kwa mara

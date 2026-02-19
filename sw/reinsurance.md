@@ -6,10 +6,10 @@ Kwa mtiririko wa jumla wa kutuma-callback-kuthibitisha, tazama [Callback na Uthi
 
 ## Mbinu Zinazopatikana
 
-| Mbinu | Maelezo | Wakati wa Kutumia | Inarudisha |
-|---|---|---|---|
-| `tira.reinsurance.submit(payload)` | Tuma maelezo ya bima ya kurudisha kwa covernote iliyotumwa hapo awali | Unapotaka kuripoti mipango ya bima ya kurudisha kwa TIRA | `ReinsuranceResponse` |
-| `tira.reinsurance.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<ReinsuranceCallbackResponse>` |
+| Mbinu                                    | Maelezo                                                               | Wakati wa Kutumia                                            | Inarudisha                                    |
+| ---------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- |
+| `tira.reinsurance.submit(payload)`       | Tuma maelezo ya bima ya kurudisha kwa covernote iliyotumwa hapo awali | Unapotaka kuripoti mipango ya bima ya kurudisha kwa TIRA     | `ReinsuranceResponse`                         |
+| `tira.reinsurance.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA                         | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<ReinsuranceCallbackResponse>` |
 
 ## Mzigo wa .submit()
 
@@ -23,77 +23,77 @@ Inatuma maelezo ya bima ya kurudisha kwa TIRA kwa covernote iliyotumwa hapo awal
 
 ### Aina za Bima ya Kurudisha
 
-| Thamani | Aina | Maelezo |
-|---|---|---|
-| `"1"` | Facultative Outward | Kupeleka hatari kwa mwingine wa bima ya kurudisha |
-| `"2"` | Facultative Inward | Kupokea hatari kutoka kwa mbima mwingine |
+| Thamani | Aina                | Maelezo                                           |
+| ------- | ------------------- | ------------------------------------------------- |
+| `"1"`   | Facultative Outward | Kupeleka hatari kwa mwingine wa bima ya kurudisha |
+| `"2"`   | Facultative Inward  | Kupokea hatari kutoka kwa mbima mwingine          |
 
 ### Sehemu za Kichwa cha Bima ya Kurudisha
 
 Hizi ni sehemu za kiwango cha juu katika mzigo wa utumaji.
 
-| Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Ndiyo | — | `RequestId` | Kitambulisho cha kipekee cha ombi |
-| `callback_url` | `string` | Ndiyo | — | `CallBackUrl` | Mahali TIRA inatuma matokeo |
-| `insurer_company_code` | `string` | Ndiyo | — | `InsurerCompanyCode` | Msimbo wa kampuni ya bima |
-| `covernote_reference_number` | `string` | Ndiyo | — | `CoverNoteReferenceNumber` | Nambari ya rejea kutoka covernote iliyotumwa hapo awali |
-| `premium_including_tax` | `number` | Ndiyo | — | `PremiumIncludingTax` | Primi jumla ikiwa na kodi. Desimali 2. |
-| `currency_code` | `string` | Hapana | `"TZS"` | `CurrencyCode` | Msimbo wa sarafu ya ISO |
-| `exchange_rate` | `number` | Hapana | `1.0` | `ExchangeRate` | Kiwango cha ubadilishaji kwa TZS. Desimali 2. |
-| `authorizing_officer_name` | `string` | Ndiyo | — | `AuthorizingOfficerName` | Jina la afisa anayeidhinisha |
-| `authorizing_officer_title` | `string` | Ndiyo | — | `AuthorizingOfficerTitle` | Cheo cha afisa anayeidhinisha |
-| `reinsurance_category` | `"1"\|"2"` | Ndiyo | — | `ReinsuranceCategory` | 1=Facultative Outward, 2=Facultative Inward |
-| `reinsurance_details` | `ReinsuranceDetail[]` | Ndiyo | — | `ReinsuranceDtl` | Angalau moja inahitajika. Tazama [Sehemu za Maelezo ya Bima ya Kurudisha](#sehemu-za-maelezo-ya-bima-ya-kurudisha). |
+| Sehemu                       | Aina                  | Inahitajika | Chaguomsingi | XML Tag                    | Maelezo                                                                                                             |
+| ---------------------------- | --------------------- | ----------- | ------------ | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `request_id`                 | `string`              | Ndiyo       | —            | `RequestId`                | Kitambulisho cha kipekee cha ombi                                                                                   |
+| `callback_url`               | `string`              | Ndiyo       | —            | `CallBackUrl`              | Mahali TIRA inatuma matokeo                                                                                         |
+| `insurer_company_code`       | `string`              | Ndiyo       | —            | `InsurerCompanyCode`       | Msimbo wa kampuni ya bima                                                                                           |
+| `covernote_reference_number` | `string`              | Ndiyo       | —            | `CoverNoteReferenceNumber` | Nambari ya rejea kutoka covernote iliyotumwa hapo awali                                                             |
+| `premium_including_tax`      | `number`              | Ndiyo       | —            | `PremiumIncludingTax`      | Primi jumla ikiwa na kodi. Desimali 2.                                                                              |
+| `currency_code`              | `string`              | Hapana      | `"TZS"`      | `CurrencyCode`             | Msimbo wa sarafu ya ISO                                                                                             |
+| `exchange_rate`              | `number`              | Hapana      | `1.0`        | `ExchangeRate`             | Kiwango cha ubadilishaji kwa TZS. Desimali 2.                                                                       |
+| `authorizing_officer_name`   | `string`              | Ndiyo       | —            | `AuthorizingOfficerName`   | Jina la afisa anayeidhinisha                                                                                        |
+| `authorizing_officer_title`  | `string`              | Ndiyo       | —            | `AuthorizingOfficerTitle`  | Cheo cha afisa anayeidhinisha                                                                                       |
+| `reinsurance_category`       | `"1"\|"2"`            | Ndiyo       | —            | `ReinsuranceCategory`      | 1=Facultative Outward, 2=Facultative Inward                                                                         |
+| `reinsurance_details`        | `ReinsuranceDetail[]` | Ndiyo       | —            | `ReinsuranceDtl`           | Angalau moja inahitajika. Tazama [Sehemu za Maelezo ya Bima ya Kurudisha](#sehemu-za-maelezo-ya-bima-ya-kurudisha). |
 
 ### Sehemu za Maelezo ya Bima ya Kurudisha
 
 Kila kipengele katika safu ya `reinsurance_details` kinawekwa kwenye kipengele cha XML `<ReinsuranceDtl>`. Angalau kimoja kinahitajika.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `participant_code` | `string` | Ndiyo | `ParticipantCode` | Msimbo wa mshiriki uliotolewa na TIRA |
-| `participant_type` | `"1"`–`"7"` | Ndiyo | `ParticipantType` | Tazama [Aina za Washiriki](#aina-za-washiriki) |
-| `reinsurance_form` | `"1"`–`"3"` | Ndiyo | `ReinsuranceForm` | Tazama [Aina za Fomu za Bima ya Kurudisha](#aina-za-fomu-za-bima-ya-kurudisha) |
-| `reinsurance_type` | `"1"`–`"8"` | Ndiyo | `ReinsuranceType` | Tazama [Aina za Bima ya Kurudisha](#aina-za-bima-ya-kurudisha-1) |
-| `re_broker_code` | `string` | Ndiyo | `ReBrokerCode` | Msimbo wa dalali wa bima ya kurudisha. Hutolewa na TIRA. |
-| `brokerage_commission` | `number` | Ndiyo | `BrokerageCommission` | Kiasi cha kamisheni ya udalalishi. Desimali 2. |
-| `reinsurance_commission` | `number` | Ndiyo | `ReinsuranceCommission` | Kiasi cha kamisheni ya bima ya kurudisha. Desimali 2. |
-| `premium_share` | `number` | Ndiyo | `PremiumShare` | Kiasi cha mgao wa primi. Desimali 2. |
-| `participation_date` | `string\|Date` | Ndiyo | `ParticipationDate` | Tarehe ya ushiriki katika muundo wa ISO au kitu cha Date. Tazama [Usimamizi wa Tarehe](#usimamizi-wa-tarehe). |
+| Sehemu                   | Aina           | Inahitajika | XML Tag                 | Maelezo                                                                                                       |
+| ------------------------ | -------------- | ----------- | ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `participant_code`       | `string`       | Ndiyo       | `ParticipantCode`       | Msimbo wa mshiriki uliotolewa na TIRA                                                                         |
+| `participant_type`       | `"1"`–`"7"`    | Ndiyo       | `ParticipantType`       | Tazama [Aina za Washiriki](#aina-za-washiriki)                                                                |
+| `reinsurance_form`       | `"1"`–`"3"`    | Ndiyo       | `ReinsuranceForm`       | Tazama [Aina za Fomu za Bima ya Kurudisha](#aina-za-fomu-za-bima-ya-kurudisha)                                |
+| `reinsurance_type`       | `"1"`–`"8"`    | Ndiyo       | `ReinsuranceType`       | Tazama [Aina za Bima ya Kurudisha](#aina-za-bima-ya-kurudisha-1)                                              |
+| `re_broker_code`         | `string`       | Ndiyo       | `ReBrokerCode`          | Msimbo wa dalali wa bima ya kurudisha. Hutolewa na TIRA.                                                      |
+| `brokerage_commission`   | `number`       | Ndiyo       | `BrokerageCommission`   | Kiasi cha kamisheni ya udalalishi. Desimali 2.                                                                |
+| `reinsurance_commission` | `number`       | Ndiyo       | `ReinsuranceCommission` | Kiasi cha kamisheni ya bima ya kurudisha. Desimali 2.                                                         |
+| `premium_share`          | `number`       | Ndiyo       | `PremiumShare`          | Kiasi cha mgao wa primi. Desimali 2.                                                                          |
+| `participation_date`     | `string\|Date` | Ndiyo       | `ParticipationDate`     | Tarehe ya ushiriki katika muundo wa ISO au kitu cha Date. Tazama [Usimamizi wa Tarehe](#usimamizi-wa-tarehe). |
 
 ### Aina za Washiriki
 
-| Thamani | Maelezo |
-|---|---|
-| `"1"` | Leader |
-| `"2"` | Treaty Cession |
-| `"3"` | Policy Cession Outward |
-| `"4"` | Facultative Outward Local |
-| `"5"` | Facultative Outward Foreign |
-| `"6"` | Facultative Inward Local |
-| `"7"` | Facultative Inward Foreign |
+| Thamani | Maelezo                     |
+| ------- | --------------------------- |
+| `"1"`   | Leader                      |
+| `"2"`   | Treaty Cession              |
+| `"3"`   | Policy Cession Outward      |
+| `"4"`   | Facultative Outward Local   |
+| `"5"`   | Facultative Outward Foreign |
+| `"6"`   | Facultative Inward Local    |
+| `"7"`   | Facultative Inward Foreign  |
 
 ### Aina za Fomu za Bima ya Kurudisha
 
-| Thamani | Maelezo |
-|---|---|
-| `"1"` | Policy Cession |
-| `"2"` | Treaty Cession |
-| `"3"` | Facultative |
+| Thamani | Maelezo        |
+| ------- | -------------- |
+| `"1"`   | Policy Cession |
+| `"2"`   | Treaty Cession |
+| `"3"`   | Facultative    |
 
 ### Aina za Bima ya Kurudisha
 
-| Thamani | Maelezo |
-|---|---|
-| `"1"` | Fac Proportion — Quota Share |
-| `"2"` | Fac Non Proportion — Excess of Loss |
-| `"3"` | Fac Proportion — Surplus Treaty |
-| `"4"` | Fac Obligatory |
-| `"5"` | Treaty Proportion — Quota Share |
-| `"6"` | Treaty Proportion — Surplus Treaty |
-| `"7"` | Treaty Non Proportion — Excess of Loss |
-| `"8"` | Treaty Non Proportion — Stop Loss |
+| Thamani | Maelezo                                |
+| ------- | -------------------------------------- |
+| `"1"`   | Fac Proportion — Quota Share           |
+| `"2"`   | Fac Non Proportion — Excess of Loss    |
+| `"3"`   | Fac Proportion — Surplus Treaty        |
+| `"4"`   | Fac Obligatory                         |
+| `"5"`   | Treaty Proportion — Quota Share        |
+| `"6"`   | Treaty Proportion — Surplus Treaty     |
+| `"7"`   | Treaty Non Proportion — Excess of Loss |
+| `"8"`   | Treaty Non Proportion — Stop Loss      |
 
 ### Usimamizi wa Tarehe
 
@@ -144,9 +144,9 @@ const result = await tira.reinsurance.submit({
   reinsurance_details: [
     {
       participant_code: "RE001",
-      participant_type: "1",  // Leader
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "1", // Leader
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK001",
       brokerage_commission: 5000,
       reinsurance_commission: 10000,
@@ -155,9 +155,9 @@ const result = await tira.reinsurance.submit({
     },
     {
       participant_code: "RE002",
-      participant_type: "4",  // Facultative Outward Local
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "4", // Facultative Outward Local
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK002",
       brokerage_commission: 5000,
       reinsurance_commission: 10000,
@@ -168,7 +168,7 @@ const result = await tira.reinsurance.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Mfano — Bima ya Kurudisha ya Facultative Inward
@@ -181,16 +181,16 @@ const result = await tira.reinsurance.submit({
   covernote_reference_number: "CN-2025-002",
   premium_including_tax: 450000,
   currency_code: "USD",
-  exchange_rate: 2500.00,
+  exchange_rate: 2500.0,
   authorizing_officer_name: "Johnson Abraham",
   authorizing_officer_title: "Manager",
   reinsurance_category: "2", // Facultative Inward
   reinsurance_details: [
     {
       participant_code: "RE003",
-      participant_type: "6",  // Facultative Inward Local
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "6", // Facultative Inward Local
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK003",
       brokerage_commission: 3000,
       reinsurance_commission: 8000,
@@ -205,14 +205,14 @@ const result = await tira.reinsurance.submit({
 
 Unapoita `tira.reinsurance.submit()`, unapata `ReinsuranceResponse` mara moja kutoka TIRA:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `acknowledgement_id` | `string` | Kitambulisho cha uthibitisho cha TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi (kinarudishwa) |
-| `tira_status_code` | `string` | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa |
-| `tira_status_desc` | `string` | Maelezo yanayosomeka |
-| `requires_acknowledgement` | `boolean` | Daima `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
+| Sehemu                     | Aina                      | Maelezo                                                    |
+| -------------------------- | ------------------------- | ---------------------------------------------------------- |
+| `acknowledgement_id`       | `string`                  | Kitambulisho cha uthibitisho cha TIRA                      |
+| `request_id`               | `string`                  | Kitambulisho chako cha ombi (kinarudishwa)                 |
+| `tira_status_code`         | `string`                  | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa         |
+| `tira_status_desc`         | `string`                  | Maelezo yanayosomeka                                       |
+| `requires_acknowledgement` | `boolean`                 | Daima `true`                                               |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
 
 ::: tip "TIRA001" inamaanisha "imepokewa", si "imeidhinishwa"
 Katika hatua hii, `"TIRA001"` inamaanisha TIRA imepokea ombi lako na linashughulikiwa. **Haimaanishi** utumaji wako wa bima ya kurudisha umeidhinishwa. Matokeo halisi (imeidhinishwa au imekataliwa) yanakuja baadaye kupitia callback URL yako.
@@ -228,12 +228,12 @@ Baada ya TIRA kushughulikia utumaji wako, inatuma matokeo kwa `callback_url` yak
 
 Sehemu ya `extracted` ina data ya callback iliyochambuliwa:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `response_id` | `string` | Kitambulisho cha jibu la TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi |
+| Sehemu                 | Aina     | Maelezo                                                                                       |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `response_id`          | `string` | Kitambulisho cha jibu la TIRA                                                                 |
+| `request_id`           | `string` | Kitambulisho chako cha ombi                                                                   |
 | `response_status_code` | `string` | `"TIRA001"` = imeidhinishwa. Tazama [Misimbo ya Makosa](/sw/error-codes) kwa misimbo mingine. |
-| `response_status_desc` | `string` | Maelezo ya hali yanayosomeka |
+| `response_status_desc` | `string` | Maelezo ya hali yanayosomeka                                                                  |
 
 ### Ikiwa Imefanikiwa
 
@@ -269,7 +269,7 @@ app.post("/tira/reinsurance-callback", async (req, res) => {
   } else {
     console.error(
       `Bima ya kurudisha imekataliwa: ${result.extracted.response_status_code}`,
-      result.extracted.response_status_desc
+      result.extracted.response_status_desc,
     );
 
     await db.reinsurance.update({
@@ -296,12 +296,13 @@ TIRA inatarajia uthibitishe kila callback. Usipothibitisha, wataendelea kurudia 
 
 Ita `tira.acknowledge(result.body, uniqueId)` na:
 
-| Hoja | Maelezo |
-|---|---|
+| Hoja          | Maelezo                                                                         |
+| ------------- | ------------------------------------------------------------------------------- |
 | `result.body` | `body` kutoka matokeo ya callback — XML kamili iliyochambuliwa kama kitu cha JS |
-| `uniqueId` | Mfuatano wa kipekee unaouzalisha (mf. UUID) |
+| `uniqueId`    | Mfuatano wa kipekee unaouzalisha (mf. UUID)                                     |
 
 Kifurushi kiotomatiki:
+
 1. Kinapata jina sahihi la tag ya uthibitisho (`ReinsuranceRes` → `ReinsuranceResAck`)
 2. Kinajaza `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, na `AcknowledgementStatusDesc`
 3. Kinasaini XML kwa ufunguo wako wa siri
@@ -360,6 +361,7 @@ app.post("/tira/reinsurance-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Kutothibitisha mara kwa mara
@@ -383,25 +385,26 @@ Kazi hii inachambua XML ya callback ambayo TIRA inatuma kwa callback URL yako na
 ### Ingizo
 
 Unaweza kutoa:
+
 - **Mfuatano wa XML ghafi** — `req.body` kutoka Express handler yako (inahitaji middleware ya `express.text({ type: "application/xml" })`)
 - **Kitu kilichochambuliwa tayari** — ikiwa umeshachambua XML mwenyewe
 
 ### Inarudisha Nini
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `type` | `"reinsurance"` | Daima `"reinsurance"` kwa mshughulikaji huu |
-| `extracted` | `ReinsuranceCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit)) |
-| `body` | `Record<string, any>` | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa |
-| `raw_xml` | `string` | Mfuatano wa XML wa asili |
+| Sehemu               | Aina                          | Maelezo                                                                        |
+| -------------------- | ----------------------------- | ------------------------------------------------------------------------------ |
+| `type`               | `"reinsurance"`               | Daima `"reinsurance"` kwa mshughulikaji huu                                    |
+| `extracted`          | `ReinsuranceCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit))      |
+| `body`               | `Record<string, any>`         | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
+| `signature_verified` | `boolean`                     | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa                              |
+| `raw_xml`            | `string`                      | Mfuatano wa XML wa asili                                                       |
 
 ### Mshughulikaji wa Rasilimali Maalum dhidi ya wa Jumla
 
-| Mbinu | Mbinu | Wakati wa Kutumia |
-|---|---|---|
-| Rasilimali maalum | `tira.reinsurance.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali |
-| Jumla | `tira.handleCallback(input)` | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
+| Mbinu             | Mbinu                                    | Wakati wa Kutumia                                                                               |
+| ----------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Rasilimali maalum | `tira.reinsurance.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali                                           |
+| Jumla             | `tira.handleCallback(input)`             | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
 
 Zote mbili zinarudisha data sawa. Mshughulikaji wa jumla unagundua aina ya callback kiotomatiki. Tazama [Callback na Uthibitisho](/sw/callbacks-acknowledgements) kwa maelezo zaidi kuhusu mshughulikaji wa jumla.
 
@@ -424,8 +427,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -502,7 +505,7 @@ Kila mshiriki ana `premium_share`, `brokerage_commission`, `reinsurance_commissi
 reinsurance_details: [
   {
     participant_code: "RE001",
-    participant_type: "1",  // Leader
+    participant_type: "1", // Leader
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK001",
@@ -513,7 +516,7 @@ reinsurance_details: [
   },
   {
     participant_code: "RE002",
-    participant_type: "4",  // Facultative Outward Local
+    participant_type: "4", // Facultative Outward Local
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK002",
@@ -524,7 +527,7 @@ reinsurance_details: [
   },
   {
     participant_code: "RE003",
-    participant_type: "5",  // Facultative Outward Foreign
+    participant_type: "5", // Facultative Outward Foreign
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK003",
@@ -533,7 +536,7 @@ reinsurance_details: [
     premium_share: 100000,
     participation_date: "2025-05-31T21:00:00Z",
   },
-]
+];
 ```
 
 ## Makosa ya Kawaida

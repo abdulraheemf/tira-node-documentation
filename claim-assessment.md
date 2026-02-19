@@ -6,10 +6,10 @@ For the general submit-callback-acknowledge flow, see [Callbacks & Acknowledgeme
 
 ## Available Methods
 
-| Method                                         | Description                                 | When to Use                                                                        | Returns                                             |
-| ---------------------------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------- |
-| `tira.claimAssessment.submit(payload)`         | Submit a claim assessment to TIRA           | After a claim intimation has been submitted and you have assessment results ready   | `ClaimAssessmentResponse`                           |
-| `tira.claimAssessment.handleCallback(input)`   | Parse and extract data from TIRA's callback | When TIRA sends the result of your submission to your callback URL                 | `CallbackResult<ClaimAssessmentCallbackResponse>`   |
+| Method                                       | Description                                 | When to Use                                                                       | Returns                                           |
+| -------------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `tira.claimAssessment.submit(payload)`       | Submit a claim assessment to TIRA           | After a claim intimation has been submitted and you have assessment results ready | `ClaimAssessmentResponse`                         |
+| `tira.claimAssessment.handleCallback(input)` | Parse and extract data from TIRA's callback | When TIRA sends the result of your submission to your callback URL                | `CallbackResult<ClaimAssessmentCallbackResponse>` |
 
 ## .submit() Payload
 
@@ -23,25 +23,25 @@ Submits a claim assessment to TIRA. This is an asynchronous operation — you re
 
 ### Claim Assessment Fields
 
-| Field                        | Type           | Required | Default  | XML Tag                    | Description                                                              |
-| ---------------------------- | -------------- | -------- | -------- | -------------------------- | ------------------------------------------------------------------------ |
-| `request_id`                 | `string`       | Yes      | —        | `RequestId`                | Unique request identifier                                                |
-| `callback_url`               | `string`       | Yes      | —        | `CallBackUrl`              | Where TIRA sends results                                                 |
-| `insurer_company_code`       | `string`       | Yes      | —        | `InsurerCompanyCode`       | Insurer's company code                                                   |
-| `claim_assessment_number`    | `string`       | Yes      | —        | `ClaimAssessmentNumber`    | Claim assessment number as per insurer. String(50).                      |
-| `claim_intimation_number`    | `string`       | Yes      | —        | `ClaimIntimationNumber`    | The claim intimation number this assessment is for. String(50).          |
-| `claim_reference_number`     | `string`       | Yes      | —        | `ClaimReferenceNumber`     | The TIRA claim reference number from the claim notification. String(50). |
-| `covernote_reference_number` | `string`       | Yes      | —        | `CoverNoteReferenceNumber` | The TIRA cover note reference number the claim is against. String(50).   |
-| `assessment_received_date`   | `string\|Date` | Yes      | —        | `AssessmentReceivedDate`   | Date the assessment was received. See [Date Handling](#date-handling).   |
-| `assessment_report_summary`  | `string`       | Yes      | —        | `AssessmentReportSummary`  | Summary of the assessment report. String(1000).                          |
-| `currency_code`              | `string`       | No       | `"TZS"`  | `CurrencyCode`             | ISO 4217 currency code.                                                  |
-| `exchange_rate`              | `number`       | No       | `1.0`    | `ExchangeRate`             | Exchange rate to TZS. Formatted to 2 decimal places.                     |
-| `assessment_amount`          | `number`       | Yes      | —        | `AssessmentAmount`         | Total assessment amount. Numeric(36,2).                                  |
-| `approved_claim_amount`      | `number`       | Yes      | —        | `ApprovedClaimAmount`      | Approved claim amount. Numeric(36,2).                                    |
-| `claim_approval_date`        | `string\|Date` | Yes      | —        | `ClaimApprovalDate`        | Date and time the claim was approved. See [Date Handling](#date-handling).|
-| `claim_approval_authority`   | `string`       | Yes      | —        | `ClaimApprovalAuthority`   | Authority who approved the claim (e.g., "CEO"). String(100).             |
-| `is_re_assessment`           | `"Y"\|"N"`     | Yes      | —        | `IsReAssessment`           | Whether this is a re-assessment. Y=Yes, N=No.                            |
-| `claimants`                  | `SimpleClaimant[]` | Yes  | —        | `Claimants > Claimant`     | At least one claimant required. See [Claimants](#claimants).             |
+| Field                        | Type               | Required | Default | XML Tag                    | Description                                                                |
+| ---------------------------- | ------------------ | -------- | ------- | -------------------------- | -------------------------------------------------------------------------- |
+| `request_id`                 | `string`           | Yes      | —       | `RequestId`                | Unique request identifier                                                  |
+| `callback_url`               | `string`           | Yes      | —       | `CallBackUrl`              | Where TIRA sends results                                                   |
+| `insurer_company_code`       | `string`           | Yes      | —       | `InsurerCompanyCode`       | Insurer's company code                                                     |
+| `claim_assessment_number`    | `string`           | Yes      | —       | `ClaimAssessmentNumber`    | Claim assessment number as per insurer. String(50).                        |
+| `claim_intimation_number`    | `string`           | Yes      | —       | `ClaimIntimationNumber`    | The claim intimation number this assessment is for. String(50).            |
+| `claim_reference_number`     | `string`           | Yes      | —       | `ClaimReferenceNumber`     | The TIRA claim reference number from the claim notification. String(50).   |
+| `covernote_reference_number` | `string`           | Yes      | —       | `CoverNoteReferenceNumber` | The TIRA cover note reference number the claim is against. String(50).     |
+| `assessment_received_date`   | `string\|Date`     | Yes      | —       | `AssessmentReceivedDate`   | Date the assessment was received. See [Date Handling](#date-handling).     |
+| `assessment_report_summary`  | `string`           | Yes      | —       | `AssessmentReportSummary`  | Summary of the assessment report. String(1000).                            |
+| `currency_code`              | `string`           | No       | `"TZS"` | `CurrencyCode`             | ISO 4217 currency code.                                                    |
+| `exchange_rate`              | `number`           | No       | `1.0`   | `ExchangeRate`             | Exchange rate to TZS. Formatted to 2 decimal places.                       |
+| `assessment_amount`          | `number`           | Yes      | —       | `AssessmentAmount`         | Total assessment amount. Numeric(36,2).                                    |
+| `approved_claim_amount`      | `number`           | Yes      | —       | `ApprovedClaimAmount`      | Approved claim amount. Numeric(36,2).                                      |
+| `claim_approval_date`        | `string\|Date`     | Yes      | —       | `ClaimApprovalDate`        | Date and time the claim was approved. See [Date Handling](#date-handling). |
+| `claim_approval_authority`   | `string`           | Yes      | —       | `ClaimApprovalAuthority`   | Authority who approved the claim (e.g., "CEO"). String(100).               |
+| `is_re_assessment`           | `"Y"\|"N"`         | Yes      | —       | `IsReAssessment`           | Whether this is a re-assessment. Y=Yes, N=No.                              |
+| `claimants`                  | `SimpleClaimant[]` | Yes      | —       | `Claimants > Claimant`     | At least one claimant required. See [Claimants](#claimants).               |
 
 ::: info Auto-filled header fields
 The XML header fields `CompanyCode` and `SystemCode` are automatically filled from your Tira config — you don't need to include them in the payload.
@@ -51,12 +51,12 @@ The XML header fields `CompanyCode` and `SystemCode` are automatically filled fr
 
 Each claimant in the `claimants` array has the following fields:
 
-| Field                | Type          | Required | Default | XML Tag            | Description                                                        |
-| -------------------- | ------------- | -------- | ------- | ------------------ | ------------------------------------------------------------------ |
-| `claimant_category`  | `"1"\|"2"`    | Yes      | —       | `ClaimantCategory` | 1=Policyholder, 2=Third Party.                                     |
-| `claimant_type`      | `"1"\|"2"`    | Yes      | —       | `ClaimantType`     | 1=Individual, 2=Corporate.                                         |
-| `claimant_id_number` | `string`      | Yes      | —       | `ClaimantIdNumber` | Identification number. String(50).                                 |
-| `claimant_id_type`   | `"1"\|…\|"7"` | Yes      | —       | `ClaimantIdType`   | ID type. See [Identification Types](#identification-types).        |
+| Field                | Type          | Required | Default | XML Tag            | Description                                                 |
+| -------------------- | ------------- | -------- | ------- | ------------------ | ----------------------------------------------------------- |
+| `claimant_category`  | `"1"\|"2"`    | Yes      | —       | `ClaimantCategory` | 1=Policyholder, 2=Third Party.                              |
+| `claimant_type`      | `"1"\|"2"`    | Yes      | —       | `ClaimantType`     | 1=Individual, 2=Corporate.                                  |
+| `claimant_id_number` | `string`      | Yes      | —       | `ClaimantIdNumber` | Identification number. String(50).                          |
+| `claimant_id_type`   | `"1"\|…\|"7"` | Yes      | —       | `ClaimantIdType`   | ID type. See [Identification Types](#identification-types). |
 
 ::: info Simplified claimants
 Claim assessment uses a simplified claimant structure (`SimpleClaimant`) with only 4 fields. This is different from [Claim Intimation](/claim-intimation), which requires full claimant details (name, birth date, address, phone, etc.).
@@ -106,7 +106,8 @@ const result = await tira.claimAssessment.submit({
   claim_reference_number: "10020-25400-07720",
   covernote_reference_number: "10020-25400-07720",
   assessment_received_date: "2020-09-10T13:55:22",
-  assessment_report_summary: "Vehicle damage assessment completed. Front bumper and headlight replacement required.",
+  assessment_report_summary:
+    "Vehicle damage assessment completed. Front bumper and headlight replacement required.",
   currency_code: "USD",
   exchange_rate: 2000.0,
   assessment_amount: 20000.0,
@@ -325,20 +326,20 @@ You can pass either:
 
 ### What It Returns
 
-| Field                | Type                                    | Description                                                              |
-| -------------------- | --------------------------------------- | ------------------------------------------------------------------------ |
-| `type`               | `"claim_assessment"`                    | Always `"claim_assessment"` for this handler                             |
-| `extracted`          | `ClaimAssessmentCallbackResponse`       | The extracted data (see [Callback Response](#submit-callback-response))  |
-| `body`               | `Record<string, any>`                   | Full parsed XML as JS object — pass this to `tira.acknowledge()`         |
-| `signature_verified` | `boolean`                               | Whether TIRA's digital signature was verified                            |
-| `raw_xml`            | `string`                                | The original XML string                                                  |
+| Field                | Type                              | Description                                                             |
+| -------------------- | --------------------------------- | ----------------------------------------------------------------------- |
+| `type`               | `"claim_assessment"`              | Always `"claim_assessment"` for this handler                            |
+| `extracted`          | `ClaimAssessmentCallbackResponse` | The extracted data (see [Callback Response](#submit-callback-response)) |
+| `body`               | `Record<string, any>`             | Full parsed XML as JS object — pass this to `tira.acknowledge()`        |
+| `signature_verified` | `boolean`                         | Whether TIRA's digital signature was verified                           |
+| `raw_xml`            | `string`                          | The original XML string                                                 |
 
 ### Resource-Specific vs Universal Handler
 
-| Approach          | Method                                         | When to Use                                                                                |
-| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Resource-specific | `tira.claimAssessment.handleCallback(input)`   | When you have separate endpoints per resource type                                         |
-| Universal         | `tira.handleCallback(input)`                   | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config)  |
+| Approach          | Method                                       | When to Use                                                                                |
+| ----------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Resource-specific | `tira.claimAssessment.handleCallback(input)` | When you have separate endpoints per resource type                                         |
+| Universal         | `tira.handleCallback(input)`                 | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
 
 Both return the same data. The universal handler auto-detects the callback type. See [Callbacks & Acknowledgements](/callbacks-acknowledgements) for details on the universal handler.
 
@@ -361,8 +362,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -453,11 +454,11 @@ Unlike [Claim Intimation](/claim-intimation) which requires full claimant detail
 claimants: [
   {
     claimant_category: "1", // Policyholder
-    claimant_type: "1",     // Individual
+    claimant_type: "1", // Individual
     claimant_id_number: "24241241",
-    claimant_id_type: "1",  // NIN
+    claimant_id_type: "1", // NIN
   },
-]
+];
 ```
 
 This is because claimant details were already captured during the claim intimation step.

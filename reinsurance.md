@@ -6,10 +6,10 @@ For the general submit-callback-acknowledge flow, see [Callbacks & Acknowledgeme
 
 ## Available Methods
 
-| Method | Description | When to Use | Returns |
-|---|---|---|---|
-| `tira.reinsurance.submit(payload)` | Submit reinsurance details for a previously submitted cover note | When you want to report reinsurance arrangements to TIRA | `ReinsuranceResponse` |
-| `tira.reinsurance.handleCallback(input)` | Parse and extract data from TIRA's callback | When TIRA sends the result of your submission to your callback URL | `CallbackResult<ReinsuranceCallbackResponse>` |
+| Method                                   | Description                                                      | When to Use                                                        | Returns                                       |
+| ---------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------- |
+| `tira.reinsurance.submit(payload)`       | Submit reinsurance details for a previously submitted cover note | When you want to report reinsurance arrangements to TIRA           | `ReinsuranceResponse`                         |
+| `tira.reinsurance.handleCallback(input)` | Parse and extract data from TIRA's callback                      | When TIRA sends the result of your submission to your callback URL | `CallbackResult<ReinsuranceCallbackResponse>` |
 
 ## .submit() Payload
 
@@ -23,77 +23,77 @@ Submits reinsurance details to TIRA for a previously submitted cover note. This 
 
 ### Reinsurance Categories
 
-| Value | Category | Description |
-|---|---|---|
-| `"1"` | Facultative Outward | Ceding risk to another reinsurer |
-| `"2"` | Facultative Inward | Accepting risk from another insurer |
+| Value | Category            | Description                         |
+| ----- | ------------------- | ----------------------------------- |
+| `"1"` | Facultative Outward | Ceding risk to another reinsurer    |
+| `"2"` | Facultative Inward  | Accepting risk from another insurer |
 
 ### Reinsurance Header Fields
 
 These are the top-level fields in the submission payload.
 
-| Field | Type | Required | Default | XML Tag | Description |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Yes | — | `RequestId` | Unique request identifier |
-| `callback_url` | `string` | Yes | — | `CallBackUrl` | Where TIRA sends results |
-| `insurer_company_code` | `string` | Yes | — | `InsurerCompanyCode` | Insurer's company code |
-| `covernote_reference_number` | `string` | Yes | — | `CoverNoteReferenceNumber` | Reference number from a previously submitted cover note |
-| `premium_including_tax` | `number` | Yes | — | `PremiumIncludingTax` | Total premium including tax. Max 2 decimal places. |
-| `currency_code` | `string` | No | `"TZS"` | `CurrencyCode` | ISO currency code |
-| `exchange_rate` | `number` | No | `1.0` | `ExchangeRate` | Exchange rate to TZS. Formatted to 2 decimal places. |
-| `authorizing_officer_name` | `string` | Yes | — | `AuthorizingOfficerName` | Name of the authorizing officer |
-| `authorizing_officer_title` | `string` | Yes | — | `AuthorizingOfficerTitle` | Title of the authorizing officer |
-| `reinsurance_category` | `"1"\|"2"` | Yes | — | `ReinsuranceCategory` | 1=Facultative Outward, 2=Facultative Inward |
-| `reinsurance_details` | `ReinsuranceDetail[]` | Yes | — | `ReinsuranceDtl` | At least one required. See [Reinsurance Detail Fields](#reinsurance-detail-fields). |
+| Field                        | Type                  | Required | Default | XML Tag                    | Description                                                                         |
+| ---------------------------- | --------------------- | -------- | ------- | -------------------------- | ----------------------------------------------------------------------------------- |
+| `request_id`                 | `string`              | Yes      | —       | `RequestId`                | Unique request identifier                                                           |
+| `callback_url`               | `string`              | Yes      | —       | `CallBackUrl`              | Where TIRA sends results                                                            |
+| `insurer_company_code`       | `string`              | Yes      | —       | `InsurerCompanyCode`       | Insurer's company code                                                              |
+| `covernote_reference_number` | `string`              | Yes      | —       | `CoverNoteReferenceNumber` | Reference number from a previously submitted cover note                             |
+| `premium_including_tax`      | `number`              | Yes      | —       | `PremiumIncludingTax`      | Total premium including tax. Max 2 decimal places.                                  |
+| `currency_code`              | `string`              | No       | `"TZS"` | `CurrencyCode`             | ISO currency code                                                                   |
+| `exchange_rate`              | `number`              | No       | `1.0`   | `ExchangeRate`             | Exchange rate to TZS. Formatted to 2 decimal places.                                |
+| `authorizing_officer_name`   | `string`              | Yes      | —       | `AuthorizingOfficerName`   | Name of the authorizing officer                                                     |
+| `authorizing_officer_title`  | `string`              | Yes      | —       | `AuthorizingOfficerTitle`  | Title of the authorizing officer                                                    |
+| `reinsurance_category`       | `"1"\|"2"`            | Yes      | —       | `ReinsuranceCategory`      | 1=Facultative Outward, 2=Facultative Inward                                         |
+| `reinsurance_details`        | `ReinsuranceDetail[]` | Yes      | —       | `ReinsuranceDtl`           | At least one required. See [Reinsurance Detail Fields](#reinsurance-detail-fields). |
 
 ### Reinsurance Detail Fields
 
 Each item in the `reinsurance_details` array maps to a `<ReinsuranceDtl>` XML element. At least one is required.
 
-| Field | Type | Required | XML Tag | Description |
-|---|---|---|---|---|
-| `participant_code` | `string` | Yes | `ParticipantCode` | Participant code assigned by TIRA |
-| `participant_type` | `"1"`–`"7"` | Yes | `ParticipantType` | See [Participant Types](#participant-types) |
-| `reinsurance_form` | `"1"`–`"3"` | Yes | `ReinsuranceForm` | See [Reinsurance Forms](#reinsurance-forms) |
-| `reinsurance_type` | `"1"`–`"8"` | Yes | `ReinsuranceType` | See [Reinsurance Types](#reinsurance-types) |
-| `re_broker_code` | `string` | Yes | `ReBrokerCode` | Reinsurance broker code. Provided by TIRA. |
-| `brokerage_commission` | `number` | Yes | `BrokerageCommission` | Brokerage commission amount. Max 2 decimal places. |
-| `reinsurance_commission` | `number` | Yes | `ReinsuranceCommission` | Reinsurance commission amount. Max 2 decimal places. |
-| `premium_share` | `number` | Yes | `PremiumShare` | Premium share amount. Max 2 decimal places. |
-| `participation_date` | `string\|Date` | Yes | `ParticipationDate` | Participation date in ISO format or Date object. See [Date Handling](#date-handling). |
+| Field                    | Type           | Required | XML Tag                 | Description                                                                           |
+| ------------------------ | -------------- | -------- | ----------------------- | ------------------------------------------------------------------------------------- |
+| `participant_code`       | `string`       | Yes      | `ParticipantCode`       | Participant code assigned by TIRA                                                     |
+| `participant_type`       | `"1"`–`"7"`    | Yes      | `ParticipantType`       | See [Participant Types](#participant-types)                                           |
+| `reinsurance_form`       | `"1"`–`"3"`    | Yes      | `ReinsuranceForm`       | See [Reinsurance Forms](#reinsurance-forms)                                           |
+| `reinsurance_type`       | `"1"`–`"8"`    | Yes      | `ReinsuranceType`       | See [Reinsurance Types](#reinsurance-types)                                           |
+| `re_broker_code`         | `string`       | Yes      | `ReBrokerCode`          | Reinsurance broker code. Provided by TIRA.                                            |
+| `brokerage_commission`   | `number`       | Yes      | `BrokerageCommission`   | Brokerage commission amount. Max 2 decimal places.                                    |
+| `reinsurance_commission` | `number`       | Yes      | `ReinsuranceCommission` | Reinsurance commission amount. Max 2 decimal places.                                  |
+| `premium_share`          | `number`       | Yes      | `PremiumShare`          | Premium share amount. Max 2 decimal places.                                           |
+| `participation_date`     | `string\|Date` | Yes      | `ParticipationDate`     | Participation date in ISO format or Date object. See [Date Handling](#date-handling). |
 
 ### Participant Types
 
-| Value | Description |
-|---|---|
-| `"1"` | Leader |
-| `"2"` | Treaty Cession |
-| `"3"` | Policy Cession Outward |
-| `"4"` | Facultative Outward Local |
+| Value | Description                 |
+| ----- | --------------------------- |
+| `"1"` | Leader                      |
+| `"2"` | Treaty Cession              |
+| `"3"` | Policy Cession Outward      |
+| `"4"` | Facultative Outward Local   |
 | `"5"` | Facultative Outward Foreign |
-| `"6"` | Facultative Inward Local |
-| `"7"` | Facultative Inward Foreign |
+| `"6"` | Facultative Inward Local    |
+| `"7"` | Facultative Inward Foreign  |
 
 ### Reinsurance Forms
 
-| Value | Description |
-|---|---|
+| Value | Description    |
+| ----- | -------------- |
 | `"1"` | Policy Cession |
 | `"2"` | Treaty Cession |
-| `"3"` | Facultative |
+| `"3"` | Facultative    |
 
 ### Reinsurance Types
 
-| Value | Description |
-|---|---|
-| `"1"` | Fac Proportion — Quota Share |
-| `"2"` | Fac Non Proportion — Excess of Loss |
-| `"3"` | Fac Proportion — Surplus Treaty |
-| `"4"` | Fac Obligatory |
-| `"5"` | Treaty Proportion — Quota Share |
-| `"6"` | Treaty Proportion — Surplus Treaty |
+| Value | Description                            |
+| ----- | -------------------------------------- |
+| `"1"` | Fac Proportion — Quota Share           |
+| `"2"` | Fac Non Proportion — Excess of Loss    |
+| `"3"` | Fac Proportion — Surplus Treaty        |
+| `"4"` | Fac Obligatory                         |
+| `"5"` | Treaty Proportion — Quota Share        |
+| `"6"` | Treaty Proportion — Surplus Treaty     |
 | `"7"` | Treaty Non Proportion — Excess of Loss |
-| `"8"` | Treaty Non Proportion — Stop Loss |
+| `"8"` | Treaty Non Proportion — Stop Loss      |
 
 ### Date Handling
 
@@ -144,9 +144,9 @@ const result = await tira.reinsurance.submit({
   reinsurance_details: [
     {
       participant_code: "RE001",
-      participant_type: "1",  // Leader
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "1", // Leader
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK001",
       brokerage_commission: 5000,
       reinsurance_commission: 10000,
@@ -155,9 +155,9 @@ const result = await tira.reinsurance.submit({
     },
     {
       participant_code: "RE002",
-      participant_type: "4",  // Facultative Outward Local
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "4", // Facultative Outward Local
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK002",
       brokerage_commission: 5000,
       reinsurance_commission: 10000,
@@ -168,7 +168,7 @@ const result = await tira.reinsurance.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Example — Facultative Inward Reinsurance
@@ -181,16 +181,16 @@ const result = await tira.reinsurance.submit({
   covernote_reference_number: "CN-2025-002",
   premium_including_tax: 450000,
   currency_code: "USD",
-  exchange_rate: 2500.00,
+  exchange_rate: 2500.0,
   authorizing_officer_name: "Johnson Abraham",
   authorizing_officer_title: "Manager",
   reinsurance_category: "2", // Facultative Inward
   reinsurance_details: [
     {
       participant_code: "RE003",
-      participant_type: "6",  // Facultative Inward Local
-      reinsurance_form: "3",  // Facultative
-      reinsurance_type: "1",  // Fac Proportion — Quota Share
+      participant_type: "6", // Facultative Inward Local
+      reinsurance_form: "3", // Facultative
+      reinsurance_type: "1", // Fac Proportion — Quota Share
       re_broker_code: "BRK003",
       brokerage_commission: 3000,
       reinsurance_commission: 8000,
@@ -205,14 +205,14 @@ const result = await tira.reinsurance.submit({
 
 When you call `tira.reinsurance.submit()`, you get an immediate `ReinsuranceResponse` from TIRA:
 
-| Field | Type | Description |
-|---|---|---|
-| `acknowledgement_id` | `string` | TIRA's acknowledgement ID |
-| `request_id` | `string` | Your original request ID (echoed back) |
-| `tira_status_code` | `string` | Status code — `"TIRA001"` means received |
-| `tira_status_desc` | `string` | Human-readable description |
-| `requires_acknowledgement` | `boolean` | Always `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
+| Field                      | Type                      | Description                                |
+| -------------------------- | ------------------------- | ------------------------------------------ |
+| `acknowledgement_id`       | `string`                  | TIRA's acknowledgement ID                  |
+| `request_id`               | `string`                  | Your original request ID (echoed back)     |
+| `tira_status_code`         | `string`                  | Status code — `"TIRA001"` means received   |
+| `tira_status_desc`         | `string`                  | Human-readable description                 |
+| `requires_acknowledgement` | `boolean`                 | Always `true`                              |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Raw parsed acknowledgement (rarely needed) |
 
 ::: tip "TIRA001" means "received", not "approved"
 At this stage, `"TIRA001"` means TIRA received your request and it's being processed. It does **not** mean your reinsurance submission has been approved. The actual result (approved or rejected) comes later via your callback URL.
@@ -228,12 +228,12 @@ After TIRA processes your submission, it sends the result to your `callback_url`
 
 The `extracted` field contains the parsed callback data:
 
-| Field | Type | Description |
-|---|---|---|
-| `response_id` | `string` | TIRA's response ID |
-| `request_id` | `string` | Your original request ID |
+| Field                  | Type     | Description                                                              |
+| ---------------------- | -------- | ------------------------------------------------------------------------ |
+| `response_id`          | `string` | TIRA's response ID                                                       |
+| `request_id`           | `string` | Your original request ID                                                 |
 | `response_status_code` | `string` | `"TIRA001"` = approved. See [Error Codes](/error-codes) for other codes. |
-| `response_status_desc` | `string` | Human-readable status description |
+| `response_status_desc` | `string` | Human-readable status description                                        |
 
 ### On Success
 
@@ -269,7 +269,7 @@ app.post("/tira/reinsurance-callback", async (req, res) => {
   } else {
     console.error(
       `Reinsurance rejected: ${result.extracted.response_status_code}`,
-      result.extracted.response_status_desc
+      result.extracted.response_status_desc,
     );
 
     await db.reinsurance.update({
@@ -296,12 +296,13 @@ TIRA expects you to acknowledge every callback. If you don't, they'll keep retry
 
 Call `tira.acknowledge(result.body, uniqueId)` with:
 
-| Argument | Description |
-|---|---|
+| Argument      | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
 | `result.body` | The `body` from the callback result — the full parsed XML as a JS object |
-| `uniqueId` | A unique string you generate (e.g., a UUID) |
+| `uniqueId`    | A unique string you generate (e.g., a UUID)                              |
 
 The package automatically:
+
 1. Derives the correct acknowledgement tag name (`ReinsuranceRes` → `ReinsuranceResAck`)
 2. Fills in `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, and `AcknowledgementStatusDesc`
 3. Signs the XML with your private key
@@ -360,6 +361,7 @@ app.post("/tira/reinsurance-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Repetitive non-acknowledgement
@@ -383,25 +385,26 @@ This function parses the callback XML that TIRA sends to your callback URL and e
 ### Input
 
 You can pass either:
+
 - A **raw XML string** — the `req.body` from your Express handler (requires `express.text({ type: "application/xml" })` middleware)
 - A **pre-parsed object** — if you've already parsed the XML yourself
 
 ### What It Returns
 
-| Field | Type | Description |
-|---|---|---|
-| `type` | `"reinsurance"` | Always `"reinsurance"` for this handler |
-| `extracted` | `ReinsuranceCallbackResponse` | The extracted data (see [Callback Response](#submit-callback-response)) |
-| `body` | `Record<string, any>` | Full parsed XML as JS object — pass this to `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Whether TIRA's digital signature was verified |
-| `raw_xml` | `string` | The original XML string |
+| Field                | Type                          | Description                                                             |
+| -------------------- | ----------------------------- | ----------------------------------------------------------------------- |
+| `type`               | `"reinsurance"`               | Always `"reinsurance"` for this handler                                 |
+| `extracted`          | `ReinsuranceCallbackResponse` | The extracted data (see [Callback Response](#submit-callback-response)) |
+| `body`               | `Record<string, any>`         | Full parsed XML as JS object — pass this to `tira.acknowledge()`        |
+| `signature_verified` | `boolean`                     | Whether TIRA's digital signature was verified                           |
+| `raw_xml`            | `string`                      | The original XML string                                                 |
 
 ### Resource-Specific vs Universal Handler
 
-| Approach | Method | When to Use |
-|---|---|---|
-| Resource-specific | `tira.reinsurance.handleCallback(input)` | When you have separate endpoints per resource type |
-| Universal | `tira.handleCallback(input)` | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
+| Approach          | Method                                   | When to Use                                                                                |
+| ----------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Resource-specific | `tira.reinsurance.handleCallback(input)` | When you have separate endpoints per resource type                                         |
+| Universal         | `tira.handleCallback(input)`             | When you have one endpoint for all TIRA callbacks (requires `enabled_callbacks` in config) |
 
 Both return the same data. The universal handler auto-detects the callback type. See [Callbacks & Acknowledgements](/callbacks-acknowledgements) for details on the universal handler.
 
@@ -424,8 +427,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -502,7 +505,7 @@ Each participant has their own `premium_share`, `brokerage_commission`, `reinsur
 reinsurance_details: [
   {
     participant_code: "RE001",
-    participant_type: "1",  // Leader
+    participant_type: "1", // Leader
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK001",
@@ -513,7 +516,7 @@ reinsurance_details: [
   },
   {
     participant_code: "RE002",
-    participant_type: "4",  // Facultative Outward Local
+    participant_type: "4", // Facultative Outward Local
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK002",
@@ -524,7 +527,7 @@ reinsurance_details: [
   },
   {
     participant_code: "RE003",
-    participant_type: "5",  // Facultative Outward Foreign
+    participant_type: "5", // Facultative Outward Foreign
     reinsurance_form: "3",
     reinsurance_type: "1",
     re_broker_code: "BRK003",
@@ -533,7 +536,7 @@ reinsurance_details: [
     premium_share: 100000,
     participation_date: "2025-05-31T21:00:00Z",
   },
-]
+];
 ```
 
 ## Common Mistakes

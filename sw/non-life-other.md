@@ -6,10 +6,10 @@ Kwa mtiririko wa jumla wa kutuma-callback-kuthibitisha, tazama [Callback na Uthi
 
 ## Mbinu Zinazopatikana
 
-| Mbinu | Maelezo | Wakati wa Kutumia | Inarudisha |
-|---|---|---|---|
-| `tira.nonLifeOther.submit(payload)` | Tuma covernote ya bima nyinginezo (mpya, upyaji, au marekebisho) | Unapotaka kuunda, kufanya upya, au kubadilisha covernote | `CoverNoteResponse` |
-| `tira.nonLifeOther.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<NonLifeOtherCallbackResponse>` |
+| Mbinu                                     | Maelezo                                                          | Wakati wa Kutumia                                            | Inarudisha                                     |
+| ----------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------- |
+| `tira.nonLifeOther.submit(payload)`       | Tuma covernote ya bima nyinginezo (mpya, upyaji, au marekebisho) | Unapotaka kuunda, kufanya upya, au kubadilisha covernote     | `CoverNoteResponse`                            |
+| `tira.nonLifeOther.handleCallback(input)` | Chambua na kutoa data kutoka callback ya TIRA                    | TIRA inapotuma matokeo ya utumaji wako kwa callback URL yako | `CallbackResult<NonLifeOtherCallbackResponse>` |
 
 ## Mzigo wa .submit()
 
@@ -23,154 +23,154 @@ Inatuma covernote ya bima nyinginezo kwa TIRA. Hii ni operesheni ya asynchronous
 
 ### Aina za Covernote
 
-| Thamani | Aina | Wakati wa Kutumia | Sehemu za Ziada Zinazohitajika |
-|---|---|---|---|
-| `"1"` | Mpya | Covernote ya mara ya kwanza | `covernote_number` |
-| `"2"` | Upyaji | Kufanya upya bima iliyopo | `covernote_number` + `previous_covernote_reference_number` |
-| `"3"` | Marekebisho | Kubadilisha bima iliyopo | `previous_covernote_reference_number` + `endorsement_type` + `endorsement_reason` |
+| Thamani | Aina        | Wakati wa Kutumia           | Sehemu za Ziada Zinazohitajika                                                    |
+| ------- | ----------- | --------------------------- | --------------------------------------------------------------------------------- |
+| `"1"`   | Mpya        | Covernote ya mara ya kwanza | `covernote_number`                                                                |
+| `"2"`   | Upyaji      | Kufanya upya bima iliyopo   | `covernote_number` + `previous_covernote_reference_number`                        |
+| `"3"`   | Marekebisho | Kubadilisha bima iliyopo    | `previous_covernote_reference_number` + `endorsement_type` + `endorsement_reason` |
 
 ### Aina za Marekebisho
 
 Wakati `covernote_type` ni `"3"` (Marekebisho), lazima ubainishe aina ya marekebisho:
 
-| Thamani | Aina | Maelezo |
-|---|---|---|
-| `"1"` | Kuongeza Primi | Mabadiliko ya sera yanayoongeza primi |
-| `"2"` | Kupunguza Primi | Mabadiliko ya sera yanayopunguza primi |
-| `"3"` | Maelezo ya Bima Yamebadilishwa | Mabadiliko ya maelezo ya bima bila athari ya primi |
-| `"4"` | Kufuta | Kufuta covernote kabisa |
+| Thamani | Aina                           | Maelezo                                            |
+| ------- | ------------------------------ | -------------------------------------------------- |
+| `"1"`   | Kuongeza Primi                 | Mabadiliko ya sera yanayoongeza primi              |
+| `"2"`   | Kupunguza Primi                | Mabadiliko ya sera yanayopunguza primi             |
+| `"3"`   | Maelezo ya Bima Yamebadilishwa | Mabadiliko ya maelezo ya bima bila athari ya primi |
+| `"4"`   | Kufuta                         | Kufuta covernote kabisa                            |
 
 ### Sehemu za Covernote
 
 Hizi ni sehemu za kiwango cha juu katika mzigo wa utumaji.
 
-| Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
-|---|---|---|---|---|---|
-| `request_id` | `string` | Ndiyo | — | `RequestId` | Kitambulisho cha kipekee cha ombi |
-| `callback_url` | `string` | Ndiyo | — | `CallBackUrl` | Mahali TIRA inatuma matokeo |
-| `insurer_company_code` | `string` | Ndiyo | — | `InsurerCompanyCode` | Msimbo wa kampuni ya bima |
-| `covernote_type` | `"1"\|"2"\|"3"` | Ndiyo | — | `CoverNoteType` | 1=Mpya, 2=Upyaji, 3=Marekebisho |
-| `covernote_number` | `string` | Masharti | `""` | `CoverNoteNumber` | Nambari yako ya covernote. Inahitajika kwa Mpya na Upyaji. |
-| `previous_covernote_reference_number` | `string` | Masharti | `""` | `PrevCoverNoteReferenceNumber` | Nambari ya rejea ya TIRA ya covernote iliyopita. Inahitajika kwa Upyaji na Marekebisho. |
-| `sales_point_code` | `string` | Ndiyo | — | `SalePointCode` | Msimbo wa kituo cha mauzo kutoka TIRA |
-| `covernote_start_date` | `string\|Date` | Ndiyo | — | `CoverNoteStartDate` | Tarehe ya kuanza. Tazama [Usimamizi wa Tarehe](#usimamizi-wa-tarehe). |
-| `covernote_end_date` | `string\|Date` | Ndiyo | — | `CoverNoteEndDate` | Tarehe ya mwisho. Lazima iwe baada ya tarehe ya kuanza. |
-| `covernote_desc` | `string` | Ndiyo | — | `CoverNoteDesc` | Maelezo (mf. "Fire & Allied Perils") |
-| `operative_clause` | `string` | Ndiyo | — | `OperativeClause` | Kifungu cha uendeshaji (mf. "Standard Fire Policy") |
-| `payment_mode` | `"1"\|"2"\|"3"` | Ndiyo | — | `PaymentMode` | 1=Taslimu, 2=Hundi, 3=EFT |
-| `currency_code` | `string` | Hapana | `"TZS"` | `CurrencyCode` | Msimbo wa sarafu ya ISO |
-| `exchange_rate` | `number` | Hapana | `1.0` | `ExchangeRate` | Kiwango cha ubadilishaji kwa TZS. Desimali 2. |
-| `total_premium_excluding_tax` | `number` | Ndiyo | — | `TotalPremiumExcludingTax` | Primi kabla ya kodi. Desimali 2. |
-| `total_premium_including_tax` | `number` | Ndiyo | — | `TotalPremiumIncludingTax` | Primi baada ya kodi. Lazima iwe >= primi kabla ya kodi. |
-| `commission_paid` | `number` | Hapana | `""` | `CommisionPaid` | Kiasi cha kamisheni. Lazima kwa wasuluhishi. |
-| `commission_rate` | `number` | Hapana | `""` | `CommisionRate` | Kiwango cha kamisheni. Desimali 5. |
-| `officer_name` | `string` | Ndiyo | — | `OfficerName` | Jina la afisa anayeshughulikia |
-| `officer_title` | `string` | Ndiyo | — | `OfficerTitle` | Cheo cha afisa |
-| `product_code` | `string` | Ndiyo | — | `ProductCode` | Msimbo wa bidhaa kutoka TIRA (mf. `SP014002000000` kwa Moto) |
-| `endorsement_type` | `"1"\|"2"\|"3"\|"4"` | Masharti | `""` | `EndorsementType` | Inahitajika wakati `covernote_type` ni `"3"`. Tazama [Aina za Marekebisho](#aina-za-marekebisho). |
-| `endorsement_reason` | `string` | Masharti | `""` | `EndorsementReason` | Inahitajika wakati `covernote_type` ni `"3"`. |
-| `endorsement_premium_earned` | `number` | Hapana | `0` | `EndorsementPremiumEarned` | Primi iliyopatikana kutoka marekebisho |
-| `risks_covered` | `RisksCovered[]` | Ndiyo | — | `RisksCovered` | Angalau moja. Tazama [Hatari Zinazofunikwa](#hatari-zinazofunikwa). |
-| `subject_matters_covered` | `SubjectMatter[]` | Ndiyo | — | `SubjectMattersCovered` | Angalau moja. Tazama [Mada za Bima](#mada-za-bima). |
-| `covernote_addons` | `CoverNoteAddon[]` | Hapana | `[]` | `CoverNoteAddons` | Tazama [Nyongeza za Covernote](#nyongeza-za-covernote). |
-| `policy_holders` | `PolicyHolder[]` | Ndiyo | — | `PolicyHolders` | Angalau mmoja. Tazama [Wamiliki wa Sera](#wamiliki-wa-sera). |
+| Sehemu                                | Aina                 | Inahitajika | Chaguomsingi | XML Tag                        | Maelezo                                                                                           |
+| ------------------------------------- | -------------------- | ----------- | ------------ | ------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `request_id`                          | `string`             | Ndiyo       | —            | `RequestId`                    | Kitambulisho cha kipekee cha ombi                                                                 |
+| `callback_url`                        | `string`             | Ndiyo       | —            | `CallBackUrl`                  | Mahali TIRA inatuma matokeo                                                                       |
+| `insurer_company_code`                | `string`             | Ndiyo       | —            | `InsurerCompanyCode`           | Msimbo wa kampuni ya bima                                                                         |
+| `covernote_type`                      | `"1"\|"2"\|"3"`      | Ndiyo       | —            | `CoverNoteType`                | 1=Mpya, 2=Upyaji, 3=Marekebisho                                                                   |
+| `covernote_number`                    | `string`             | Masharti    | `""`         | `CoverNoteNumber`              | Nambari yako ya covernote. Inahitajika kwa Mpya na Upyaji.                                        |
+| `previous_covernote_reference_number` | `string`             | Masharti    | `""`         | `PrevCoverNoteReferenceNumber` | Nambari ya rejea ya TIRA ya covernote iliyopita. Inahitajika kwa Upyaji na Marekebisho.           |
+| `sales_point_code`                    | `string`             | Ndiyo       | —            | `SalePointCode`                | Msimbo wa kituo cha mauzo kutoka TIRA                                                             |
+| `covernote_start_date`                | `string\|Date`       | Ndiyo       | —            | `CoverNoteStartDate`           | Tarehe ya kuanza. Tazama [Usimamizi wa Tarehe](#usimamizi-wa-tarehe).                             |
+| `covernote_end_date`                  | `string\|Date`       | Ndiyo       | —            | `CoverNoteEndDate`             | Tarehe ya mwisho. Lazima iwe baada ya tarehe ya kuanza.                                           |
+| `covernote_desc`                      | `string`             | Ndiyo       | —            | `CoverNoteDesc`                | Maelezo (mf. "Fire & Allied Perils")                                                              |
+| `operative_clause`                    | `string`             | Ndiyo       | —            | `OperativeClause`              | Kifungu cha uendeshaji (mf. "Standard Fire Policy")                                               |
+| `payment_mode`                        | `"1"\|"2"\|"3"`      | Ndiyo       | —            | `PaymentMode`                  | 1=Taslimu, 2=Hundi, 3=EFT                                                                         |
+| `currency_code`                       | `string`             | Hapana      | `"TZS"`      | `CurrencyCode`                 | Msimbo wa sarafu ya ISO                                                                           |
+| `exchange_rate`                       | `number`             | Hapana      | `1.0`        | `ExchangeRate`                 | Kiwango cha ubadilishaji kwa TZS. Desimali 2.                                                     |
+| `total_premium_excluding_tax`         | `number`             | Ndiyo       | —            | `TotalPremiumExcludingTax`     | Primi kabla ya kodi. Desimali 2.                                                                  |
+| `total_premium_including_tax`         | `number`             | Ndiyo       | —            | `TotalPremiumIncludingTax`     | Primi baada ya kodi. Lazima iwe >= primi kabla ya kodi.                                           |
+| `commission_paid`                     | `number`             | Hapana      | `""`         | `CommisionPaid`                | Kiasi cha kamisheni. Lazima kwa wasuluhishi.                                                      |
+| `commission_rate`                     | `number`             | Hapana      | `""`         | `CommisionRate`                | Kiwango cha kamisheni. Desimali 5.                                                                |
+| `officer_name`                        | `string`             | Ndiyo       | —            | `OfficerName`                  | Jina la afisa anayeshughulikia                                                                    |
+| `officer_title`                       | `string`             | Ndiyo       | —            | `OfficerTitle`                 | Cheo cha afisa                                                                                    |
+| `product_code`                        | `string`             | Ndiyo       | —            | `ProductCode`                  | Msimbo wa bidhaa kutoka TIRA (mf. `SP014002000000` kwa Moto)                                      |
+| `endorsement_type`                    | `"1"\|"2"\|"3"\|"4"` | Masharti    | `""`         | `EndorsementType`              | Inahitajika wakati `covernote_type` ni `"3"`. Tazama [Aina za Marekebisho](#aina-za-marekebisho). |
+| `endorsement_reason`                  | `string`             | Masharti    | `""`         | `EndorsementReason`            | Inahitajika wakati `covernote_type` ni `"3"`.                                                     |
+| `endorsement_premium_earned`          | `number`             | Hapana      | `0`          | `EndorsementPremiumEarned`     | Primi iliyopatikana kutoka marekebisho                                                            |
+| `risks_covered`                       | `RisksCovered[]`     | Ndiyo       | —            | `RisksCovered`                 | Angalau moja. Tazama [Hatari Zinazofunikwa](#hatari-zinazofunikwa).                               |
+| `subject_matters_covered`             | `SubjectMatter[]`    | Ndiyo       | —            | `SubjectMattersCovered`        | Angalau moja. Tazama [Mada za Bima](#mada-za-bima).                                               |
+| `covernote_addons`                    | `CoverNoteAddon[]`   | Hapana      | `[]`         | `CoverNoteAddons`              | Tazama [Nyongeza za Covernote](#nyongeza-za-covernote).                                           |
+| `policy_holders`                      | `PolicyHolder[]`     | Ndiyo       | —            | `PolicyHolders`                | Angalau mmoja. Tazama [Wamiliki wa Sera](#wamiliki-wa-sera).                                      |
 
 ### Hatari Zinazofunikwa
 
 Angalau hatari moja inahitajika. Kila kipengele katika safu ya `risks_covered` kinawekwa kwenye kipengele cha XML `<RiskCovered>`.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `risk_code` | `string` | Ndiyo | `RiskCode` | Msimbo wa hatari kutoka TIRA (mf. `SP014002000001`) |
-| `sum_insured` | `number` | Ndiyo | `SumInsured` | Kiasi kilichobimishwa. Desimali 2. |
-| `sum_insured_equivalent` | `number` | Ndiyo | `SumInsuredEquivalent` | Kiasi sawa kwa TZS. Desimali 2. |
-| `premium_rate` | `number` | Ndiyo | `PremiumRate` | Kiwango cha primi. Desimali 5. |
-| `premium_before_discount` | `number` | Ndiyo | `PremiumBeforeDiscount` | Primi kabla ya punguzo. Desimali 2. |
-| `premium_after_discount` | `number` | Ndiyo | `PremiumAfterDiscount` | Primi baada ya punguzo. Desimali 2. |
-| `premium_excluding_tax_equivalent` | `number` | Ndiyo | `PremiumExcludingTaxEquivalent` | Primi kabla ya kodi kwa TZS. Desimali 2. |
-| `premium_including_tax` | `number` | Ndiyo | `PremiumIncludingTax` | Primi baada ya kodi. Desimali 2. |
-| `discounts_offered` | `DiscountOffered[]` | Hapana | `DiscountsOffered` | Tazama [Punguzo Zinazotolewa](#punguzo-zinazotolewa) |
-| `taxes_charged` | `TaxCharged[]` | Ndiyo | `TaxesCharged` | Tazama [Kodi Zinazolipishwa](#kodi-zinazolipishwa) |
+| Sehemu                             | Aina                | Inahitajika | XML Tag                         | Maelezo                                              |
+| ---------------------------------- | ------------------- | ----------- | ------------------------------- | ---------------------------------------------------- |
+| `risk_code`                        | `string`            | Ndiyo       | `RiskCode`                      | Msimbo wa hatari kutoka TIRA (mf. `SP014002000001`)  |
+| `sum_insured`                      | `number`            | Ndiyo       | `SumInsured`                    | Kiasi kilichobimishwa. Desimali 2.                   |
+| `sum_insured_equivalent`           | `number`            | Ndiyo       | `SumInsuredEquivalent`          | Kiasi sawa kwa TZS. Desimali 2.                      |
+| `premium_rate`                     | `number`            | Ndiyo       | `PremiumRate`                   | Kiwango cha primi. Desimali 5.                       |
+| `premium_before_discount`          | `number`            | Ndiyo       | `PremiumBeforeDiscount`         | Primi kabla ya punguzo. Desimali 2.                  |
+| `premium_after_discount`           | `number`            | Ndiyo       | `PremiumAfterDiscount`          | Primi baada ya punguzo. Desimali 2.                  |
+| `premium_excluding_tax_equivalent` | `number`            | Ndiyo       | `PremiumExcludingTaxEquivalent` | Primi kabla ya kodi kwa TZS. Desimali 2.             |
+| `premium_including_tax`            | `number`            | Ndiyo       | `PremiumIncludingTax`           | Primi baada ya kodi. Desimali 2.                     |
+| `discounts_offered`                | `DiscountOffered[]` | Hapana      | `DiscountsOffered`              | Tazama [Punguzo Zinazotolewa](#punguzo-zinazotolewa) |
+| `taxes_charged`                    | `TaxCharged[]`      | Ndiyo       | `TaxesCharged`                  | Tazama [Kodi Zinazolipishwa](#kodi-zinazolipishwa)   |
 
 ### Kodi Zinazolipishwa
 
 Kila hatari na nyongeza lazima ijumuishe maelezo ya kodi. Ikiwa hakuna kodi, weka `is_tax_exempted` kuwa `"Y"` na utoe maelezo ya msamaha.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `tax_code` | `string` | Ndiyo | `TaxCode` | Msimbo wa kodi kutoka TIRA (mf. `VAT-MAINLAND`) |
-| `is_tax_exempted` | `"Y"\|"N"` | Ndiyo | `IsTaxExempted` | Ikiwa kodi imesamehewa |
-| `tax_exemption_type` | `"1"\|"2"` | Masharti | `TaxExemptionType` | Inahitajika ikiwa imesamehewa. 1=Mmiliki wa Sera Amesamehewa, 2=Hatari Imesamehewa |
-| `tax_exemption_reference` | `string` | Masharti | `TaxExemptionReference` | Inahitajika ikiwa imesamehewa. Nambari ya rejea ya msamaha. |
-| `tax_rate` | `number` | Ndiyo | `TaxRate` | Kiwango cha kodi kama desimali (mf. `0.18` kwa 18%). Desimali 5. |
-| `tax_amount` | `number` | Ndiyo | `TaxAmount` | Kiasi cha kodi. Desimali 2. |
+| Sehemu                    | Aina       | Inahitajika | XML Tag                 | Maelezo                                                                            |
+| ------------------------- | ---------- | ----------- | ----------------------- | ---------------------------------------------------------------------------------- |
+| `tax_code`                | `string`   | Ndiyo       | `TaxCode`               | Msimbo wa kodi kutoka TIRA (mf. `VAT-MAINLAND`)                                    |
+| `is_tax_exempted`         | `"Y"\|"N"` | Ndiyo       | `IsTaxExempted`         | Ikiwa kodi imesamehewa                                                             |
+| `tax_exemption_type`      | `"1"\|"2"` | Masharti    | `TaxExemptionType`      | Inahitajika ikiwa imesamehewa. 1=Mmiliki wa Sera Amesamehewa, 2=Hatari Imesamehewa |
+| `tax_exemption_reference` | `string`   | Masharti    | `TaxExemptionReference` | Inahitajika ikiwa imesamehewa. Nambari ya rejea ya msamaha.                        |
+| `tax_rate`                | `number`   | Ndiyo       | `TaxRate`               | Kiwango cha kodi kama desimali (mf. `0.18` kwa 18%). Desimali 5.                   |
+| `tax_amount`              | `number`   | Ndiyo       | `TaxAmount`             | Kiasi cha kodi. Desimali 2.                                                        |
 
 ### Punguzo Zinazotolewa
 
 Si lazima. Zimejumuishwa ndani ya kila hatari.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `discount_type` | `"1"` | Ndiyo | `DiscountType` | Kwa sasa `"1"` tu (Punguzo la Msafara) |
-| `discount_rate` | `number` | Ndiyo | `DiscountRate` | Kiwango cha punguzo. Desimali 5. |
-| `discount_amount` | `number` | Ndiyo | `DiscountAmount` | Kiasi cha punguzo. Desimali 2. |
+| Sehemu            | Aina     | Inahitajika | XML Tag          | Maelezo                                |
+| ----------------- | -------- | ----------- | ---------------- | -------------------------------------- |
+| `discount_type`   | `"1"`    | Ndiyo       | `DiscountType`   | Kwa sasa `"1"` tu (Punguzo la Msafara) |
+| `discount_rate`   | `number` | Ndiyo       | `DiscountRate`   | Kiwango cha punguzo. Desimali 5.       |
+| `discount_amount` | `number` | Ndiyo       | `DiscountAmount` | Kiasi cha punguzo. Desimali 2.         |
 
 ### Mada za Bima
 
 Angalau mada moja ya bima inahitajika. Kila kipengele kinawekwa kwenye kipengele cha XML `<SubjectMatter>`.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `subject_matter_reference` | `string` | Ndiyo | `SubjectMatterReference` | Rejea yako (mf. "BLD001") |
-| `subject_matter_desc` | `string` | Ndiyo | `SubjectMatterDesc` | Maelezo (mf. "Commercial Building") |
+| Sehemu                     | Aina     | Inahitajika | XML Tag                  | Maelezo                             |
+| -------------------------- | -------- | ----------- | ------------------------ | ----------------------------------- |
+| `subject_matter_reference` | `string` | Ndiyo       | `SubjectMatterReference` | Rejea yako (mf. "BLD001")           |
+| `subject_matter_desc`      | `string` | Ndiyo       | `SubjectMatterDesc`      | Maelezo (mf. "Commercial Building") |
 
 ### Nyongeza za Covernote
 
 Si lazima. Kila kipengele kinawekwa kwenye kipengele cha XML `<CoverNoteAddon>`.
 
-| Sehemu | Aina | Inahitajika | XML Tag | Maelezo |
-|---|---|---|---|---|
-| `addon_reference` | `string` | Ndiyo | `AddonReference` | Rejea yako ya nyongeza |
-| `addon_description` | `string` | Ndiyo | `AddonDesc` | Maelezo ya nyongeza |
-| `addon_amount` | `number` | Ndiyo | `AddonAmount` | Kiasi cha nyongeza. Desimali 2. |
-| `addon_premium_rate` | `number` | Ndiyo | `AddonPremiumRate` | Kiwango cha primi. Desimali 5. |
-| `premium_excluding_tax` | `number` | Ndiyo | `PremiumExcludingTax` | Primi kabla ya kodi. Desimali 2. |
-| `premium_excluding_tax_equivalent` | `number` | Ndiyo | `PremiumExcludingTaxEquivalent` | Primi kabla ya kodi kwa TZS. Desimali 2. |
-| `premium_including_tax` | `number` | Ndiyo | `PremiumIncludingTax` | Primi baada ya kodi. Desimali 2. |
-| `taxes_charged` | `TaxCharged[]` | Ndiyo | `TaxesCharged` | Muundo sawa na [Kodi Zinazolipishwa](#kodi-zinazolipishwa) |
+| Sehemu                             | Aina           | Inahitajika | XML Tag                         | Maelezo                                                    |
+| ---------------------------------- | -------------- | ----------- | ------------------------------- | ---------------------------------------------------------- |
+| `addon_reference`                  | `string`       | Ndiyo       | `AddonReference`                | Rejea yako ya nyongeza                                     |
+| `addon_description`                | `string`       | Ndiyo       | `AddonDesc`                     | Maelezo ya nyongeza                                        |
+| `addon_amount`                     | `number`       | Ndiyo       | `AddonAmount`                   | Kiasi cha nyongeza. Desimali 2.                            |
+| `addon_premium_rate`               | `number`       | Ndiyo       | `AddonPremiumRate`              | Kiwango cha primi. Desimali 5.                             |
+| `premium_excluding_tax`            | `number`       | Ndiyo       | `PremiumExcludingTax`           | Primi kabla ya kodi. Desimali 2.                           |
+| `premium_excluding_tax_equivalent` | `number`       | Ndiyo       | `PremiumExcludingTaxEquivalent` | Primi kabla ya kodi kwa TZS. Desimali 2.                   |
+| `premium_including_tax`            | `number`       | Ndiyo       | `PremiumIncludingTax`           | Primi baada ya kodi. Desimali 2.                           |
+| `taxes_charged`                    | `TaxCharged[]` | Ndiyo       | `TaxesCharged`                  | Muundo sawa na [Kodi Zinazolipishwa](#kodi-zinazolipishwa) |
 
 ### Wamiliki wa Sera
 
 Angalau mmiliki mmoja wa sera anahitajika. Kila kipengele kinawekwa kwenye kipengele cha XML `<PolicyHolder>`.
 
-| Sehemu | Aina | Inahitajika | Chaguomsingi | XML Tag | Maelezo |
-|---|---|---|---|---|---|
-| `policyholder_name` | `string` | Ndiyo | — | `PolicyHolderName` | Jina kamili |
-| `policyholder_birthdate` | `string` | Ndiyo | — | `PolicyHolderBirthDate` | Tarehe ya kuzaliwa (`YYYY-MM-DD`) |
-| `policyholder_type` | `"1"\|"2"` | Ndiyo | — | `PolicyHolderType` | 1=Mtu Binafsi, 2=Kampuni |
-| `policyholder_id_type` | `"1"`–`"7"` | Ndiyo | — | `PolicyHolderIdType` | Tazama jedwali la aina za kitambulisho hapa chini |
-| `policyholder_id_number` | `string` | Ndiyo | — | `PolicyHolderIdNumber` | Nambari ya kitambulisho |
-| `gender` | `"M"\|"F"` | Ndiyo | — | `Gender` | M=Me, F=Ke |
-| `country_code` | `string` | Hapana | `"TZA"` | `CountryCode` | Msimbo wa nchi wa ISO (mf. `TZA`, `KEN`, `UGA`) |
-| `region` | `string` | Ndiyo | — | `Region` | Msimbo wa mkoa kutoka TIRA |
-| `district` | `string` | Ndiyo | — | `District` | Wilaya kutoka TIRA |
-| `street` | `string` | Ndiyo | — | `Street` | Jina la mtaa |
-| `phone_number` | `string` | Ndiyo | — | `PolicyHolderPhoneNumber` | Muundo: `2557XXXXXXXX` (tarakimu 12) |
-| `fax_number` | `string` | Hapana | `""` | `PolicyHolderFax` | Nambari ya faksi |
-| `postal_address` | `string` | Ndiyo | — | `PostalAddress` | Anwani ya posta |
-| `email_address` | `string` | Hapana | `""` | `EmailAddress` | Barua pepe (inathibitishwa ikitolewa) |
+| Sehemu                   | Aina        | Inahitajika | Chaguomsingi | XML Tag                   | Maelezo                                           |
+| ------------------------ | ----------- | ----------- | ------------ | ------------------------- | ------------------------------------------------- |
+| `policyholder_name`      | `string`    | Ndiyo       | —            | `PolicyHolderName`        | Jina kamili                                       |
+| `policyholder_birthdate` | `string`    | Ndiyo       | —            | `PolicyHolderBirthDate`   | Tarehe ya kuzaliwa (`YYYY-MM-DD`)                 |
+| `policyholder_type`      | `"1"\|"2"`  | Ndiyo       | —            | `PolicyHolderType`        | 1=Mtu Binafsi, 2=Kampuni                          |
+| `policyholder_id_type`   | `"1"`–`"7"` | Ndiyo       | —            | `PolicyHolderIdType`      | Tazama jedwali la aina za kitambulisho hapa chini |
+| `policyholder_id_number` | `string`    | Ndiyo       | —            | `PolicyHolderIdNumber`    | Nambari ya kitambulisho                           |
+| `gender`                 | `"M"\|"F"`  | Ndiyo       | —            | `Gender`                  | M=Me, F=Ke                                        |
+| `country_code`           | `string`    | Hapana      | `"TZA"`      | `CountryCode`             | Msimbo wa nchi wa ISO (mf. `TZA`, `KEN`, `UGA`)   |
+| `region`                 | `string`    | Ndiyo       | —            | `Region`                  | Msimbo wa mkoa kutoka TIRA                        |
+| `district`               | `string`    | Ndiyo       | —            | `District`                | Wilaya kutoka TIRA                                |
+| `street`                 | `string`    | Ndiyo       | —            | `Street`                  | Jina la mtaa                                      |
+| `phone_number`           | `string`    | Ndiyo       | —            | `PolicyHolderPhoneNumber` | Muundo: `2557XXXXXXXX` (tarakimu 12)              |
+| `fax_number`             | `string`    | Hapana      | `""`         | `PolicyHolderFax`         | Nambari ya faksi                                  |
+| `postal_address`         | `string`    | Ndiyo       | —            | `PostalAddress`           | Anwani ya posta                                   |
+| `email_address`          | `string`    | Hapana      | `""`         | `EmailAddress`            | Barua pepe (inathibitishwa ikitolewa)             |
 
 #### Aina za Kitambulisho cha Mmiliki wa Sera
 
-| Thamani | Maelezo |
-|---|---|
-| `"1"` | NIDA |
-| `"2"` | Kadi ya Mpiga Kura |
-| `"3"` | Pasipoti |
-| `"4"` | Leseni ya Udereva |
-| `"5"` | Kitambulisho cha Zanzibar |
-| `"6"` | TIN |
-| `"7"` | Nambari ya Cheti cha Usajili wa Kampuni |
+| Thamani | Maelezo                                 |
+| ------- | --------------------------------------- |
+| `"1"`   | NIDA                                    |
+| `"2"`   | Kadi ya Mpiga Kura                      |
+| `"3"`   | Pasipoti                                |
+| `"4"`   | Leseni ya Udereva                       |
+| `"5"`   | Kitambulisho cha Zanzibar               |
+| `"6"`   | TIN                                     |
+| `"7"`   | Nambari ya Cheti cha Usajili wa Kampuni |
 
 ### Usimamizi wa Tarehe
 
@@ -201,11 +201,11 @@ Kifurushi kinathibitisha mzigo wako kabla ya kuutuma kwa TIRA. Uthibitishaji uki
 
 **Kwa aina ya covernote:**
 
-| Hali | `covernote_number` | `previous_covernote_reference_number` | `endorsement_type` | `endorsement_reason` |
-|---|---|---|---|---|
-| Mpya (`"1"`) | Inahitajika | — | — | — |
-| Upyaji (`"2"`) | Inahitajika | Inahitajika | — | — |
-| Marekebisho (`"3"`) | — | Inahitajika | Inahitajika | Inahitajika |
+| Hali                | `covernote_number` | `previous_covernote_reference_number` | `endorsement_type` | `endorsement_reason` |
+| ------------------- | ------------------ | ------------------------------------- | ------------------ | -------------------- |
+| Mpya (`"1"`)        | Inahitajika        | —                                     | —                  | —                    |
+| Upyaji (`"2"`)      | Inahitajika        | Inahitajika                           | —                  | —                    |
+| Marekebisho (`"3"`) | —                  | Inahitajika                           | Inahitajika        | Inahitajika          |
 
 ### Mfano — Covernote Mpya
 
@@ -218,7 +218,7 @@ const result = await tira.nonLifeOther.submit({
   covernote_number: "FIRE-2025-001",
   sales_point_code: "SP719",
   covernote_start_date: "2025-05-31T21:00:00Z", // Juni 1 EAT
-  covernote_end_date: "2026-05-31T21:00:00Z",   // Juni 1 mwaka ujao EAT
+  covernote_end_date: "2026-05-31T21:00:00Z", // Juni 1 mwaka ujao EAT
   covernote_desc: "Fire & Allied Perils",
   operative_clause: "Standard Fire Policy",
   payment_mode: "3", // EFT
@@ -273,7 +273,7 @@ const result = await tira.nonLifeOther.submit({
 });
 
 console.log(result.acknowledgement_id); // "ACK123456"
-console.log(result.tira_status_code);   // "TIRA001"
+console.log(result.tira_status_code); // "TIRA001"
 ```
 
 ### Mfano — Upyaji
@@ -307,14 +307,14 @@ const result = await tira.nonLifeOther.submit({
 
 Unapoita `tira.nonLifeOther.submit()`, unapata `CoverNoteResponse` mara moja kutoka TIRA:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `acknowledgement_id` | `string` | Kitambulisho cha uthibitisho cha TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi (kinarudishwa) |
-| `tira_status_code` | `string` | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa |
-| `tira_status_desc` | `string` | Maelezo yanayosomeka |
-| `requires_acknowledgement` | `boolean` | Daima `true` |
-| `acknowledgement_payload` | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
+| Sehemu                     | Aina                      | Maelezo                                                    |
+| -------------------------- | ------------------------- | ---------------------------------------------------------- |
+| `acknowledgement_id`       | `string`                  | Kitambulisho cha uthibitisho cha TIRA                      |
+| `request_id`               | `string`                  | Kitambulisho chako cha ombi (kinarudishwa)                 |
+| `tira_status_code`         | `string`                  | Msimbo wa hali — `"TIRA001"` inamaanisha imepokewa         |
+| `tira_status_desc`         | `string`                  | Maelezo yanayosomeka                                       |
+| `requires_acknowledgement` | `boolean`                 | Daima `true`                                               |
+| `acknowledgement_payload`  | `Record<string, unknown>` | Uthibitisho ghafi uliochambuliwa (mara chache unahitajika) |
 
 ::: tip "TIRA001" inamaanisha "imepokewa", si "imeidhinishwa"
 Katika hatua hii, `"TIRA001"` inamaanisha TIRA imepokea ombi lako na linashughulikiwa. **Haimaanishi** covernote yako imeidhinishwa. Matokeo halisi (imeidhinishwa au imekataliwa) yanakuja baadaye kupitia callback URL yako.
@@ -330,23 +330,23 @@ Baada ya TIRA kushughulikia utumaji wako, inatuma matokeo kwa `callback_url` yak
 
 Sehemu ya `extracted` ina data ya callback iliyochambuliwa:
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `response_id` | `string` | Kitambulisho cha jibu la TIRA |
-| `request_id` | `string` | Kitambulisho chako cha ombi |
-| `response_status_code` | `string` | `"TIRA001"` = imeidhinishwa. Tazama [Misimbo ya Makosa](/sw/error-codes) kwa misimbo mingine. |
-| `response_status_desc` | `string` | Maelezo ya hali yanayosomeka |
-| `covernote_reference_number` | `string` | Nambari ya rejea ya covernote ya TIRA (ikiwa imefanikiwa) |
+| Sehemu                       | Aina     | Maelezo                                                                                       |
+| ---------------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `response_id`                | `string` | Kitambulisho cha jibu la TIRA                                                                 |
+| `request_id`                 | `string` | Kitambulisho chako cha ombi                                                                   |
+| `response_status_code`       | `string` | `"TIRA001"` = imeidhinishwa. Tazama [Misimbo ya Makosa](/sw/error-codes) kwa misimbo mingine. |
+| `response_status_desc`       | `string` | Maelezo ya hali yanayosomeka                                                                  |
+| `covernote_reference_number` | `string` | Nambari ya rejea ya covernote ya TIRA (ikiwa imefanikiwa)                                     |
 
 ### Sehemu Zote za Matokeo
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `type` | `"non_life_other"` | Kitambulisho cha aina ya callback |
-| `extracted` | `NonLifeOtherCallbackResponse` | Data iliyotolewa (tazama jedwali hapo juu) |
-| `body` | `Record<string, any>` | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa |
-| `raw_xml` | `string` | Mfuatano wa XML wa asili |
+| Sehemu               | Aina                           | Maelezo                                                                        |
+| -------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+| `type`               | `"non_life_other"`             | Kitambulisho cha aina ya callback                                              |
+| `extracted`          | `NonLifeOtherCallbackResponse` | Data iliyotolewa (tazama jedwali hapo juu)                                     |
+| `body`               | `Record<string, any>`          | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
+| `signature_verified` | `boolean`                      | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa                              |
+| `raw_xml`            | `string`                       | Mfuatano wa XML wa asili                                                       |
 
 ### Ikiwa Imefanikiwa
 
@@ -384,7 +384,7 @@ app.post("/tira/non-life-callback", async (req, res) => {
   } else {
     console.error(
       `Covernote imekataliwa: ${result.extracted.response_status_code}`,
-      result.extracted.response_status_desc
+      result.extracted.response_status_desc,
     );
 
     await db.coverNotes.update({
@@ -411,12 +411,13 @@ TIRA inatarajia uthibitishe kila callback. Usipothibitisha, wataendelea kurudia 
 
 Ita `tira.acknowledge(result.body, uniqueId)` na:
 
-| Hoja | Maelezo |
-|---|---|
+| Hoja          | Maelezo                                                                         |
+| ------------- | ------------------------------------------------------------------------------- |
 | `result.body` | `body` kutoka matokeo ya callback — XML kamili iliyochambuliwa kama kitu cha JS |
-| `uniqueId` | Mfuatano wa kipekee unaouzalisha (mf. UUID) |
+| `uniqueId`    | Mfuatano wa kipekee unaouzalisha (mf. UUID)                                     |
 
 Kifurushi kiotomatiki:
+
 1. Kinapata jina sahihi la tag ya uthibitisho (`CoverNoteRefRes` → `CoverNoteRefResAck`)
 2. Kinajaza `AcknowledgementId`, `ResponseId`, `AcknowledgementStatusCode`, na `AcknowledgementStatusDesc`
 3. Kinasaini XML kwa ufunguo wako wa siri
@@ -475,6 +476,7 @@ app.post("/tira/non-life-callback", async (req, res) => {
   res.set("Content-Type", "application/xml").send(ackXml);
 });
 ```
+
 :::
 
 ::: danger Kutothibitisha mara kwa mara
@@ -498,25 +500,26 @@ Kazi hii inachambua XML ya callback ambayo TIRA inatuma kwa callback URL yako na
 ### Ingizo
 
 Unaweza kutoa:
+
 - **Mfuatano wa XML ghafi** — `req.body` kutoka Express handler yako (inahitaji middleware ya `express.text({ type: "application/xml" })`)
 - **Kitu kilichochambuliwa tayari** — ikiwa umeshachambua XML mwenyewe
 
 ### Inarudisha Nini
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `type` | `"non_life_other"` | Daima `"non_life_other"` kwa mshughulikaji huu |
-| `extracted` | `NonLifeOtherCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit)) |
-| `body` | `Record<string, any>` | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
-| `signature_verified` | `boolean` | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa |
-| `raw_xml` | `string` | Mfuatano wa XML wa asili |
+| Sehemu               | Aina                           | Maelezo                                                                        |
+| -------------------- | ------------------------------ | ------------------------------------------------------------------------------ |
+| `type`               | `"non_life_other"`             | Daima `"non_life_other"` kwa mshughulikaji huu                                 |
+| `extracted`          | `NonLifeOtherCallbackResponse` | Data iliyotolewa (tazama [Jibu la Callback](#jibu-la-callback-la-submit))      |
+| `body`               | `Record<string, any>`          | XML kamili iliyochambuliwa kama kitu cha JS — toa hii kwa `tira.acknowledge()` |
+| `signature_verified` | `boolean`                      | Ikiwa sahihi ya kidijitali ya TIRA ilithibitishwa                              |
+| `raw_xml`            | `string`                       | Mfuatano wa XML wa asili                                                       |
 
 ### Mshughulikaji wa Rasilimali Maalum dhidi ya wa Jumla
 
-| Mbinu | Mbinu | Wakati wa Kutumia |
-|---|---|---|
-| Rasilimali maalum | `tira.nonLifeOther.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali |
-| Jumla | `tira.handleCallback(input)` | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
+| Mbinu             | Mbinu                                     | Wakati wa Kutumia                                                                               |
+| ----------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Rasilimali maalum | `tira.nonLifeOther.handleCallback(input)` | Unapo na endpoint tofauti kwa kila aina ya rasilimali                                           |
+| Jumla             | `tira.handleCallback(input)`              | Unapo na endpoint moja kwa callback zote za TIRA (inahitaji `enabled_callbacks` katika usanidi) |
 
 Zote mbili zinarudisha data sawa. Mshughulikaji wa jumla unagundua aina ya callback kiotomatiki. Tazama [Callback na Uthibitisho](/sw/callbacks-acknowledgements) kwa maelezo zaidi kuhusu mshughulikaji wa jumla.
 
@@ -539,8 +542,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });

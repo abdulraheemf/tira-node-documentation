@@ -23,8 +23,8 @@ const tira = new Tira({
   client_key: "YOUR_CLIENT_KEY",
   system_code: "YOUR_SYSTEM_CODE",
   transacting_company_code: "YOUR_COMPANY_CODE",
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: "your-pfx-password",
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: "your-pfx-password",
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: "tira-public-password",
 });
@@ -39,8 +39,8 @@ const tira = new Tira({
   client_key: "YOUR_CLIENT_KEY",
   system_code: "YOUR_SYSTEM_CODE",
   transacting_company_code: "YOUR_COMPANY_CODE",
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: "your-pfx-password",
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: "your-pfx-password",
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: "tira-public-password",
 });
@@ -56,17 +56,17 @@ Kila sehemu unayoweza kupitisha kwa mjenzi wa `Tira`:
 
 ### Sehemu Zinazohitajika
 
-| Sehemu | Aina | Maelezo |
-|---|---|---|
-| `base_url` | `string` | URL ya msingi ya TIRAMIS API. Hii ndiyo kitu pekee kinachobadilika kati ya mazingira ya majaribio na uzalishaji. |
-| `client_code` | `string` | Kitambulisho chako cha kipekee cha mteja. Kinapewa na TIRA wakati wa usajili. |
-| `client_key` | `string` | Ufunguo wako wa uthibitishaji. Unapewa na TIRA wakati wa usajili. |
-| `system_code` | `string` | Kitambulisho cha mfumo kwa muunganisho wako. Kinapewa na TIRA wakati wa usajili. |
-| `transacting_company_code` | `string` | Msimbo wa kampuni kwa shughuli ya sasa. Tazama [Kuelewa transacting_company_code](#kuelewa-transacting-company-code) hapa chini. |
-| `pfx_path` | `string` | Njia ya faili ya cheti chako cha `tiramisclientprivate.pfx`. Kinatumika kusaini maombi na uthibitishaji wa TLS wa pande zote. |
-| `pfx_passphrase` | `string` | Nywila ya cheti chako cha PFX cha faragha. |
-| `tira_public_pfx_path` | `string` | Njia ya faili ya cheti cha TIRA `tiramispublic.pfx`. Kinatumika kuthibitisha sahihi za callback na kama cheti cha CA cha TLS. |
-| `tira_public_pfx_passphrase` | `string` | Nywila ya cheti cha PFX cha umma cha TIRA. |
+| Sehemu                          | Aina     | Maelezo                                                                                                                          |
+| ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `base_url`                      | `string` | URL ya msingi ya TIRAMIS API. Hii ndiyo kitu pekee kinachobadilika kati ya mazingira ya majaribio na uzalishaji.                 |
+| `client_code`                   | `string` | Kitambulisho chako cha kipekee cha mteja. Kinapewa na TIRA wakati wa usajili.                                                    |
+| `client_key`                    | `string` | Ufunguo wako wa uthibitishaji. Unapewa na TIRA wakati wa usajili.                                                                |
+| `system_code`                   | `string` | Kitambulisho cha mfumo kwa muunganisho wako. Kinapewa na TIRA wakati wa usajili.                                                 |
+| `transacting_company_code`      | `string` | Msimbo wa kampuni kwa shughuli ya sasa. Tazama [Kuelewa transacting_company_code](#kuelewa-transacting-company-code) hapa chini. |
+| `client_private_pfx_path`       | `string` | Njia ya faili ya cheti chako cha `tiramisclientprivate.pfx`. Kinatumika kusaini maombi na uthibitishaji wa TLS wa pande zote.    |
+| `client_private_pfx_passphrase` | `string` | Nywila ya cheti chako cha PFX cha faragha.                                                                                       |
+| `tira_public_pfx_path`          | `string` | Njia ya faili ya cheti cha TIRA `tiramispublic.pfx`. Kinatumika kuthibitisha sahihi za callback na kama cheti cha CA cha TLS.    |
+| `tira_public_pfx_passphrase`    | `string` | Nywila ya cheti cha PFX cha umma cha TIRA.                                                                                       |
 
 ::: danger Sehemu zote zinazohitajika lazima zitolewe
 Ikiwa sehemu yoyote inayohitajika inakosekana au ni tupu, mjenzi atatupa kosa mara moja. Kwa mfano:
@@ -80,10 +80,10 @@ Hii ni makusudi — ni bora kushindwa haraka wakati wa kuanza kuliko kushindwa k
 
 ### Sehemu za Hiari
 
-| Sehemu | Aina | Chaguo-msingi | Maelezo |
-|---|---|---|---|
-| `verify_signatures` | `boolean` | `true` | Kuthibitisha sahihi za callback za TIRA kwa kutumia cheti chao cha umma. |
-| `enabled_callbacks` | `EnabledCallbacks` | `undefined` | Aina zipi za callback ambazo njia ya kawaida ya `tira.handleCallback()` inapaswa kukubali. |
+| Sehemu              | Aina               | Chaguo-msingi | Maelezo                                                                                    |
+| ------------------- | ------------------ | ------------- | ------------------------------------------------------------------------------------------ |
+| `verify_signatures` | `boolean`          | `true`        | Kuthibitisha sahihi za callback za TIRA kwa kutumia cheti chao cha umma.                   |
+| `enabled_callbacks` | `EnabledCallbacks` | `undefined`   | Aina zipi za callback ambazo njia ya kawaida ya `tira.handleCallback()` inapaswa kukubali. |
 
 Hizi zinashughulikiwa kwa undani katika [Usanidi wa Hiari](#usanidi-wa-hiari).
 
@@ -149,8 +149,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -188,8 +188,8 @@ function createTira(companyCode) {
     client_key: process.env.TIRA_CLIENT_KEY,
     system_code: process.env.TIRA_SYSTEM_CODE,
     transacting_company_code: companyCode,
-    pfx_path: "./certs/tiramisclientprivate.pfx",
-    pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+    client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+    client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
     tira_public_pfx_path: "./certs/tiramispublic.pfx",
     tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
   });
@@ -218,15 +218,21 @@ const baseConfig = {
   client_code: process.env.TIRA_CLIENT_CODE,
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 };
 
 // Unda mifano na misimbo tofauti ya kampuni
-const tiraForBrokerA = new Tira({ ...baseConfig, transacting_company_code: "BROKER_A" });
-const tiraForBrokerB = new Tira({ ...baseConfig, transacting_company_code: "BROKER_B" });
+const tiraForBrokerA = new Tira({
+  ...baseConfig,
+  transacting_company_code: "BROKER_A",
+});
+const tiraForBrokerB = new Tira({
+  ...baseConfig,
+  transacting_company_code: "BROKER_B",
+});
 
 // Au tumia kazi
 function createTira(companyCode) {
@@ -235,7 +241,7 @@ function createTira(companyCode) {
 ```
 
 ::: tip Tumia vigezo vya mazingira
-Hifadhi thamani nyeti kama `client_key`, `pfx_passphrase`, na nywila za vyeti katika vigezo vya mazingira. Kamwe usiziweke moja kwa moja kwenye msimbo wako wa chanzo.
+Hifadhi thamani nyeti kama `client_key`, `client_private_pfx_passphrase`, na nywila za vyeti katika vigezo vya mazingira. Kamwe usiziweke moja kwa moja kwenye msimbo wako wa chanzo.
 :::
 
 ## Usanidi wa Hiari
@@ -299,19 +305,19 @@ Add { enabled_callbacks: { motor: true } } to your Tira config.
 
 Hizi ndizo aina zote za callback zinazopatikana:
 
-| Aina ya Callback | Maelezo |
-|---|---|
-| `motor` | Callback za covernote ya gari |
-| `motor_fleet` | Callback za covernote ya msafara wa magari |
-| `non_life_other` | Callback za covernote zisizo za maisha nyingine |
-| `reinsurance` | Callback za uwasilishaji wa bima-tena |
-| `policy` | Callback za uwasilishaji wa sera |
-| `claim_notification` | Callback za taarifa ya madai |
-| `claim_intimation` | Callback za uarifu wa madai |
-| `claim_assessment` | Callback za tathmini ya madai |
-| `discharge_voucher` | Callback za hati ya malipo |
-| `claim_payment` | Callback za malipo ya madai |
-| `claim_rejection` | Callback za kukataliwa kwa madai |
+| Aina ya Callback     | Maelezo                                         |
+| -------------------- | ----------------------------------------------- |
+| `motor`              | Callback za covernote ya gari                   |
+| `motor_fleet`        | Callback za covernote ya msafara wa magari      |
+| `non_life_other`     | Callback za covernote zisizo za maisha nyingine |
+| `reinsurance`        | Callback za uwasilishaji wa bima-tena           |
+| `policy`             | Callback za uwasilishaji wa sera                |
+| `claim_notification` | Callback za taarifa ya madai                    |
+| `claim_intimation`   | Callback za uarifu wa madai                     |
+| `claim_assessment`   | Callback za tathmini ya madai                   |
+| `discharge_voucher`  | Callback za hati ya malipo                      |
+| `claim_payment`      | Callback za malipo ya madai                     |
+| `claim_rejection`    | Callback za kukataliwa kwa madai                |
 
 ## Kubadilisha Kati ya Majaribio na Uzalishaji
 
@@ -332,8 +338,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: process.env.TIRA_PFX_PATH,
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: process.env.TIRA_PFX_PATH,
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: process.env.TIRA_PUBLIC_PFX_PATH,
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -349,42 +355,42 @@ Baada ya uanzishaji, kitu cha `tira` kinakupa ufikiaji wa rasilimali zote za TIR
 
 ### Covernote
 
-| Rasilimali | Maelezo | Njia |
-|---|---|---|
-| `tira.motor` | Covernote za magari | `.submit()`, `.handleCallback()`, `.verify()` |
-| `tira.motorFleet` | Covernote za msafara wa magari (magari mengi) | `.submit()`, `.handleCallback()` |
-| `tira.nonLifeOther` | Covernote zisizo za maisha nyingine (moto, bahari, nk.) | `.submit()`, `.handleCallback()` |
+| Rasilimali          | Maelezo                                                 | Njia                                          |
+| ------------------- | ------------------------------------------------------- | --------------------------------------------- |
+| `tira.motor`        | Covernote za magari                                     | `.submit()`, `.handleCallback()`, `.verify()` |
+| `tira.motorFleet`   | Covernote za msafara wa magari (magari mengi)           | `.submit()`, `.handleCallback()`              |
+| `tira.nonLifeOther` | Covernote zisizo za maisha nyingine (moto, bahari, nk.) | `.submit()`, `.handleCallback()`              |
 
 ### Uthibitishaji
 
-| Rasilimali | Maelezo | Njia |
-|---|---|---|
+| Rasilimali                   | Maelezo                              | Njia        |
+| ---------------------------- | ------------------------------------ | ----------- |
 | `tira.coverNoteVerification` | Thibitisha hali ya covernote na TIRA | `.submit()` |
 
 ### Sera na Bima-tena
 
-| Rasilimali | Maelezo | Njia |
-|---|---|---|
-| `tira.policy` | Uwasilishaji wa sera | `.submit()`, `.handleCallback()` |
+| Rasilimali         | Maelezo                   | Njia                             |
+| ------------------ | ------------------------- | -------------------------------- |
+| `tira.policy`      | Uwasilishaji wa sera      | `.submit()`, `.handleCallback()` |
 | `tira.reinsurance` | Uwasilishaji wa bima-tena | `.submit()`, `.handleCallback()` |
 
 ### Madai
 
-| Rasilimali | Maelezo | Njia |
-|---|---|---|
-| `tira.claimNotification` | Arifu TIRA kuhusu dai jipya | `.submit()`, `.handleCallback()` |
-| `tira.claimIntimation` | Wasilisha maelezo ya uarifu wa dai | `.submit()`, `.handleCallback()` |
-| `tira.claimAssessment` | Wasilisha tathmini ya dai | `.submit()`, `.handleCallback()` |
-| `tira.dischargeVoucher` | Wasilisha hati ya malipo | `.submit()`, `.handleCallback()` |
-| `tira.claimPayment` | Wasilisha malipo ya dai | `.submit()`, `.handleCallback()` |
-| `tira.claimRejection` | Wasilisha kukataliwa kwa dai | `.submit()`, `.handleCallback()` |
+| Rasilimali               | Maelezo                            | Njia                             |
+| ------------------------ | ---------------------------------- | -------------------------------- |
+| `tira.claimNotification` | Arifu TIRA kuhusu dai jipya        | `.submit()`, `.handleCallback()` |
+| `tira.claimIntimation`   | Wasilisha maelezo ya uarifu wa dai | `.submit()`, `.handleCallback()` |
+| `tira.claimAssessment`   | Wasilisha tathmini ya dai          | `.submit()`, `.handleCallback()` |
+| `tira.dischargeVoucher`  | Wasilisha hati ya malipo           | `.submit()`, `.handleCallback()` |
+| `tira.claimPayment`      | Wasilisha malipo ya dai            | `.submit()`, `.handleCallback()` |
+| `tira.claimRejection`    | Wasilisha kukataliwa kwa dai       | `.submit()`, `.handleCallback()` |
 
 ### Njia za Kiwango cha Juu
 
-| Njia | Maelezo |
-|---|---|
-| `tira.handleCallback(input)` | Mshughulikiaji wa callback wa kawaida. Inagundua kiotomatiki aina ya callback na kutoa data. Inahitaji `enabled_callbacks` katika usanidi. |
-| `tira.acknowledge(body, ackId)` | Inajenga XML ya kukubalika iliyosainiwa kutuma kwa TIRA baada ya kupokea callback. |
+| Njia                            | Maelezo                                                                                                                                    |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tira.handleCallback(input)`    | Mshughulikiaji wa callback wa kawaida. Inagundua kiotomatiki aina ya callback na kutoa data. Inahitaji `enabled_callbacks` katika usanidi. |
+| `tira.acknowledge(body, ackId)` | Inajenga XML ya kukubalika iliyosainiwa kutuma kwa TIRA baada ya kupokea callback.                                                         |
 
 ## Nini Kinafuata
 

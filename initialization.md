@@ -23,8 +23,8 @@ const tira = new Tira({
   client_key: "YOUR_CLIENT_KEY",
   system_code: "YOUR_SYSTEM_CODE",
   transacting_company_code: "YOUR_COMPANY_CODE",
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: "your-pfx-password",
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: "your-pfx-password",
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: "tira-public-password",
 });
@@ -39,8 +39,8 @@ const tira = new Tira({
   client_key: "YOUR_CLIENT_KEY",
   system_code: "YOUR_SYSTEM_CODE",
   transacting_company_code: "YOUR_COMPANY_CODE",
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: "your-pfx-password",
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: "your-pfx-password",
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: "tira-public-password",
 });
@@ -56,17 +56,17 @@ Every field you can pass to the `Tira` constructor:
 
 ### Required Fields
 
-| Field | Type | Description |
-|---|---|---|
-| `base_url` | `string` | The TIRAMIS API base URL. This is the only thing that changes between test and live environments. |
-| `client_code` | `string` | Your unique client identifier. Provided by TIRA during onboarding. |
-| `client_key` | `string` | Your authentication key. Provided by TIRA during onboarding. |
-| `system_code` | `string` | The system identifier for your integration. Provided by TIRA during onboarding. |
-| `transacting_company_code` | `string` | The company code for the current transaction. See [Understanding transacting_company_code](#understanding-transacting-company-code) below. |
-| `pfx_path` | `string` | File path to your `tiramisclientprivate.pfx` certificate. Used for signing requests and mutual TLS authentication. |
-| `pfx_passphrase` | `string` | The passphrase for your private PFX certificate. |
-| `tira_public_pfx_path` | `string` | File path to TIRA's `tiramispublic.pfx` certificate. Used for verifying callback signatures and as the TLS CA certificate. |
-| `tira_public_pfx_passphrase` | `string` | The passphrase for TIRA's public PFX certificate. |
+| Field                           | Type     | Description                                                                                                                                |
+| ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `base_url`                      | `string` | The TIRAMIS API base URL. This is the only thing that changes between test and live environments.                                          |
+| `client_code`                   | `string` | Your unique client identifier. Provided by TIRA during onboarding.                                                                         |
+| `client_key`                    | `string` | Your authentication key. Provided by TIRA during onboarding.                                                                               |
+| `system_code`                   | `string` | The system identifier for your integration. Provided by TIRA during onboarding.                                                            |
+| `transacting_company_code`      | `string` | The company code for the current transaction. See [Understanding transacting_company_code](#understanding-transacting-company-code) below. |
+| `client_private_pfx_path`       | `string` | File path to your `tiramisclientprivate.pfx` certificate. Used for signing requests and mutual TLS authentication.                         |
+| `client_private_pfx_passphrase` | `string` | The passphrase for your private PFX certificate.                                                                                           |
+| `tira_public_pfx_path`          | `string` | File path to TIRA's `tiramispublic.pfx` certificate. Used for verifying callback signatures and as the TLS CA certificate.                 |
+| `tira_public_pfx_passphrase`    | `string` | The passphrase for TIRA's public PFX certificate.                                                                                          |
 
 ::: danger All required fields must be provided
 If any required field is missing or empty, the constructor will throw an error immediately. For example:
@@ -80,9 +80,9 @@ This is intentional — it's better to fail fast on startup than to fail silentl
 
 ### Optional Fields
 
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `verify_signatures` | `boolean` | `true` | Whether to verify TIRA's callback signatures using their public certificate. |
+| Field               | Type               | Default     | Description                                                                      |
+| ------------------- | ------------------ | ----------- | -------------------------------------------------------------------------------- |
+| `verify_signatures` | `boolean`          | `true`      | Whether to verify TIRA's callback signatures using their public certificate.     |
 | `enabled_callbacks` | `EnabledCallbacks` | `undefined` | Which callback types the universal `tira.handleCallback()` method should accept. |
 
 These are covered in detail in [Optional Configuration](#optional-configuration).
@@ -149,8 +149,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -188,8 +188,8 @@ function createTira(companyCode) {
     client_key: process.env.TIRA_CLIENT_KEY,
     system_code: process.env.TIRA_SYSTEM_CODE,
     transacting_company_code: companyCode,
-    pfx_path: "./certs/tiramisclientprivate.pfx",
-    pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+    client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+    client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
     tira_public_pfx_path: "./certs/tiramispublic.pfx",
     tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
   });
@@ -218,15 +218,21 @@ const baseConfig = {
   client_code: process.env.TIRA_CLIENT_CODE,
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
-  pfx_path: "./certs/tiramisclientprivate.pfx",
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: "./certs/tiramisclientprivate.pfx",
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: "./certs/tiramispublic.pfx",
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 };
 
 // Create instances with different company codes
-const tiraForBrokerA = new Tira({ ...baseConfig, transacting_company_code: "BROKER_A" });
-const tiraForBrokerB = new Tira({ ...baseConfig, transacting_company_code: "BROKER_B" });
+const tiraForBrokerA = new Tira({
+  ...baseConfig,
+  transacting_company_code: "BROKER_A",
+});
+const tiraForBrokerB = new Tira({
+  ...baseConfig,
+  transacting_company_code: "BROKER_B",
+});
 
 // Or use a function
 function createTira(companyCode) {
@@ -235,7 +241,7 @@ function createTira(companyCode) {
 ```
 
 ::: tip Use environment variables
-Always store sensitive values like `client_key`, `pfx_passphrase`, and certificate passphrases in environment variables. Never hardcode them in your source code.
+Always store sensitive values like `client_key`, `client_private_pfx_passphrase`, and certificate passphrases in environment variables. Never hardcode them in your source code.
 :::
 
 ## Optional Configuration
@@ -299,19 +305,19 @@ Add { enabled_callbacks: { motor: true } } to your Tira config.
 
 Here are all the available callback types:
 
-| Callback Type | Description |
-|---|---|
-| `motor` | Motor cover note callbacks |
-| `motor_fleet` | Motor fleet cover note callbacks |
-| `non_life_other` | Non-life other cover note callbacks |
-| `reinsurance` | Reinsurance submission callbacks |
-| `policy` | Policy submission callbacks |
-| `claim_notification` | Claim notification callbacks |
-| `claim_intimation` | Claim intimation callbacks |
-| `claim_assessment` | Claim assessment callbacks |
-| `discharge_voucher` | Discharge voucher callbacks |
-| `claim_payment` | Claim payment callbacks |
-| `claim_rejection` | Claim rejection callbacks |
+| Callback Type        | Description                         |
+| -------------------- | ----------------------------------- |
+| `motor`              | Motor cover note callbacks          |
+| `motor_fleet`        | Motor fleet cover note callbacks    |
+| `non_life_other`     | Non-life other cover note callbacks |
+| `reinsurance`        | Reinsurance submission callbacks    |
+| `policy`             | Policy submission callbacks         |
+| `claim_notification` | Claim notification callbacks        |
+| `claim_intimation`   | Claim intimation callbacks          |
+| `claim_assessment`   | Claim assessment callbacks          |
+| `discharge_voucher`  | Discharge voucher callbacks         |
+| `claim_payment`      | Claim payment callbacks             |
+| `claim_rejection`    | Claim rejection callbacks           |
 
 ## Switching Between Test and Live
 
@@ -332,8 +338,8 @@ const tira = new Tira({
   client_key: process.env.TIRA_CLIENT_KEY,
   system_code: process.env.TIRA_SYSTEM_CODE,
   transacting_company_code: process.env.TIRA_COMPANY_CODE,
-  pfx_path: process.env.TIRA_PFX_PATH,
-  pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
+  client_private_pfx_path: process.env.TIRA_PFX_PATH,
+  client_private_pfx_passphrase: process.env.TIRA_PFX_PASSPHRASE,
   tira_public_pfx_path: process.env.TIRA_PUBLIC_PFX_PATH,
   tira_public_pfx_passphrase: process.env.TIRA_PUBLIC_PFX_PASSPHRASE,
 });
@@ -349,42 +355,42 @@ After initialization, the `tira` object gives you access to all TIRAMIS resource
 
 ### Cover Notes
 
-| Resource | Description | Methods |
-|---|---|---|
-| `tira.motor` | Motor vehicle cover notes | `.submit()`, `.handleCallback()`, `.verify()` |
-| `tira.motorFleet` | Motor fleet cover notes (multiple vehicles) | `.submit()`, `.handleCallback()` |
-| `tira.nonLifeOther` | Non-life other cover notes (fire, marine, etc.) | `.submit()`, `.handleCallback()` |
+| Resource            | Description                                     | Methods                                       |
+| ------------------- | ----------------------------------------------- | --------------------------------------------- |
+| `tira.motor`        | Motor vehicle cover notes                       | `.submit()`, `.handleCallback()`, `.verify()` |
+| `tira.motorFleet`   | Motor fleet cover notes (multiple vehicles)     | `.submit()`, `.handleCallback()`              |
+| `tira.nonLifeOther` | Non-life other cover notes (fire, marine, etc.) | `.submit()`, `.handleCallback()`              |
 
 ### Verification
 
-| Resource | Description | Methods |
-|---|---|---|
+| Resource                     | Description                            | Methods     |
+| ---------------------------- | -------------------------------------- | ----------- |
 | `tira.coverNoteVerification` | Verify a cover note's status with TIRA | `.submit()` |
 
 ### Policy & Reinsurance
 
-| Resource | Description | Methods |
-|---|---|---|
-| `tira.policy` | Policy submissions | `.submit()`, `.handleCallback()` |
+| Resource           | Description             | Methods                          |
+| ------------------ | ----------------------- | -------------------------------- |
+| `tira.policy`      | Policy submissions      | `.submit()`, `.handleCallback()` |
 | `tira.reinsurance` | Reinsurance submissions | `.submit()`, `.handleCallback()` |
 
 ### Claims
 
-| Resource | Description | Methods |
-|---|---|---|
-| `tira.claimNotification` | Notify TIRA of a new claim | `.submit()`, `.handleCallback()` |
-| `tira.claimIntimation` | Submit claim intimation details | `.submit()`, `.handleCallback()` |
-| `tira.claimAssessment` | Submit claim assessment | `.submit()`, `.handleCallback()` |
-| `tira.dischargeVoucher` | Submit discharge voucher | `.submit()`, `.handleCallback()` |
-| `tira.claimPayment` | Submit claim payment | `.submit()`, `.handleCallback()` |
-| `tira.claimRejection` | Submit claim rejection | `.submit()`, `.handleCallback()` |
+| Resource                 | Description                     | Methods                          |
+| ------------------------ | ------------------------------- | -------------------------------- |
+| `tira.claimNotification` | Notify TIRA of a new claim      | `.submit()`, `.handleCallback()` |
+| `tira.claimIntimation`   | Submit claim intimation details | `.submit()`, `.handleCallback()` |
+| `tira.claimAssessment`   | Submit claim assessment         | `.submit()`, `.handleCallback()` |
+| `tira.dischargeVoucher`  | Submit discharge voucher        | `.submit()`, `.handleCallback()` |
+| `tira.claimPayment`      | Submit claim payment            | `.submit()`, `.handleCallback()` |
+| `tira.claimRejection`    | Submit claim rejection          | `.submit()`, `.handleCallback()` |
 
 ### Top-Level Methods
 
-| Method | Description |
-|---|---|
-| `tira.handleCallback(input)` | Universal callback handler. Automatically detects the callback type and extracts data. Requires `enabled_callbacks` in config. |
-| `tira.acknowledge(body, ackId)` | Builds a signed acknowledgement XML to send back to TIRA after receiving a callback. |
+| Method                          | Description                                                                                                                    |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `tira.handleCallback(input)`    | Universal callback handler. Automatically detects the callback type and extracts data. Requires `enabled_callbacks` in config. |
+| `tira.acknowledge(body, ackId)` | Builds a signed acknowledgement XML to send back to TIRA after receiving a callback.                                           |
 
 ## What's Next
 
